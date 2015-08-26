@@ -55,8 +55,6 @@ class Updater
     puts " twbs cache: #{@cache_path}"
     puts '-' * 60
 
-    FileUtils.rm_rf(@cache_path)
-
     @save_to.each { |_, v| FileUtils.mkdir_p(v) }
 
     update_scss_assets
@@ -70,10 +68,14 @@ class Updater
     File.open(path, mode) { |file| file.write(content) }
   end
 
+  def upstream_version
+    @upstream_version ||= get_json(file_url 'package.json')['version']
+  end
+
   # Update version.rb file with BOOTSTRAP_SHA
   def store_version
     path    = 'lib/bootstrap/version.rb'
-    content = File.read(path).sub(/BOOTSTRAP_SHA\s*=\s*['"][\w]+['"]/, "BOOTSTRAP_SHA = '#@branch_sha'")
+    content = File.read(path).sub(/BOOTSTRAP_SHA\s*=\s*['"][^'"]*['"]/, "BOOTSTRAP_SHA = '#@branch_sha'")
     File.open(path, 'w') { |f| f.write(content) }
   end
 end

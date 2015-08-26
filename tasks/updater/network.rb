@@ -11,15 +11,19 @@ class Updater
       get_tree(get_tree_sha(dir), recursive)['tree'].select { |f| f['type'] == 'blob' }.map { |f| f['path'] }
     end
 
+    def file_url(path)
+      "https://raw.githubusercontent.com/#@repo/#@branch_sha/#{path}"
+    end
+
     def read_files(path, files)
-      full_path = "https://raw.githubusercontent.com/#@repo/#@branch_sha/#{path}"
+      path_url = file_url path
       contents = read_cached_files(path, files)
-      log_http_get_files contents.keys, full_path, true if contents.keys
+      log_http_get_files contents.keys, path_url, true if contents.keys
       files -= contents.keys
-      log_http_get_files files, full_path, false
+      log_http_get_files files, path_url, false
       files.map do |name|
         Thread.start {
-          contents[name] = open("#{full_path}/#{name}").read
+          contents[name] = open("#{path_url}/#{name}").read
           Thread.exclusive { write_cached_files path, name => contents[name] }
         }
       end.each(&:join)
@@ -65,7 +69,7 @@ class Updater
     # get sha of the branch (= the latest commit)
     def get_branch_sha
       @branch_sha ||= begin
-        if @branch + "\n" == %x[git rev-parse -- #@branch]
+        if @branch =~ /\A[0-9a-f]{40,}\z/
           @branch
         else
           cmd = "git ls-remote #{Shellwords.escape "https://github.com/#@repo"} #@branch"
