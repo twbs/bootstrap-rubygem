@@ -1,18 +1,4 @@
 # coding: utf-8
-# Based on convert script from vwall/compass-twitter-bootstrap gem.
-# https://github.com/vwall/compass-twitter-bootstrap/blob/master/build/convert.rb
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this work except in compliance with the License.
-# You may obtain a copy of the License in the LICENSE file, or at:
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 require 'open-uri'
 require 'json'
@@ -25,7 +11,6 @@ require_relative 'updater/scss'
 require_relative 'updater/js'
 require_relative 'updater/logger'
 require_relative 'updater/network'
-require 'bootstrap/version'
 
 class Updater
   extend Forwardable
@@ -48,7 +33,7 @@ class Updater
   def_delegators :@logger, :log, :log_status, :log_processing, :log_transform, :log_file_info, :log_processed, :log_http_get_file, :log_http_get_files, :silence_log
 
   def update_bootstrap
-    log_status "Update Bootstrap"
+    log_status 'Updating Bootstrap'
     puts " repo   : #@repo_url"
     puts " branch : #@branch_sha #@repo_url/tree/#@branch"
     puts " save to: #{@save_to.to_json}"
