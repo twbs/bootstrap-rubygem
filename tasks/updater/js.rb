@@ -1,5 +1,5 @@
 class Updater
-  module JsConversion
+  module Js
     def update_javascript_assets
       log_status 'Updating javascripts...'
       save_to = @save_to[:js]

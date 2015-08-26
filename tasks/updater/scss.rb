@@ -1,5 +1,5 @@
 class Updater
-  module ScssConversion
+  module Scss
     def update_scss_assets
       log_status 'Updating scss...'
       save_to = @save_to[:scss]

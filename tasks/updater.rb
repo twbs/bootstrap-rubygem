@@ -21,8 +21,8 @@ require 'forwardable'
 require 'term/ansicolor'
 require 'fileutils'
 
-require_relative 'updater/scss_conversion'
-require_relative 'updater/js_conversion'
+require_relative 'updater/scss'
+require_relative 'updater/js'
 require_relative 'updater/logger'
 require_relative 'updater/network'
 require 'bootstrap/version'
@@ -30,8 +30,8 @@ require 'bootstrap/version'
 class Updater
   extend Forwardable
   include Network
-  include JsConversion
-  include ScssConversion
+  include Js
+  include Scss
 
   def initialize(repo: 'twbs/bootstrap', branch: 'master', save_to: {}, cache_path: 'tmp/bootstrap-cache')
     @logger     = Logger.new
