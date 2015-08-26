@@ -7,8 +7,8 @@ gemfile:
   - test/gemfiles/sass_3_3.gemfile
   - test/gemfiles/sass_3_4.gemfile
   - test/gemfiles/sass_head.gemfile
-before_install:
-  - "npm install"
+cache: bundler
+bundler_args: --path ../../vendor/bundle --without debug
 matrix:
   allow_failures:
     - gemfile: test/gemfiles/sass_head.gemfile
@@ -18,4 +18,4 @@ env:
   global:
   - VERBOSE=1
 script:
-  bundle exec rake && sh test/*.sh
+  bundle exec rake
