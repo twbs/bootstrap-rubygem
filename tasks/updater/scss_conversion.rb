@@ -12,20 +12,19 @@ class Updater
       log_processed "#{bootstrap_scss_files * ' '}"
 
       log_status 'Updating scss main files'
-
-      %w(bootstrap bootstrap-flex bootstrap-grid bootstrap-reboot).each do |file_name|
-        main_from = "#{save_to}/#{file_name}.scss"
-        main_to   = File.expand_path("#{save_to}/../_#{file_name}.scss")
-        if file_name == 'bootstrap-flex'
-          save_file main_to, File.read(main_from)
-        else
-          save_file main_to, File.read(main_from).gsub(/ "/, ' "bootstrap/')
+      %w(bootstrap bootstrap-flex bootstrap-grid bootstrap-reboot).each do |name|
+        # Compass treats non-partials as targets to copy into the main project, so make them partials.
+        # Also move them up a level to clearly indicate entry points.
+        from = "#{save_to}/#{name}.scss"
+        to   = "#{save_to}/../_#{name}.scss"
+        FileUtils.mv from, to
+        # As we moved the files, adjust imports accordingly (except for bootstrap-flex that imports the main bootstrap).
+        unless 'bootstrap-flex' == name
+          File.write to, File.read(to).gsub(/ "/, ' "bootstrap/')
         end
-        File.delete(main_from)
       end
 
       log_status 'Generating variable template file'
-
       save_file 'templates/project/_bootstrap-variables.sass',
         "// Override Bootstrap variables here (defaults from bootstrap v#{upstream_version}):\n\n" +
           File.read("#{save_to}/_variables.scss").lines[1..-1].join.gsub(/^(?=\$|\))/, '// ').gsub(/ !default/, '')
