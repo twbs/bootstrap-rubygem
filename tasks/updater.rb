@@ -25,7 +25,7 @@ require_relative 'updater/scss_conversion'
 require_relative 'updater/js_conversion'
 require_relative 'updater/logger'
 require_relative 'updater/network'
-require 'bootstrap-sass/version'
+require 'bootstrap/version'
 
 class Updater
   extend Forwardable
@@ -72,7 +72,7 @@ class Updater
 
   # Update version.rb file with BOOTSTRAP_SHA
   def store_version
-    path    = 'lib/bootstrap-sass/version.rb'
+    path    = 'lib/bootstrap/version.rb'
     content = File.read(path).sub(/BOOTSTRAP_SHA\s*=\s*['"][\w]+['"]/, "BOOTSTRAP_SHA = '#@branch_sha'")
     File.open(path, 'w') { |f| f.write(content) }
   end

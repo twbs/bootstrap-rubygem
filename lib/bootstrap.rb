@@ -1,4 +1,4 @@
-require 'bootstrap-sass/version'
+require 'bootstrap/version'
 module Bootstrap
   class << self
     # Inspired by Kaminari
@@ -50,9 +50,6 @@ module Bootstrap
       require 'sass'
 
       ::Sass.load_paths << stylesheets_path
-
-      # bootstrap requires minimum precision of 8, see https://github.com/twbs/bootstrap-sass/issues/409
-      ::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max
     end
 
     def register_compass_extension
@@ -66,7 +63,7 @@ module Bootstrap
     end
 
     def register_rails_engine
-      require 'bootstrap-sass/engine'
+      require 'bootstrap/engine'
     end
 
     def register_sprockets

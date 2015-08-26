@@ -1,8 +1,7 @@
 lib_path = File.join(File.dirname(__FILE__), 'lib')
 $:.unshift(lib_path) unless $:.include?(lib_path)
 
-load './tasks/bower.rake'
-require './lib/bootstrap-sass'
+require './lib/bootstrap'
 require 'rake/testtask'
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -20,7 +19,7 @@ task :debug do
   end
 end
 
-desc 'Update bootstrap to bootstrap-sass'
+desc 'Update bootstrap from upstream'
 task :update, :branch do |t, args|
   require './tasks/updater'
   Updater.new(branch: args[:branch]).update_bootstrap

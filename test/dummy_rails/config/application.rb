@@ -10,10 +10,10 @@ require 'rails'
   require "#{framework}/railtie"
 end
 
-require 'slim-rails'
-require 'jquery-rails'
+require 'bootstrap'
 require 'compass'
-require 'bootstrap-sass'
+require 'jquery-rails'
+require 'slim-rails'
 require 'uglifier'
 
 module Dummy

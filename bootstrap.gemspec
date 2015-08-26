@@ -1,17 +1,17 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bootstrap-sass/version'
+require 'bootstrap/version'
 
 Gem::Specification.new do |s|
-  s.name     = "bootstrap-sass"
+  s.name     = 'bootstrap'
   s.version  = Bootstrap::VERSION
-  s.authors  = ["Thomas McDonald"]
-  s.email    = 'tom@conceptcoding.co.uk'
-  s.summary  = "Twitter's Bootstrap, converted to Sass and ready to drop into Rails or Compass"
-  s.homepage = "https://github.com/twbs/bootstrap-sass"
+  s.authors  = ['Twitter, Inc.']
+  s.email    = '' # TODO
+  s.summary  = 'The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. http://getbootstrap.com'
+  s.homepage = 'https://github.com/twbs/bootstrap-rubygem'
   s.license  = 'MIT'
 
-  s.add_runtime_dependency 'sass', '>= 3.3.0'
+  s.add_runtime_dependency 'sass', '>= 3.3.4'
 
   # Testing dependencies
   s.add_development_dependency 'minitest', '~> 5.8.0'
@@ -27,8 +27,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'jquery-rails', '>= 3.1.0'
   s.add_development_dependency 'slim-rails'
   s.add_development_dependency 'uglifier'
-  # Converter
-  s.add_development_dependency 'term-ansicolor'
 
   s.files      = `git ls-files`.split("\n")
   s.test_files = `git ls-files -- test/*`.split("\n")
