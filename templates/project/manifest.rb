@@ -1,7 +1,7 @@
 description 'Bootstrap'
 
 # Stylesheet importing bootstrap
-stylesheet 'styles.sass'
+stylesheet 'styles.scss'
 
 # Bootstrap variable overrides file
 stylesheet '_bootstrap-variables.scss', :to => '_bootstrap-variables.scss'
