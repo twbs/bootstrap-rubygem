@@ -25,7 +25,7 @@ class Updater
       end
 
       log_status 'Generating variable template file'
-      save_file 'templates/project/_bootstrap-variables.sass',
+      save_file 'templates/project/_bootstrap-variables.scss',
         "// Override Bootstrap variables here (defaults from bootstrap v#{upstream_version}):\n\n" +
           File.read("#{save_to}/_variables.scss").lines[1..-1].join.gsub(/^(?=\$|\)|[ ]{2})/, '// ').gsub(/ !default/, '')
 
