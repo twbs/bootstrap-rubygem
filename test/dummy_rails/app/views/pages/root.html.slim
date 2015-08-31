@@ -43,10 +43,11 @@
       .col-sm-6
         h2 6 columns
         .row
-          .col-xs-4.col-xs-push-4
-            h6 This is col-xs-4 col-xs-push-4
+          .col-xs-4.col-xs-push-4: .card: .card-block
+            .card-text data-toggle="tooltip" title="hi"
+              h6 This is col-xs-4 col-xs-push-4.<br><small>Hover for tooltip.</small>
 
-        form.form-inline
+        .card: .card-block: form.form-inline
           .form-group
             label.sr-only for="exampleInputEmail2" Email address
             input.form-control#exampleInputEmail2 type="email" placeholder="Enter email"

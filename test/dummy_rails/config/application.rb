@@ -10,11 +10,13 @@ require 'rails'
   require "#{framework}/railtie"
 end
 
-require 'bootstrap'
 require 'compass'
-require 'jquery-rails'
 require 'slim-rails'
 require 'uglifier'
+
+require 'bootstrap'
+require 'jquery-rails'
+require 'rails-assets-tether'
 
 module Dummy
   class Application < Rails::Application

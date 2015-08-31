@@ -7,6 +7,9 @@ gem 'compass', require: false
 
 group :development do
   gem 'term-ansicolor'
+  source 'https://rails-assets.org' do
+    gem 'rails-assets-tether', '>= 1.1.0'
+  end
 end
 
 group :debug do
