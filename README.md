@@ -1,4 +1,4 @@
-# Bootstrap Ruby Gem
+# Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem)
 
 This is the future home of the Bootstrap v4 ruby gem for Ruby on Rails (Sprockets) and Compass.
 
