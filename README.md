@@ -113,7 +113,7 @@ This will create a new Compass project with the following files in it:
 * [styles.scss](/templates/project/styles.scss) - main project Sass file, imports Bootstrap and variables.
 * [_bootstrap-variables.scss](/templates/project/_bootstrap-variables.scss) - all of Bootstrap variables, override them here.
 
-Some bootstrap-sass mixins may conflict with the Compass ones.
+Some bootstrap mixins may conflict with the Compass ones.
 If this happens, change the import order so that Compass mixins are loaded later.
 
 ## Configuration
@@ -139,6 +139,5 @@ In the application Sass file, replace `@import 'bootstrap'` with:
 @import 'bootstrap-custom';
 ```
 
-[antirequire]: https://github.com/twbs/bootstrap-sass/issues/79#issuecomment-4428595
 [autoprefixer]: https://github.com/ai/autoprefixer
 [tether]: http://github.hubspot.com/tether/
