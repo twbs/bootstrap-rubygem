@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/twbs/bootstrap-rubygem'
   s.license  = 'MIT'
 
-  s.add_runtime_dependency 'sass', '>= 3.3.4'
+  s.add_runtime_dependency 'sass', '>= 3.4.18'
+  s.add_runtime_dependency 'autoprefixer-rails', '>= 5.2.1.3'
 
   # Testing dependencies
   s.add_development_dependency 'minitest', '~> 5.8.0'
@@ -23,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'actionpack', '>= 4.1.5'
   s.add_development_dependency 'activesupport', '>= 4.1.5'
   s.add_development_dependency 'json', '>= 1.8.1'
-  s.add_development_dependency 'sprockets-rails', '>= 2.1.3'
+  s.add_development_dependency 'sprockets-rails', '>= 2.3.2'
   s.add_development_dependency 'jquery-rails', '>= 3.1.0'
   s.add_development_dependency 'slim-rails'
   s.add_development_dependency 'uglifier'
