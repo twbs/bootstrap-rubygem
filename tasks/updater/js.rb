@@ -2,7 +2,7 @@ class Updater
   module Js
     def update_javascript_assets
       log_status 'Updating javascripts...'
-      save_to = @save_to[:js]
+      save_to  = @save_to[:js]
       contents = {}
       read_files('js/dist', bootstrap_js_files).each do |name, file|
         contents[name] = file
@@ -29,18 +29,8 @@ class Updater
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        files = get_paths_by_type('js/dist', /\.js$/)
-        files.sort_by { |f|
-          case f
-            # tooltip depends on popover and must be loaded earlier
-            when /tooltip/ then
-              1
-            when /popover/ then
-              2
-            else
-              0
-          end
-        }
+        gruntfile = get_file(file_url 'Gruntfile.js')
+        JSON.parse(/concat:.*?src: (\[[^\]]+\])/m.match(gruntfile)[1].tr("'", '"')).map { |p| p.sub %r(\Ajs/src/), '' }
       end
     end
   end

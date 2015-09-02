@@ -1,3 +1,4 @@
+//= require ./bootstrap/util
 //= require ./bootstrap/alert
 //= require ./bootstrap/button
 //= require ./bootstrap/carousel
@@ -6,6 +7,5 @@
 //= require ./bootstrap/modal
 //= require ./bootstrap/scrollspy
 //= require ./bootstrap/tab
-//= require ./bootstrap/util
 //= require ./bootstrap/tooltip
 //= require ./bootstrap/popover
