@@ -1,0 +1,16 @@
+.*          text eol=lf
+Gemfile     text eol=lf
+LICENSE     text eol=lf
+Rakefile    text eol=lf
+*.gemfile   text eol=lf
+*.gemspec   text eol=lf
+*.html.erb  text eol=lf
+*.html.slim text eol=lf
+*.js        text eol=lf
+*.rb        text eol=lf
+*.ru        text eol=lf
+*.sass      text eol=lf
+*.scss      text eol=lf
+*.yml       text eol=lf
+# Don't diff or textually merge source maps
+*.map   binary
