@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+gem 'actionpack', '>= 4.2.4'
+gem 'activesupport', '>= 4.2.4'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
+
+gemspec path: '../../'
+

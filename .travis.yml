@@ -1,17 +1,11 @@
 language: ruby
 sudo: false
 rvm:
-  - 2.1.5
-  - 2.2.3
+  - 2.2
 gemfile:
-  - test/gemfiles/sass_3_3.gemfile
-  - test/gemfiles/sass_3_4.gemfile
-  - test/gemfiles/sass_head.gemfile
+  - test/gemfiles/rails_4_2.gemfile
 cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
-matrix:
-  allow_failures:
-    - gemfile: test/gemfiles/sass_head.gemfile
 notifications:
   slack: heybb:3n88HHilXn76ji9vV4gL819Y
 env:

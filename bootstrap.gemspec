@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   # Testing dependencies
   s.add_development_dependency 'minitest', '~> 5.8.0'
   s.add_development_dependency 'minitest-reporters', '~> 1.0.5'
+  s.add_development_dependency 'compass', '~> 1.0.3'
   # Integration testing
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
