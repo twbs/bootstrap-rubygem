@@ -49,6 +49,7 @@ $enable-shadows:            false !default;
 $enable-gradients:          false !default;
 $enable-transitions:        false !default;
 $enable-hover-media-query:  false !default;
+$enable-grid-classes:       true !default;
 
 
 // Spacing
@@ -75,6 +76,7 @@ $body-color:                 $gray-dark !default;
 // Style anchor elements.
 
 $link-color:                 $brand-primary !default;
+$link-decoration:            none !default;
 $link-hover-color:           darken($link-color, 15%) !default;
 $link-hover-decoration:      underline !default;
 
@@ -142,10 +144,10 @@ $font-size-h4:               1.5rem !default;
 $font-size-h5:               1.25rem !default;
 $font-size-h6:               1rem !default;
 
-$display1-size:               3.5rem !default;
-$display2-size:               4.5rem !default;
-$display3-size:               5.5rem !default;
-$display4-size:               6rem !default;
+$display1-size:               6rem !default;
+$display2-size:               5.5rem !default;
+$display3-size:               4.5rem !default;
+$display4-size:               3.5rem !default;
 
 $display1-weight:             300 !default;
 $display2-weight:             300 !default;
@@ -285,7 +287,7 @@ $input-height:                   (($font-size-base * $line-height) + ($input-pad
 $input-height-lg:                (($font-size-lg * $line-height-lg) + ($input-padding-y-lg * 2) + ($border-width * 2)) !default;
 $input-height-sm:                (($font-size-sm * $line-height-sm) + ($input-padding-y-sm * 2) + ($border-width * 2)) !default;
 
-$form-group-margin-bottom:       15px !default;
+$form-group-margin-bottom:       $spacer-y !default;
 
 $input-group-addon-bg:           $gray-lighter !default;
 $input-group-addon-border-color: $input-border !default;

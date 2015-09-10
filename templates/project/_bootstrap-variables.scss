@@ -50,6 +50,7 @@
 // $enable-gradients:          false;
 // $enable-transitions:        false;
 // $enable-hover-media-query:  false;
+// $enable-grid-classes:       true;
 
 
 // Spacing
@@ -76,6 +77,7 @@
 // Style anchor elements.
 
 // $link-color:                 $brand-primary;
+// $link-decoration:            none;
 // $link-hover-color:           darken($link-color, 15%);
 // $link-hover-decoration:      underline;
 
@@ -143,10 +145,10 @@
 // $font-size-h5:               1.25rem;
 // $font-size-h6:               1rem;
 
-// $display1-size:               3.5rem;
-// $display2-size:               4.5rem;
-// $display3-size:               5.5rem;
-// $display4-size:               6rem;
+// $display1-size:               6rem;
+// $display2-size:               5.5rem;
+// $display3-size:               4.5rem;
+// $display4-size:               3.5rem;
 
 // $display1-weight:             300;
 // $display2-weight:             300;
@@ -286,7 +288,7 @@
 // $input-height-lg:                (($font-size-lg * $line-height-lg) + ($input-padding-y-lg * 2) + ($border-width * 2));
 // $input-height-sm:                (($font-size-sm * $line-height-sm) + ($input-padding-y-sm * 2) + ($border-width * 2));
 
-// $form-group-margin-bottom:       15px;
+// $form-group-margin-bottom:       $spacer-y;
 
 // $input-group-addon-bg:           $gray-lighter;
 // $input-group-addon-border-color: $input-border;
