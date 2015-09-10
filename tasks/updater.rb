@@ -40,6 +40,7 @@ class Updater
     puts " twbs cache: #{@cache_path}"
     puts '-' * 60
 
+    FileUtils.rm_rf('assets')
     @save_to.each { |_, v| FileUtils.mkdir_p(v) }
 
     update_scss_assets
