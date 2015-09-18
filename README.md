@@ -38,9 +38,9 @@ it may come with a `.css` file instead. If this file exists, it will be served i
 $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 ```
 
-Then, remove all the `//= require` and `//= require_tree` statements from the file. Instead, use `@import` to import Sass files.
+Then, remove all the `*= require` and `*= require_tree` statements from the Sass file. Instead, use `@import` to import Sass files.
 
-Do not use `//= require` in Sass or your other stylesheets will not be able to access the Bootstrap mixins and variables.
+Do not use `*= require` in Sass or your other stylesheets will not be able to access the Bootstrap mixins and variables.
 
 Require Bootstrap Javascripts in `app/assets/javascripts/application.js`:
 
