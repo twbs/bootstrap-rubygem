@@ -1,6 +1,8 @@
 # Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem)
 
-This is the future home of the Bootstrap v4 ruby gem for Ruby on Rails (Sprockets) and Compass.
+[Bootstrap 4][bootstrap-home] ruby gem for Ruby on Rails (Sprockets) and Compass.
+
+For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/twbs/bootstrap-sass) instead.
 
 There has not been a release yet, but if you'd like to try out the latest development version, see the instructions below.
 
@@ -139,5 +141,6 @@ In the application Sass file, replace `@import 'bootstrap'` with:
 @import 'bootstrap-custom';
 ```
 
+[bootstrap-home]: http://v4-alpha.getbootstrap.com/
 [autoprefixer]: https://github.com/ai/autoprefixer
 [tether]: http://github.hubspot.com/tether/
