@@ -12,12 +12,13 @@ Gem::Specification.new do |s|
   s.license  = 'MIT'
 
   s.add_runtime_dependency 'sass', '>= 3.4.18'
-  s.add_runtime_dependency 'autoprefixer-rails', '>= 5.2.1.3'
+  s.add_runtime_dependency 'autoprefixer-rails', '>= 6.0.3'
 
   # Testing dependencies
   s.add_development_dependency 'minitest', '~> 5.8.0'
   s.add_development_dependency 'minitest-reporters', '~> 1.0.5'
   s.add_development_dependency 'compass', '~> 1.0.3'
+  s.add_development_dependency 'term-ansicolor'
   # Integration testing
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
