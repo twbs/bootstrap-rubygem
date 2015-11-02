@@ -6,13 +6,13 @@ Gem::Specification.new do |s|
   s.name     = 'bootstrap'
   s.version  = Bootstrap::VERSION
   s.authors  = ['Twitter, Inc.']
-  s.email    = '' # TODO
+  s.email    = 'glex.spb@gmail.com'
   s.summary  = 'The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. http://getbootstrap.com'
   s.homepage = 'https://github.com/twbs/bootstrap-rubygem'
   s.license  = 'MIT'
 
-  s.add_runtime_dependency 'sass', '>= 3.4.18'
-  s.add_runtime_dependency 'autoprefixer-rails', '>= 5.2.1.3'
+  s.add_runtime_dependency 'sass', '>= 3.4.19'
+  s.add_runtime_dependency 'autoprefixer-rails', '>= 6.0.3'
 
   # Testing dependencies
   s.add_development_dependency 'minitest', '~> 5.8.0'
