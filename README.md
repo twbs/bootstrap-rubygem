@@ -4,8 +4,6 @@
 
 For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/twbs/bootstrap-sass) instead.
 
-There has not been a release yet, but if you'd like to try out the latest development version, see the instructions below.
-
 ## Installation
 
 Please see the appropriate guide for your environment of choice:
@@ -19,7 +17,7 @@ Please see the appropriate guide for your environment of choice:
 Add `bootstrap` to your Gemfile:
 
 ```ruby
-gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+gem 'bootstrap', '~> 4.0.0.alpha1'
 ```
 
 Ensure that `sprockets-rails` is at least v2.3.2.
@@ -77,11 +75,10 @@ Then, run `bundle`, restart the server, and require tether before bootstrap but 
 
 ### b. Compass without Rails
 
-Install the gem from GitHub master:
+Install the gem:
 
 ```console
-$ gem install specific_install
-$ gem specific_install https://github.com/twbs/bootstrap-rubygem.git
+$ gem install bootstrap -v 4.0.0.alpha1
 ```
 
 **If you have an existing Compass project:**
