@@ -5,7 +5,10 @@ class Updater
       save_to  = @save_to[:js]
       contents = {}
       read_files('js/dist', bootstrap_js_files).each do |name, file|
-        contents[name] = file
+        contents[name] = file.
+            # Remove the source mapping URL comment as this gem does not bundle source maps.
+            sub!(%r(^//# sourceMappingURL=#{name}.map\n\z), '') or
+            fail "Cannot find source mapping URL to remove in #{name}. Last line: #{file.lines.last.inspect}"
         save_file("#{save_to}/#{name}", file)
       end
       log_processed "#{bootstrap_js_files * ' '}"
