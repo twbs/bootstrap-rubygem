@@ -616,4 +616,3 @@ var Tooltip = (function ($) {
 
   return Tooltip;
 })(jQuery);
-//# sourceMappingURL=tooltip.js.map

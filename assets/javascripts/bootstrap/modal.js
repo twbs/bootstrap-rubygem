@@ -533,4 +533,3 @@ var Modal = (function ($) {
 
   return Modal;
 })(jQuery);
-//# sourceMappingURL=modal.js.map

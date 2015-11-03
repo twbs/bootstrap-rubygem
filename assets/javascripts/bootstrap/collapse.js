@@ -361,4 +361,3 @@ var Collapse = (function ($) {
 
   return Collapse;
 })(jQuery);
-//# sourceMappingURL=collapse.js.map
