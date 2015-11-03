@@ -16,4 +16,9 @@ class RailsTest < ActionDispatch::IntegrationTest
     get ActionController::Base.helpers.stylesheet_path('application.css')
     assert_match /-webkit-(?:transition|transform)/, response.body
   end
+
+  def test_precompile
+    Dummy::Application.load_tasks
+    Rake::Task['assets:precompile'].invoke
+  end
 end
