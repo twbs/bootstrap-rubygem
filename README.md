@@ -45,14 +45,14 @@ Do not use `*= require` in Sass or your other stylesheets will not be able to ac
 Require Bootstrap Javascripts in `app/assets/javascripts/application.js`:
 
 ```js
-//= require jquery
+//= require jquery2
 //= require bootstrap-sprockets
 ```
 
 While `bootstrap-sprockets` provides individual Bootstrap components for ease of debugging, you may alternatively require the concatenated `bootstrap` for faster compilation:
 
 ```js
-//= require jquery
+//= require jquery2
 //= require bootstrap
 ```
 
@@ -68,7 +68,7 @@ end
 Then, run `bundle`, restart the server, and require tether before bootstrap but after jQuery:
 
 ```js
-//= require jquery
+//= require jquery2
 //= require tether
 //= require bootstrap-sprockets
 ```
