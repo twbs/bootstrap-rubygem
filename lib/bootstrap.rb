@@ -7,6 +7,8 @@ module Bootstrap
 
       if rails?
         register_rails_engine
+      elsif lotus?
+        register_lotus
       elsif sprockets?
         register_sprockets
       end
@@ -44,6 +46,10 @@ module Bootstrap
       defined?(::Rails)
     end
 
+    def lotus?
+      defined?(::Lotus)
+    end
+
     private
 
     def configure_sass
@@ -69,6 +75,10 @@ module Bootstrap
     def register_sprockets
       Sprockets.append_path(stylesheets_path)
       Sprockets.append_path(javascripts_path)
+    end
+
+    def register_lotus
+      Lotus::Assets.sources << assets_path
     end
   end
 end
