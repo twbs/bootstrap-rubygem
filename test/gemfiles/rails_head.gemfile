@@ -9,7 +9,8 @@ gem 'sprockets', github: 'rails/sprockets'
 gem 'sprockets-rails', github: 'rails/sprockets-rails'
 gem 'sass-rails', github: 'rails/sass-rails', branch: 'master'
 
-gem 'autoprefixer-rails', github: 'ai/autoprefixer-rails'
+# Need https://github.com/ai/autoprefixer-rails/pull/73 fixed to unlock
+gem 'autoprefixer-rails', '= 6.1.0'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
