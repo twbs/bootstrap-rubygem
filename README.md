@@ -78,7 +78,7 @@ Then, run `bundle`, restart the server, and require tether before bootstrap but 
 Install the gem:
 
 ```console
-$ gem install bootstrap -v 4.0.0.alpha1
+$ gem install bootstrap -v 4.0.0.alpha3
 ```
 
 **If you have an existing Compass project:**
