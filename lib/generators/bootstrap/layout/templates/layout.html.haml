@@ -1,0 +1,56 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "<%= app_name %>"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all"
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+    = javascript_include_tag "application"
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
+
+
+  %body
+    %nav.navbar.navbar-light.bg-faded
+      %button.navbar-toggler.hidden-sm-up{"data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
+        \☰
+      #exCollapsingNavbar2.collapse.navbar-toggleable-xs
+        %a.navbar-brand{:href => "#"} Responsive navbar
+        %ul.nav.navbar-nav
+          %li.nav-item.active
+            %a.nav-link{:href => "#"}
+              Home
+              %span.sr-only (current)
+          %li.nav-item
+            %a.nav-link{:href => "#"} Features
+          %li.nav-item
+            %a.nav-link{:href => "#"} Pricing
+          %li.nav-item
+            %a.nav-link{:href => "#"} About
+    .container-fluid
+      .row
+        .col-lg-9
+          = bootstrap_flash
+          = yield
+        #sidebar.col-lg-3.sidebar-offcanvas
+          .list-group
+            %a.list-group-item.active{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+            %a.list-group-item{:href => "#"} Link
+      %footer
+        %p.text-lg-center © Company 2016

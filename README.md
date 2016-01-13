@@ -73,6 +73,18 @@ Then, run `bundle`, restart the server, and require tether before bootstrap but 
 //= require bootstrap-sprockets
 ```
 
+Generating layouts
+
+You can run following generators to get started with Bootstrap quickly.
+
+Layout (generates Bootstrap compatible layout) - (Haml and Slim supported)
+
+Usage:
+
+```console
+$ rails g bootstrap:layout [LAYOUT_NAME]
+```
+
 ### b. Compass without Rails
 
 Install the gem:
