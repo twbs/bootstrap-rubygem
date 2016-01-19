@@ -20,7 +20,7 @@ var Modal = (function ($) {
    */
 
   var NAME = 'modal';
-  var VERSION = '4.0.0-alpha';
+  var VERSION = '4.0.0-alpha.2';
   var DATA_KEY = 'bs.modal';
   var EVENT_KEY = '.' + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -258,7 +258,7 @@ var Modal = (function ($) {
 
         $(document).off(Event.FOCUSIN) // guard against infinite focus loop
         .on(Event.FOCUSIN, function (event) {
-          if (_this3._element !== event.target && !$(_this3._element).has(event.target).length) {
+          if (document !== event.target && _this3._element !== event.target && !$(_this3._element).has(event.target).length) {
             _this3._element.focus();
           }
         });

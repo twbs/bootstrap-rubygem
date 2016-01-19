@@ -58,46 +58,46 @@
 // Control the default styling of most Bootstrap elements by modifying these
 // variables. Mostly focused on spacing.
 
-// $spacer:                     1rem;
-// $spacer-x:                   $spacer;
-// $spacer-y:                   $spacer;
+// $spacer:   1rem;
+// $spacer-x: $spacer;
+// $spacer-y: $spacer;
 // $spacers: (
 //   0: (
-//     x:   0,
-//     y:   0
+//     x: 0,
+//     y: 0
 //   ),
 //   1: (
-//     x:   $spacer-x,
-//     y:   $spacer-y
+//     x: $spacer-x,
+//     y: $spacer-y
 //   ),
 //   2: (
-//     x:   ($spacer-x * 1.5),
-//     y:   ($spacer-y * 1.5)
+//     x: ($spacer-x * 1.5),
+//     y: ($spacer-y * 1.5)
 //   ),
 //   3: (
-//     x:   ($spacer-x * 3),
-//     y:   ($spacer-y * 3)
+//     x: ($spacer-x * 3),
+//     y: ($spacer-y * 3)
 //   )
 // );
-// $border-width:               1px;
+// $border-width: 1px;
 
 
 // Body
 //
 // Settings for the `<body>` element.
 
-// $body-bg:                    #fff;
-// $body-color:                 $gray-dark;
+// $body-bg:    #fff;
+// $body-color: $gray-dark;
 
 
 // Links
 //
 // Style anchor elements.
 
-// $link-color:                 $brand-primary;
-// $link-decoration:            none;
-// $link-hover-color:           darken($link-color, 15%);
-// $link-hover-decoration:      underline;
+// $link-color:            $brand-primary;
+// $link-decoration:       none;
+// $link-hover-color:      darken($link-color, 15%);
+// $link-hover-decoration: underline;
 
 
 // Grid breakpoints
@@ -106,15 +106,10 @@
 // adapting to different screen sizes, for use in media queries.
 
 // $grid-breakpoints: (
-//   // Extra small screen / phone
 //   xs: 0,
-//   // Small screen / phone
 //   sm: 544px,
-//   // Medium screen / tablet
 //   md: 768px,
-//   // Large screen / desktop
 //   lg: 992px,
-//   // Extra large screen / wide desktop
 //   xl: 1200px
 // );
 
@@ -135,71 +130,72 @@
 //
 // Set the number of columns and specify the width of the gutters.
 
-// $grid-columns:               12;
-// $grid-gutter-width:          1.875rem; // 30px
+// $grid-columns:      12;
+// $grid-gutter-width: 1.875rem; // 30px
 
 
 // Typography
 //
 // Font, line-height, and color for body text, headings, and more.
 
-// $font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif;
-// $font-family-serif:          Georgia, "Times New Roman", Times, serif;
-// $font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace;
-// $font-family-base:           $font-family-sans-serif;
+// $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// $font-family-serif:      Georgia, "Times New Roman", Times, serif;
+// $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+// $font-family-base:       $font-family-sans-serif;
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-// $font-size-root:             16px;
+// $font-size-root: 16px;
 
-// $font-size-base:             1rem;
-// $font-size-lg:               1.25rem;
-// $font-size-sm:               .875rem;
-// $font-size-xs:               .75rem;
+// $font-size-base: 1rem;
+// $font-size-lg:   1.25rem;
+// $font-size-sm:   .875rem;
+// $font-size-xs:   .75rem;
 
-// $font-size-h1:               2.5rem;
-// $font-size-h2:               2rem;
-// $font-size-h3:               1.75rem;
-// $font-size-h4:               1.5rem;
-// $font-size-h5:               1.25rem;
-// $font-size-h6:               1rem;
+// $font-size-h1: 2.5rem;
+// $font-size-h2: 2rem;
+// $font-size-h3: 1.75rem;
+// $font-size-h4: 1.5rem;
+// $font-size-h5: 1.25rem;
+// $font-size-h6: 1rem;
 
-// $display1-size:               6rem;
-// $display2-size:               5.5rem;
-// $display3-size:               4.5rem;
-// $display4-size:               3.5rem;
+// $display1-size: 6rem;
+// $display2-size: 5.5rem;
+// $display3-size: 4.5rem;
+// $display4-size: 3.5rem;
 
-// $display1-weight:             300;
-// $display2-weight:             300;
-// $display3-weight:             300;
-// $display4-weight:             300;
+// $display1-weight: 300;
+// $display2-weight: 300;
+// $display3-weight: 300;
+// $display4-weight: 300;
 
-// $line-height:                1.5;
+// $line-height: 1.5;
 
-// $headings-margin-bottom:     ($spacer / 2);
-// $headings-font-family:       inherit;
-// $headings-font-weight:       500;
-// $headings-line-height:       1.1;
-// $headings-color:             inherit;
+// $headings-margin-bottom: ($spacer / 2);
+// $headings-font-family:   inherit;
+// $headings-font-weight:   500;
+// $headings-line-height:   1.1;
+// $headings-color:         inherit;
 
-// $lead-font-size:             1.25rem;
-// $lead-font-weight:           300;
+// $lead-font-size:   1.25rem;
+// $lead-font-weight: 300;
 
-// $text-muted:                  $gray-light;
+// $text-muted: $gray-light;
 
-// $abbr-border-color:           $gray-light;
+// $abbr-border-color: $gray-light;
 
-// $blockquote-small-color:      $gray-light;
-// $blockquote-font-size:        ($font-size-base * 1.25);
-// $blockquote-border-color:     $gray-lighter;
+// $blockquote-small-color:  $gray-light;
+// $blockquote-font-size:    ($font-size-base * 1.25);
+// $blockquote-border-color: $gray-lighter;
 
-// $hr-border-color:             rgba(0,0,0,.1);
-// $hr-border-width:             $border-width;
+// $hr-border-color: rgba(0,0,0,.1);
+// $hr-border-width: $border-width;
 
-// $dt-font-weight:              bold;
+// $dt-font-weight: bold;
 
-// $nested-kbd-font-weight:      bold;
+// $kbd-box-shadow:         inset 0 -.1rem 0 rgba(0,0,0,.25);
+// $nested-kbd-font-weight: bold;
 
-// $list-inline-padding:         5px;
+// $list-inline-padding: 5px;
 
 
 // Components
@@ -243,6 +239,8 @@
 // $btn-padding-x:                  1rem;
 // $btn-padding-y:                  .375rem;
 // $btn-font-weight:                normal;
+// $btn-box-shadow:                 inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+// $btn-active-box-shadow:          inset 0 3px 5px rgba(0,0,0,.125);
 
 // $btn-primary-color:              #fff;
 // $btn-primary-bg:                 $brand-primary;
@@ -275,6 +273,12 @@
 
 // $btn-padding-x-lg:               1.25rem;
 // $btn-padding-y-lg:               .75rem;
+
+// $btn-block-spacing-y:            5px;
+// $btn-toolbar-margin:             5px;
+
+// $split-btn-dropdown-toggle-padding-x:     8px;
+// $split-btn-lg-dropdown-toggle-padding-x: 12px;
 
 // Allows for customizing button radius independently from global border radius
 // $btn-border-radius:              $border-radius;
@@ -321,6 +325,74 @@
 
 // $cursor-disabled:                not-allowed;
 
+// $custom-control-gutter:   1.5rem;
+// $custom-control-spacer-x: 1rem;
+// $custom-control-spacer-y: .25rem;
+
+// $custom-control-indicator-size:       1rem;
+// $custom-control-indicator-bg:         #ddd;
+// $custom-control-indicator-bg-size:    50% 50%;
+// $custom-control-indicator-box-shadow: inset 0 .25rem .25rem rgba(0,0,0,.1);
+
+// $custom-control-disabled-cursor:             $cursor-disabled;
+// $custom-control-disabled-indicator-bg:       #eee;
+// $custom-control-disabled-description-color:  #767676;
+
+// $custom-control-checked-indicator-color:      #fff;
+// $custom-control-checked-indicator-bg:         #0074d9;
+// $custom-control-checked-indicator-box-shadow: none;
+
+// $custom-control-focus-indicator-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9;
+
+// $custom-control-active-indicator-color:      #fff;
+// $custom-control-active-indicator-bg:         #84c6ff;
+// $custom-control-active-indicator-box-shadow: none;
+
+// $custom-checkbox-radius: $border-radius;
+// $custom-checkbox-checked-icon: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgOCA4IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA4IDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTYuNCwxTDUuNywxLjdMMi45LDQuNUwyLjEsMy43TDEuNCwzTDAsNC40bDAuNywwLjdsMS41LDEuNWwwLjcsMC43bDAuNy0wLjdsMy41LTMuNWwwLjctMC43TDYuNCwxTDYuNCwxeiINCgkvPg0KPC9zdmc+DQo=";
+// $custom-checkbox-indeterminate-bg: #0074d9;
+// $custom-checkbox-indeterminate-icon: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iOHB4IiBoZWlnaHQ9IjhweCIgdmlld0JveD0iMCAwIDggOCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgOCA4IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0wLDN2Mmg4VjNIMHoiLz4NCjwvc3ZnPg0K";
+// $custom-checkbox-indeterminate-box-shadow: none;
+
+// $custom-radio-radius: 50%;
+// $custom-radio-checked-icon: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgOCA4IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA4IDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTQsMUMyLjMsMSwxLDIuMywxLDRzMS4zLDMsMywzczMtMS4zLDMtM1M1LjcsMSw0LDF6Ii8+DQo8L3N2Zz4NCg==";
+
+// $custom-select-padding-x:          .75rem ;
+// $custom-select-padding-y:          .375rem;
+// $custom-select-indicator-padding:  1rem; // Extra padding to account for the presence of the background-image based indicator
+// $custom-select-color:         $input-color;
+// $custom-select-bg:            #fff;
+// $custom-select-bg-size:       8px 10px; // In pixels because image dimensions
+// $custom-select-indicator:     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAMAAACzvE1FAAAADFBMVEUzMzMzMzMzMzMzMzMKAG/3AAAAA3RSTlMAf4C/aSLHAAAAPElEQVR42q3NMQ4AIAgEQTn//2cLdRKppSGzBYwzVXvznNWs8C58CiussPJj8h6NwgorrKRdTvuV9v16Afn0AYFOB7aYAAAAAElFTkSuQmCC";
+// $custom-select-border-width:  $input-btn-border-width;
+// $custom-select-border-color:  $input-border-color;
+// $custom-select-border-radius: $border-radius;
+
+// $custom-select-focus-border-color: #51a7e8;
+// $custom-select-focus-box-shadow:   inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(81, 167, 232, 0.5);
+
+// $custom-select-sm-padding-y: .2rem;
+// $custom-select-sm-font-size: 75%;
+
+// $custom-file-height:           2.5rem;
+// $custom-file-width:            14rem;
+// $custom-file-focus-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem #0074d9;
+
+// $custom-file-padding-x:     .5rem;
+// $custom-file-padding-y:     1rem;
+// $custom-file-line-height:   1.5;
+// $custom-file-color:         #555;
+// $custom-file-bg:            #fff;
+// $custom-file-border-width:  $border-width;
+// $custom-file-border-color:  #ddd;
+// $custom-file-border-radius: $border-radius;
+// $custom-file-box-shadow:    inset 0 .2rem .4rem rgba(0,0,0,.05);
+// $custom-file-placeholder:   "Choose file...";
+// $custom-file-button-label:  "Browse";
+// $custom-file-button-color:  $custom-file-color;
+// $custom-file-button-bg:     #eee;
+
+
 // Form validation icons
 // $form-icon-success: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjNWNiODVjIiBkPSJNMjMzLjggNjEwYy0xMy4zIDAtMjYtNi0zNC0xNi44TDkwLjUgNDQ4LjhDNzYuMyA0MzAgODAgNDAzLjMgOTguOCAzODljMTguOC0xNC4yIDQ1LjUtMTAuNCA1OS44IDguNGw3MiA5NUw0NTEuMyAyNDJjMTIuNS0yMCAzOC44LTI2LjIgNTguOC0xMy43IDIwIDEyLjQgMjYgMzguNyAxMy43IDU4LjhMMjcwIDU5MGMtNy40IDEyLTIwLjIgMTkuNC0zNC4zIDIwaC0yeiIvPjwvc3ZnPg==";
 // $form-icon-warning: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjZjBhZDRlIiBkPSJNNjAzIDY0MC4ybC0yNzguNS01MDljLTMuOC02LjYtMTAuOC0xMC42LTE4LjUtMTAuNnMtMTQuNyA0LTE4LjUgMTAuNkw5IDY0MC4yYy0zLjcgNi41LTMuNiAxNC40LjIgMjAuOCAzLjggNi41IDEwLjggMTAuNCAxOC4zIDEwLjRoNTU3YzcuNiAwIDE0LjYtNCAxOC40LTEwLjQgMy41LTYuNCAzLjYtMTQuNCAwLTIwLjh6bS0yNjYuNC0zMGgtNjEuMlY1NDloNjEuMnY2MS4yem0wLTEwN2gtNjEuMlYzMDRoNjEuMnYxOTl6Ii8+PC9zdmc+";
@@ -335,6 +407,7 @@
 // $dropdown-border-color:          rgba(0,0,0,.15);
 // $dropdown-border-width:          $border-width;
 // $dropdown-divider-bg:            #e5e5e5;
+// $dropdown-box-shadow:            0 6px 12px rgba(0,0,0,.175);
 
 // $dropdown-link-color:            $gray-dark;
 // $dropdown-link-hover-color:      darken($gray-dark, 5%);
@@ -353,6 +426,7 @@
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
+// $zindex-dropdown-backdrop:  990;
 // $zindex-navbar:            1000;
 // $zindex-dropdown:          1000;
 // $zindex-popover:           1060;
@@ -382,27 +456,26 @@
 
 // Navs
 
-// $nav-link-padding:                          .5em 1em;
-// $nav-link-hover-bg:                         $gray-lighter;
+// $nav-item-margin:               .2rem;
+// $nav-item-inline-spacer:        1rem;
+// $nav-link-padding:              .5em 1em;
+// $nav-link-hover-bg:             $gray-lighter;
+// $nav-disabled-link-color:       $gray-light;
+// $nav-disabled-link-hover-color: $gray-light;
+// $nav-disabled-link-hover-bg:    transparent;
 
-// $nav-disabled-link-color:                   $gray-light;
-// $nav-disabled-link-hover-color:             $gray-light;
+// $nav-tabs-border-color:                       #ddd;
+// $nav-tabs-border-width:                       $border-width;
+// $nav-tabs-link-hover-border-color:            $gray-lighter;
+// $nav-tabs-active-link-hover-color:            $gray;
+// $nav-tabs-active-link-hover-bg:               $body-bg;
+// $nav-tabs-active-link-hover-border-color:     #ddd;
+// $nav-tabs-justified-link-border-color:        #ddd;
+// $nav-tabs-justified-active-link-border-color: $body-bg;
 
-// $nav-tabs-border-color:                     #ddd;
-
-// $nav-tabs-link-border-width:                $border-width;
-// $nav-tabs-link-hover-border-color:          $gray-lighter;
-
-// $nav-tabs-active-link-hover-bg:             $body-bg;
-// $nav-tabs-active-link-hover-color:          $gray;
-// $nav-tabs-active-link-hover-border-color:   #ddd;
-
-// $nav-tabs-justified-link-border-color:            #ddd;
-// $nav-tabs-justified-active-link-border-color:     $body-bg;
-
-// $nav-pills-border-radius:                   $border-radius;
-// $nav-pills-active-link-hover-bg:            $component-active-bg;
-// $nav-pills-active-link-hover-color:         $component-active-color;
+// $nav-pills-border-radius:     $border-radius;
+// $nav-pills-active-link-color: $component-active-color;
+// $nav-pills-active-link-bg:    $component-active-bg;
 
 
 // Pagination
@@ -431,21 +504,6 @@
 // $pagination-disabled-color:            $gray-light;
 // $pagination-disabled-bg:               #fff;
 // $pagination-disabled-border:           #ddd;
-
-
-// Pager
-
-// $pager-bg:                             $pagination-bg;
-// $pager-border-width:                   $border-width;
-// $pager-border-color:                   $pagination-border-color;
-// $pager-border-radius:                  15px;
-
-// $pager-hover-bg:                       $pagination-hover-bg;
-
-// $pager-active-bg:                      $pagination-active-bg;
-// $pager-active-color:                   $pagination-active-color;
-
-// $pager-disabled-color:                 $pagination-disabled-color;
 
 
 // Jumbotron
@@ -487,6 +545,8 @@
 
 // $card-link-hover-color:    #fff;
 
+// $card-deck-margin:         .625rem;
+
 
 // Tooltips
 
@@ -494,6 +554,9 @@
 // $tooltip-color:               #fff;
 // $tooltip-bg:                  #000;
 // $tooltip-opacity:             .9;
+// $tooltip-padding-y:           3px;
+// $tooltip-padding-x:           8px;
+// $tooltip-margin:              3px;
 
 // $tooltip-arrow-width:         5px;
 // $tooltip-arrow-color:         $tooltip-bg;
@@ -505,13 +568,19 @@
 // $popover-max-width:                   276px;
 // $popover-border-width:                $border-width;
 // $popover-border-color:                rgba(0,0,0,.2);
+// $popover-box-shadow:                  0 5px 10px rgba(0,0,0,.2);
 
 // $popover-title-bg:                    darken($popover-bg, 3%);
+// $popover-title-padding-x:             14px;
+// $popover-title-padding-y:             8px;
+
+// $popover-content-padding-x:           14px;
+// $popover-content-padding-y:           9px;
 
 // $popover-arrow-width:                 10px;
 // $popover-arrow-color:                 $popover-bg;
 
-// $popover-arrow-outer-width:           ($popover-arrow-width + 1);
+// $popover-arrow-outer-width:           ($popover-arrow-width + 1px);
 // $popover-arrow-outer-color:           fade-in($popover-border-color, 0.05);
 
 
@@ -537,8 +606,10 @@
 // $modal-title-padding:         15px;
 // $modal-title-line-height:     $line-height;
 
-// $modal-content-bg:                             #fff;
-// $modal-content-border-color:                   rgba(0,0,0,.2);
+// $modal-content-bg:               #fff;
+// $modal-content-border-color:     rgba(0,0,0,.2);
+// $modal-content-xs-box-shadow:    0 3px 9px rgba(0,0,0,.5);
+// $modal-content-sm-up-box-shadow: 0 5px 15px rgba(0,0,0,.5);
 
 // $modal-backdrop-bg:           #000;
 // $modal-backdrop-opacity:      .5;
@@ -578,9 +649,10 @@
 
 // Progress bars
 
-// $progress-bg:                 #f5f5f5;
-// $progress-bar-color:          #fff;
+// $progress-bg:                 #eee;
+// $progress-bar-color:          #0074d9;
 // $progress-border-radius:      $border-radius;
+// $progress-box-shadow:         inset 0 .1rem .1rem rgba(0,0,0,.1);
 
 // $progress-bar-bg:             $brand-primary;
 // $progress-bar-success-bg:     $brand-success;
@@ -618,17 +690,26 @@
 // $thumbnail-border-width:      $border-width;
 // $thumbnail-border-color:      #ddd;
 // $thumbnail-border-radius:     $border-radius;
+// $thumbnail-box-shadow:        0 1px 2px rgba(0,0,0,.075);
 
 
 // Breadcrumbs
 
-// $breadcrumb-padding-vertical:   .75rem;
-// $breadcrumb-padding-horizontal: 1rem;
+// $breadcrumb-padding-y:          .75rem;
+// $breadcrumb-padding-x:          1rem;
+// $breadcrumb-item-padding:       .5rem;
 
 // $breadcrumb-bg:                 $gray-lighter;
 // $breadcrumb-divider-color:      $gray-light;
 // $breadcrumb-active-color:       $gray-light;
 // $breadcrumb-divider:            "/";
+
+
+// Media objects
+
+// $media-margin-top:            15px;
+// $media-heading-margin-bottom:  5px;
+// $media-alignment-padding-x:   10px;
 
 
 // Carousel
