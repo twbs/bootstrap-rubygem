@@ -18,13 +18,15 @@ task :test_all_gemfiles do
     env = {'BUNDLE_GEMFILE' => gemfile}
     cmd_with_env = "  (#{env.map { |k, v| "export #{k}=#{Shellwords.escape v}" } * ' '}; #{cmd})"
     $stderr.puts Term::ANSIColor.cyan("Testing\n#{cmd_with_env}")
-    PTY.spawn(env, cmd) do |r, _w, pid|
-      begin
-        r.each_line { |l| puts l }
-      rescue Errno::EIO
-        # Errno:EIO error means that the process has finished giving output.
-      ensure
-        ::Process.wait pid
+    Bundler.with_clean_env do
+      PTY.spawn(env, cmd) do |r, _w, pid|
+        begin
+          r.each_line { |l| puts l }
+        rescue Errno::EIO
+          # Errno:EIO error means that the process has finished giving output.
+        ensure
+          ::Process.wait pid
+        end
       end
     end
     [$? && $?.exitstatus == 0, cmd_with_env]
