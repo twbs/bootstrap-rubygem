@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'compass', '~> 1.0.3'
   s.add_development_dependency 'term-ansicolor'
   # Integration testing
-  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara', '>= 2.6.0'
   s.add_development_dependency 'poltergeist'
   # Dummy Rails app dependencies
   s.add_development_dependency 'actionpack', '>= 4.1.5'
