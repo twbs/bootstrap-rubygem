@@ -125,6 +125,39 @@ Bootstrap requires the use of [Autoprefixer][autoprefixer].
 If you are using bootstrap with Rails, autoprefixer is set up for you automatically.
 Otherwise, please consult the [Autoprefixer documentation][autoprefixer].
 
+You have to specify browsers for your Rails project, you can save them to
+
+* `browserslist` and place it under `app/assets/stylesheets/` or any of its ancestor directories
+
+    ```
+    Chrome >= 35
+    Firefox >= 38
+    Edge >= 12
+    Explorer >= 9
+    iOS >= 8
+    Safari >= 8
+    Android 2.3
+    Android >= 4
+    Opera >= 12
+    ```
+
+* Or `config/autoprefixer.yml`
+
+    ```yaml
+    browsers:
+      - "Chrome >= 35"
+      - "Firefox >= 38"
+      - "Edge >= 12"
+      - "Explorer >= 9"
+      - "iOS >= 8"
+      - "Safari >= 8"
+      - "Android 2.3"
+      - "Android >= 4"
+      - "Opera >= 12"
+    ```
+
+See [Browserslist docs](https://github.com/ai/browserslist) for config format.
+
 ### Sass: Individual components
 
 By default all of Bootstrap is imported.
