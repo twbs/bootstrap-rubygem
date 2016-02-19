@@ -1,3 +1,5 @@
+// scss-lint:disable QualifyingElement
+
 //
 // Textual form controls
 //
@@ -9,24 +11,17 @@
   // height: $input-height;
   padding: $input-padding-y $input-padding-x;
   font-size: $font-size-base;
-  line-height: $line-height;
+  line-height: $input-line-height;
   color: $input-color;
   background-color: $input-bg;
   // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214.
   background-image: none;
+  background-clip: padding-box;
   border: $input-btn-border-width solid $input-border-color;
   // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
   @include border-radius($input-border-radius);
   @include box-shadow($input-box-shadow);
   @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
-
-  // Make inputs at least the height of their button counterpart (base line-height + padding + border).
-  // Only apply the height to textual inputs and some selects.
-  // &:not(textarea),
-  // &:not(select[size]),
-  // &:not(select[multiple]) {
-  //   height: $input-height;
-  // }
 
   // Unstyle the caret on `<select>`s in IE10+.
   &::-ms-expand {
@@ -61,6 +56,11 @@
   }
 }
 
+select.form-control {
+  &:not([size]):not([multiple]) {
+    height: $input-height;
+  }
+}
 
 // Make file inputs better match text inputs by forcing them to new lines.
 .form-control-file,
@@ -92,8 +92,6 @@
 //
 // Note that as of 8.3, iOS doesn't support `week`.
 
-// SCSS-Lint exemption until https://github.com/brigade/scss-lint/pull/672 gets merged
-// scss-lint:disable PseudoElement
 _::-webkit-full-page-media, // Hack to make this CSS be Safari-only; see http://browserbu.gs/css-hacks/webkit-full-page-media/
 input[type="date"],
 input[type="time"],
@@ -113,7 +111,6 @@ input[type="month"] {
     line-height: $input-height-lg;
   }
 }
-// scss-lint:enable PseudoElement
 
 
 // Static form control text
@@ -146,18 +143,14 @@ input[type="month"] {
 // issue documented in https://github.com/twbs/bootstrap/issues/15074.
 
 .form-control-sm {
-  // height: $input-height-sm;
   padding: $input-padding-y-sm $input-padding-x-sm;
   font-size: $font-size-sm;
-  line-height: $line-height-sm;
   @include border-radius($input-border-radius-sm);
 }
 
 .form-control-lg {
-  // height: $input-height-lg;
   padding: $input-padding-y-lg $input-padding-x-lg;
   font-size: $font-size-lg;
-  line-height: $line-height-lg;
   @include border-radius($input-border-radius-lg);
 }
 
@@ -264,8 +257,8 @@ input[type="checkbox"] {
 .form-control-danger {
   padding-right: ($input-padding-x * 3);
   background-repeat: no-repeat;
-  background-position: center right ($input-height * .25);
-  background-size: ($input-height * .65) ($input-height * .65);
+  background-position: center right ($input-height / 4);
+  background-size: ($input-height / 2) ($input-height / 2);
 }
 
 // Form validation states
@@ -273,7 +266,7 @@ input[type="checkbox"] {
   @include form-control-validation($brand-success);
 
   .form-control-success {
-    background-image: url($form-icon-success);
+    background-image: $form-icon-success;
   }
 }
 
@@ -281,7 +274,7 @@ input[type="checkbox"] {
   @include form-control-validation($brand-warning);
 
   .form-control-warning {
-    background-image: url($form-icon-warning);
+    background-image: $form-icon-warning;
   }
 }
 
@@ -289,7 +282,7 @@ input[type="checkbox"] {
   @include form-control-validation($brand-danger);
 
   .form-control-danger {
-    background-image: url($form-icon-danger);
+    background-image: $form-icon-danger;
   }
 }
 
@@ -297,17 +290,17 @@ input[type="checkbox"] {
 
 
 // .form-control-success {
-//   background-image: url("#{$form-icon-success}");
+//   background-image: $form-icon-success;
 //   border-color: $brand-success;
 // }
 //
 // .form-control-warning {
-//   background-image: url("#{$form-icon-warning}");
+//   background-image: $form-icon-warning;
 //   border-color: $brand-warning;
 // }
 //
 // .form-control-error {
-//   background-image: url("#{$form-icon-danger}");
+//   background-image: $form-icon-danger;
 //   border-color: $brand-danger;
 // }
 

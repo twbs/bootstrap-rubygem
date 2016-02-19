@@ -13,6 +13,7 @@
   position: relative;
   display: inline;
   padding-left: $custom-control-gutter;
+  cursor: pointer;
 
   + .custom-control {
     margin-left: $custom-control-spacer-x;
@@ -84,12 +85,12 @@
   }
 
   .custom-control-input:checked ~ .custom-control-indicator {
-    background-image: url(#{$custom-checkbox-checked-icon});
+    background-image: $custom-checkbox-checked-icon;
   }
 
   .custom-control-input:indeterminate ~ .custom-control-indicator {
     background-color: $custom-checkbox-indeterminate-bg;
-    background-image: url(#{$custom-checkbox-indeterminate-icon});
+    background-image: $custom-checkbox-indeterminate-icon;
     @include box-shadow($custom-checkbox-indeterminate-box-shadow);
   }
 }
@@ -104,7 +105,7 @@
   }
 
   .custom-control-input:checked ~ .custom-control-indicator {
-    background-image: url(#{$custom-radio-checked-icon});
+    background-image: $custom-radio-checked-icon;
   }
 }
 
@@ -145,7 +146,7 @@
   padding-right: $custom-select-padding-x \9;
   color: $custom-select-color;
   vertical-align: middle;
-  background: $custom-select-bg url(#{$custom-select-indicator}) no-repeat right $custom-select-padding-x center;
+  background: $custom-select-bg $custom-select-indicator no-repeat right $custom-select-padding-x center;
   background-image: none \9;
   background-size: $custom-select-bg-size;
   border: $custom-select-border-width solid $custom-select-border-color;
@@ -218,8 +219,10 @@
   @include border-radius($custom-file-border-radius);
   @include box-shadow($custom-file-box-shadow);
 
-  &::after {
-    content: $custom-file-placeholder;
+  @each $lang, $text in map-get($custom-file-text, placeholder) {
+    &:lang(#{$lang})::after {
+      content: $text;
+    }
   }
 
   &::before {
@@ -233,9 +236,14 @@
     padding: $custom-file-padding-x $custom-file-padding-y;
     line-height: $custom-file-line-height;
     color: $custom-file-button-color;
-    content: $custom-file-button-label;
     background-color: $custom-file-button-bg;
     border: $custom-file-border-width solid $custom-file-border-color;
     @include border-radius(0 $custom-file-border-radius $custom-file-border-radius 0);
+  }
+
+  @each $lang, $text in map-get($custom-file-text, button-label) {
+    &:lang(#{$lang})::before {
+      content: $text;
+    }
   }
 }
