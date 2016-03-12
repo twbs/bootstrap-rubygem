@@ -1,3 +1,5 @@
+require 'autoprefixer-rails'
+
 module Bootstrap
   module Rails
     class Engine < ::Rails::Engine
