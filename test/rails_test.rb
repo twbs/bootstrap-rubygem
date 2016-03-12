@@ -14,7 +14,7 @@ class RailsTest < ActionDispatch::IntegrationTest
 
   def test_autoprefixer
     get ActionController::Base.helpers.stylesheet_path('application.css')
-    assert_match /-webkit-(?:transition|transform)/, response.body
+    assert_match(/-webkit-(?:transition|transform)/, response.body)
   end
 
   def test_precompile
