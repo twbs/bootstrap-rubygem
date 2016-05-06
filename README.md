@@ -27,7 +27,7 @@ Ensure that `sprockets-rails` is at least v2.3.2.
 Import Bootstrap styles in `app/assets/stylesheets/application.scss`:
 
 ```scss
-// Custom bootstrap variables must be set or import before bootstrap itself.
+// Custom bootstrap variables must be set or imported before bootstrap itself.
 @import "bootstrap";
 ```
 
