@@ -3,6 +3,8 @@ class Updater
   module Network
     protected
 
+    WRITE_FILES_MUTEX = Mutex.new
+
     def get_paths_by_type(dir, file_re, recursive = true)
       get_file_paths(dir, recursive).select { |path| path =~ file_re }
     end
@@ -24,7 +26,7 @@ class Updater
       files.map do |name|
         Thread.start {
           contents[name] = open("#{path_url}/#{name}").read
-          Thread.exclusive { write_cached_files path, name => contents[name] }
+          WRITE_FILES_MUTEX.synchronize { write_cached_files path, name => contents[name] }
         }
       end.each(&:join)
       contents
