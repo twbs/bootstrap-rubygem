@@ -50,6 +50,7 @@
 // $brand-info:                #5bc0de;
 // $brand-warning:             #f0ad4e;
 // $brand-danger:              #d9534f;
+// $brand-inverse:             $gray-dark;
 
 
 // Options
@@ -245,8 +246,8 @@
 // $table-sm-cell-padding:         .3rem;
 
 // $table-bg:                      transparent;
-// $table-bg-accent:               #f9f9f9;
-// $table-bg-hover:                #f5f5f5;
+// $table-bg-accent:               rgba(0,0,0,.05);
+// $table-bg-hover:                rgba(0,0,0,.075);
 // $table-bg-active:               $table-bg-hover;
 
 // $table-border-width:            $border-width;
@@ -296,11 +297,8 @@
 // $btn-padding-x-lg:               1.5rem;
 // $btn-padding-y-lg:               .75rem;
 
-// $btn-block-spacing-y:            5px;
-// $btn-toolbar-margin:             5px;
-
-// $split-btn-dropdown-toggle-padding-x:     8px;
-// $split-btn-lg-dropdown-toggle-padding-x: 12px;
+// $btn-block-spacing-y:            .5rem;
+// $btn-toolbar-margin:             .5rem;
 
 // Allows for customizing button radius independently from global border radius
 // $btn-border-radius:              $border-radius;
@@ -326,8 +324,10 @@
 // $input-border-radius-lg:         $border-radius-lg;
 // $input-border-radius-sm:         $border-radius-sm;
 
+// $input-bg-focus:                 $input-bg;
 // $input-border-focus:             #66afe9;
 // $input-box-shadow-focus:         rgba(102,175,233,.6);
+// $input-color-focus:              $input-color;
 
 // $input-color-placeholder:        #999;
 
@@ -383,8 +383,10 @@
 // $custom-select-padding-x:          .75rem ;
 // $custom-select-padding-y:          .375rem;
 // $custom-select-indicator-padding:  1rem; // Extra padding to account for the presence of the background-image based indicator
-// $custom-select-color:         $input-color;
+// $custom-select-color:          $input-color;
+// $custom-select-disabled-color: $gray-light;
 // $custom-select-bg:            #fff;
+// $custom-select-disabled-bg:   $gray-lighter;
 // $custom-select-bg-size:       8px 10px; // In pixels because image dimensions
 // $custom-select-indicator:     url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
 // $custom-select-border-width:  $input-btn-border-width;
@@ -501,6 +503,7 @@
 
 // $nav-tabs-border-color:                       #ddd;
 // $nav-tabs-border-width:                       $border-width;
+// $nav-tabs-border-radius:                      $border-radius;
 // $nav-tabs-link-hover-border-color:            $gray-lighter;
 // $nav-tabs-active-link-hover-color:            $gray;
 // $nav-tabs-active-link-hover-bg:               $body-bg;
@@ -581,6 +584,8 @@
 
 // $card-link-hover-color:    #fff;
 
+// $card-img-overlay-padding: 1.25rem;
+
 // $card-deck-margin:         .625rem;
 
 // $card-columns-sm-up-column-gap: 1.25rem;
@@ -602,6 +607,7 @@
 
 // Popovers
 
+// $popover-inner-padding:               1px;
 // $popover-bg:                          #fff;
 // $popover-max-width:                   276px;
 // $popover-border-width:                $border-width;
@@ -792,6 +798,8 @@
 // $carousel-caption-width:                      70%;
 // $carousel-caption-sm-up-width:                60%;
 // $carousel-caption-color:                      #fff;
+
+// $carousel-icon-width:                         20px;
 
 
 // Close
