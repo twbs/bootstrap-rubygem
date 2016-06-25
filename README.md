@@ -31,11 +31,26 @@ Import Bootstrap styles in `app/assets/stylesheets/application.scss`:
 @import "bootstrap";
 ```
 
+To enable [flexbox](http://v4-alpha.getbootstrap.com/getting-started/flexbox/) support, use `bootstrap-flex` instead:
+
+```scss
+// Enable flexbox support by bootstrapping the flexbox variable.
+@import "bootstrap-flex";
+```
+
 Make sure the file has `.scss` extension (or `.sass` for Sass syntax). If you have just generated a new Rails app,
 it may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so rename it:
 
 ```console
 $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
+```
+
+To override Bootstrap defaults, set the corresponding [variable](https://github.com/twbs/bootstrap-rubygem/blob/master/templates/project/_bootstrap-variables.scss) above the import statement:
+
+```scss
+// Set variables above your import statement to override Bootstrap defaults
+$brand-primary: #563d7c;
+@import "bootstrap";
 ```
 
 Then, remove all the `*= require` and `*= require_tree` statements from the Sass file. Instead, use `@import` to import Sass files.
