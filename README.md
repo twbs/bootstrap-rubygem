@@ -24,6 +24,12 @@ Ensure that `sprockets-rails` is at least v2.3.2.
 
 `bundle install` and restart your server to make the files available through the pipeline.
 
+In case your bundle install is not working properly you can install the gem seperatly
+using the command 
+
+  gem install bootstrap -v version number
+
+this can also be used in case you are using an older version of rails in that case try installing and older version of gem 
 Import Bootstrap styles in `app/assets/stylesheets/application.scss`:
 
 ```scss
