@@ -1,4 +1,4 @@
-// Override Bootstrap variables here (defaults from bootstrap v4.0.0-alpha.2):
+// Override Bootstrap variables here (defaults from bootstrap v4.0.0-alpha.3):
 
 //
 // Copy settings from this file into the provided `_custom.scss` to override
@@ -22,7 +22,11 @@
 //   $prev-key: null;
 //   $prev-num: null;
 //   @each $key, $num in $map {
-//     @if $prev-num != null and $prev-num >= $num {
+//     @if $prev-num == null {
+//       // Do nothing
+//     } @else if not comparable($prev-num, $num) {
+//       @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+//     } @else if $prev-num >= $num {
 //       @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
 //     }
 //     $prev-key: $key;
@@ -155,7 +159,7 @@
 //
 // Font, line-height, and color for body text, headings, and more.
 
-// $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+// $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 // $font-family-serif:      Georgia, "Times New Roman", Times, serif;
 // $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 // $font-family-base:       $font-family-sans-serif;
