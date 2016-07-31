@@ -17,7 +17,7 @@ Please see the appropriate guide for your environment of choice:
 Add `bootstrap` to your Gemfile:
 
 ```ruby
-gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'bootstrap', '~> 4.0.0.alpha3.1'
 ```
 
 Ensure that `sprockets-rails` is at least v2.3.2.
@@ -78,7 +78,7 @@ Then, run `bundle`, restart the server, and require tether before bootstrap but 
 Install the gem:
 
 ```console
-$ gem install bootstrap -v 4.0.0.alpha3
+$ gem install bootstrap -v 4.0.0.alpha3.1
 ```
 
 **If you have an existing Compass project:**
