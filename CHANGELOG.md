@@ -7,6 +7,6 @@ The Bootstrap framework changes can be found in [the Releases section of twbs/bo
 Release announcement posts on [the official Bootstrap blog](http://blog.getbootstrap.com) contain summaries of the most noteworthy changes made in each release of Bootstrap.
 
 
-# 4.0.0.alpha3.1
+# 4.0.0.alpha4
 
-This release corresponds to the upstream Bootstrap 4 Alpha 3.
+This release corresponds to the upstream Bootstrap 4 Alpha 4.
