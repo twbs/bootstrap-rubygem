@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'actionpack', '~> 5.0.0.rc1'
-gem 'activesupport', '~> 5.0.0.rc1'
+gem 'actionpack', '~> 5.0.0'
+gem 'activesupport', '~> 5.0.0'
 gem 'autoprefixer-rails', '>= 6.3.6.1'
 
 source 'https://rails-assets.org' do
