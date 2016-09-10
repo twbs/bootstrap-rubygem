@@ -1,8 +1,4 @@
-// Override Bootstrap variables here (defaults from bootstrap v4.0.0-alpha.3):
-
-//
-// Copy settings from this file into the provided `_custom.scss` to override
-// the Bootstrap defaults without modifying key, versioned files.
+// Override Bootstrap variables here (defaults from bootstrap v4.0.0-alpha.4):
 
 
 // Table of Contents
@@ -18,21 +14,6 @@
 // Fonts
 // Components
 
-@mixin _assert-ascending($map, $map-name) {
-//   $prev-key: null;
-//   $prev-num: null;
-//   @each $key, $num in $map {
-//     @if $prev-num == null {
-//       // Do nothing
-//     } @else if not comparable($prev-num, $num) {
-//       @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
-//     } @else if $prev-num >= $num {
-//       @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
-//     }
-//     $prev-key: $key;
-//     $prev-num: $num;
-//   }
-}
 
 // General variable structure
 //
@@ -131,7 +112,6 @@
 //   lg: 992px,
 //   xl: 1200px
 // );
-@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 
 
 // Grid containers
@@ -144,7 +124,6 @@
 //   lg: 940px,
 //   xl: 1140px
 // );
-@include _assert-ascending($container-max-widths, "$container-max-widths");
 
 
 // Grid columns
@@ -686,7 +665,7 @@
 //
 // Define alert colors, border radius, and padding.
 
-// $alert-padding:               15px;
+// $alert-padding:               1rem;
 // $alert-border-radius:         $border-radius;
 // $alert-link-font-weight:      bold;
 // $alert-border-width:          $border-width;
