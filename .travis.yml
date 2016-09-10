@@ -13,4 +13,4 @@ env:
   global:
   - VERBOSE=1
 script:
-  bundle exec rake
+  bundle exec rake --trace
