@@ -1,4 +1,4 @@
-// Override Bootstrap variables here (defaults from bootstrap v4.0.0-alpha.4):
+// Override Bootstrap variables here (defaults from bootstrap v4.0.0-alpha.5):
 
 
 // Table of Contents
@@ -107,7 +107,7 @@
 
 // $grid-breakpoints: (
 //   xs: 0,
-//   sm: 544px,
+//   sm: 576px,
 //   md: 768px,
 //   lg: 992px,
 //   xl: 1200px
@@ -119,9 +119,9 @@
 // Define the maximum width of `.container` for different screen sizes.
 
 // $container-max-widths: (
-//   sm: 576px,
+//   sm: 540px,
 //   md: 720px,
-//   lg: 940px,
+//   lg: 960px,
 //   xl: 1140px
 // );
 
@@ -130,9 +130,15 @@
 //
 // Set the number of columns and specify the width of the gutters.
 
-// $grid-columns:      12;
-// $grid-gutter-width: 30px;
-
+// $grid-columns:               12;
+// $grid-gutter-width-base:     30px;
+// $grid-gutter-widths: (
+//   xs: $grid-gutter-width-base,
+//   sm: $grid-gutter-width-base,
+//   md: $grid-gutter-width-base,
+//   lg: $grid-gutter-width-base,
+//   xl: $grid-gutter-width-base
+// );
 
 // Typography
 //
@@ -309,7 +315,7 @@
 
 // $input-bg-focus:                 $input-bg;
 // $input-border-focus:             #66afe9;
-// $input-box-shadow-focus:         rgba(102,175,233,.6);
+// $input-box-shadow-focus:         $input-box-shadow, 0 0 8px rgba(102,175,233,.6);
 // $input-color-focus:              $input-color;
 
 // $input-color-placeholder:        #999;
@@ -355,13 +361,15 @@
 // $custom-control-active-indicator-box-shadow: none;
 
 // $custom-checkbox-radius: $border-radius;
-// $custom-checkbox-checked-icon: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+// $custom-checkbox-checked-icon: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$custom-control-checked-indicator-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+
 // $custom-checkbox-indeterminate-bg: #0074d9;
-// $custom-checkbox-indeterminate-icon: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E");
+// $custom-checkbox-indeterminate-indicator-color: $custom-control-checked-indicator-color;
+// $custom-checkbox-indeterminate-icon: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$custom-checkbox-indeterminate-indicator-color}' d='M0 2h4'/%3E%3C/svg%3E");
 // $custom-checkbox-indeterminate-box-shadow: none;
 
 // $custom-radio-radius: 50%;
-// $custom-radio-checked-icon: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E");
+// $custom-radio-checked-icon: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='#{$custom-control-checked-indicator-color}'/%3E%3C/svg%3E");
 
 // $custom-select-padding-x:          .75rem ;
 // $custom-select-padding-y:          .375rem;
@@ -371,7 +379,8 @@
 // $custom-select-bg:            #fff;
 // $custom-select-disabled-bg:   $gray-lighter;
 // $custom-select-bg-size:       8px 10px; // In pixels because image dimensions
-// $custom-select-indicator:     url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+// $custom-select-indicator-color: #333;
+// $custom-select-indicator:     url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
 // $custom-select-border-width:  $input-btn-border-width;
 // $custom-select-border-color:  $input-border-color;
 // $custom-select-border-radius: $border-radius;
@@ -408,23 +417,28 @@
 
 
 // Form validation icons
-// $form-icon-success: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%235cb85c' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E");
-// $form-icon-warning: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23f0ad4e' d='M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z'/%3E%3C/svg%3E");
-// $form-icon-danger: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d9534f' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23d9534f' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E");
+// $form-icon-success-color: $brand-success;
+// $form-icon-success: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$form-icon-success-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E");
+
+// $form-icon-warning-color: $brand-warning;
+// $form-icon-warning: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$form-icon-warning-color}' d='M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z'/%3E%3C/svg%3E");
+
+// $form-icon-danger-color: $brand-danger;
+// $form-icon-danger: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$form-icon-danger-color}' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23d9534f' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E");
 
 
 // Dropdowns
 //
 // Dropdown menu container and contents.
 
-// $dropdown-min-width:             160px;
-// $dropdown-padding-y:             5px;
-// $dropdown-margin-top:            2px;
+// $dropdown-min-width:             10rem;
+// $dropdown-padding-y:             .5rem;
+// $dropdown-margin-top:            .125rem;
 // $dropdown-bg:                    #fff;
 // $dropdown-border-color:          rgba(0,0,0,.15);
 // $dropdown-border-width:          $border-width;
 // $dropdown-divider-bg:            #e5e5e5;
-// $dropdown-box-shadow:            0 6px 12px rgba(0,0,0,.175);
+// $dropdown-box-shadow:            0 .5rem 1rem rgba(0,0,0,.175);
 
 // $dropdown-link-color:            $gray-dark;
 // $dropdown-link-hover-color:      darken($gray-dark, 5%);
@@ -435,7 +449,7 @@
 
 // $dropdown-link-disabled-color:   $gray-light;
 
-// $dropdown-item-padding-x:        20px;
+// $dropdown-item-padding-x:        1.5rem;
 
 // $dropdown-header-color:          $gray-light;
 
@@ -461,18 +475,31 @@
 // $navbar-border-radius:              $border-radius;
 // $navbar-padding-x:                  $spacer;
 // $navbar-padding-y:                  ($spacer / 2);
+
 // $navbar-brand-padding-y:            .25rem;
+
+// $navbar-divider-padding-y:          .425rem;
+
+// $navbar-toggler-padding-x:           .75rem;
+// $navbar-toggler-padding-y:           .5rem;
+// $navbar-toggler-font-size:           $font-size-lg;
+// $navbar-toggler-border-radius:       $btn-border-radius;
+// $navbar-toggler-padding-x:           .75rem;
+// $navbar-toggler-padding-y:           .5rem;
 
 // $navbar-dark-color:                 rgba(255,255,255,.5);
 // $navbar-dark-hover-color:           rgba(255,255,255,.75);
 // $navbar-dark-active-color:          rgba(255,255,255,1);
 // $navbar-dark-disabled-color:        rgba(255,255,255,.25);
+// $navbar-dark-toggler-bg: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-dark-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+// $navbar-dark-toggler-border:        rgba(255,255,255,.1);
 
-// $navbar-light-color:                rgba(0,0,0,.3);
-// $navbar-light-hover-color:          rgba(0,0,0,.6);
-// $navbar-light-active-color:         rgba(0,0,0,.8);
-// $navbar-light-disabled-color:       rgba(0,0,0,.15);
-
+// $navbar-light-color:                rgba(0,0,0,.5);
+// $navbar-light-hover-color:          rgba(0,0,0,.7);
+// $navbar-light-active-color:         rgba(0,0,0,.9);
+// $navbar-light-disabled-color:       rgba(0,0,0,.3);
+// $navbar-light-toggler-bg: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#{$navbar-light-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+// $navbar-light-toggler-border:       rgba(0,0,0,.1);
 
 // Navs
 
@@ -561,7 +588,7 @@
 // $card-border-width:        1px;
 // $card-border-radius:       $border-radius;
 // $card-border-color:        rgba(0,0,0,.125);
-// $card-border-radius-inner: $card-border-radius;
+// $card-border-radius-inner: calc(#{$card-border-radius} - #{$card-border-width});
 // $card-cap-bg:              #f5f5f5;
 // $card-bg:                  #fff;
 
@@ -665,7 +692,8 @@
 //
 // Define alert colors, border radius, and padding.
 
-// $alert-padding:               1rem;
+// $alert-padding-x:             1.25rem;
+// $alert-padding-y:             .75rem;
 // $alert-border-radius:         $border-radius;
 // $alert-link-font-weight:      bold;
 // $alert-border-width:          $border-width;
