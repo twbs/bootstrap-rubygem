@@ -27,9 +27,11 @@ Ensure that `sprockets-rails` is at least v2.3.2.
 Import Bootstrap styles in `app/assets/stylesheets/application.scss`:
 
 ```scss
-// Custom bootstrap variables must be set or imported before bootstrap itself.
+// Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 ```
+
+The available variables can be found [here][bootstrap-variables.scss].
 
 Make sure the file has `.scss` extension (or `.sass` for Sass syntax). If you have just generated a new Rails app,
 it may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so rename it:
@@ -61,7 +63,7 @@ If you use them, add tether to the Gemfile:
 
 ```ruby
 source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.1.0'
+  gem 'rails-assets-tether', '>= 1.3.3'
 end
 ```
 
@@ -139,5 +141,6 @@ In the application Sass file, replace `@import 'bootstrap'` with:
 ```
 
 [bootstrap-home]: http://v4-alpha.getbootstrap.com/
+[bootstrap-variables.scss]: https://github.com/twbs/bootstrap-rubygem/blob/master/templates/project/_bootstrap-variables.scss
 [autoprefixer]: https://github.com/ai/autoprefixer
 [tether]: http://github.hubspot.com/tether/
