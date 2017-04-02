@@ -66,6 +66,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
 ```
+ 
+Alternatively use jakegavin/teher-rails at https://github.com/jakegavin/tether-rails. Just add to your gem file
+
+gem 'tether-rails' 
 
 Then, run `bundle`, restart the server, and require tether before bootstrap but after jQuery:
 
