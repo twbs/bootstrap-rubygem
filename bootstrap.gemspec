@@ -31,6 +31,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'slim-rails'
   s.add_development_dependency 'uglifier'
 
-  s.files      = `git ls-files`.split("\n")
+  s.files      = Dir.glob([".*", "*", "{assets,tasks,templates,test,lib}/**/*"]).reject(&File.method(:directory?)) - ["Gemfile.lock"]
   s.test_files = `git ls-files -- test/*`.split("\n")
 end
