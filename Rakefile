@@ -65,6 +65,7 @@ end
 desc 'Update bootstrap from upstream'
 task :update, :branch do |t, args|
   require './tasks/updater'
+  args.with_defaults(:branch => Bootstrap::BOOTSTRAP_SHA)
   Updater.new(branch: args[:branch]).update_bootstrap
 end
 
