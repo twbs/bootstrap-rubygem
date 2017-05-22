@@ -1,3 +1,7 @@
+require 'bundler/gem_tasks'
+CLEAN.include 'tmp'
+CLOBBER.include 'assets'
+
 lib_path = File.join(File.dirname(__FILE__), 'lib')
 $:.unshift(lib_path) unless $:.include?(lib_path)
 
@@ -61,6 +65,7 @@ end
 desc 'Update bootstrap from upstream'
 task :update, :branch do |t, args|
   require './tasks/updater'
+  args.with_defaults(:branch => Bootstrap::BOOTSTRAP_SHA)
   Updater.new(branch: args[:branch]).update_bootstrap
 end
 
