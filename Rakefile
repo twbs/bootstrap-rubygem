@@ -46,13 +46,11 @@ task :debug do
   require 'sass'
   require './lib/bootstrap'
   require 'term/ansicolor'
-  require 'autoprefixer-rails'
   path = Bootstrap.stylesheets_path
   %w(_bootstrap _bootstrap-flex _bootstrap-reboot _bootstrap-grid).each do |file|
     engine = Sass::Engine.for_file("#{path}/#{file}.scss", syntax: :scss, load_paths: [path])
     out = File.join('tmp', "#{file[1..-1]}.css")
     css = engine.render
-    css = AutoprefixerRails.process(css)
     File.write(out, css)
     $stderr.puts Term::ANSIColor.green "Compiled #{out}"
   end

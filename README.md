@@ -125,11 +125,14 @@ If this happens, change the import order so that Compass mixins are loaded later
 
 ### Sass: Autoprefixer
 
-Bootstrap requires the use of [Autoprefixer][autoprefixer].
+Bootstrap requires the use of [Autoprefixer][autoprefixer] for wide browser support.
 [Autoprefixer][autoprefixer] adds vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com/).
 
-If you are using bootstrap with Rails, autoprefixer is set up for you automatically.
-Otherwise, please consult the [Autoprefixer documentation][autoprefixer].
+If you are using bootstrap with Rails and you need to support older browsers, it is recommended that you add `autoprefixer-rails` to your Gemfile:
+
+```ruby
+gem 'autoprefixer-rails', '>= 6.0.3'
+```
 
 ### Sass: Individual components
 
