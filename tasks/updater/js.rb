@@ -3,12 +3,7 @@ class Updater
     def update_javascript_assets
       log_status 'Updating javascripts...'
       save_to  = @save_to[:js]
-      contents = {}
       read_files('js/dist', bootstrap_js_files).each do |name, file|
-        contents[name] = file.
-            # Remove the source mapping URL comment as this gem does not bundle source maps.
-            sub!(%r(^//# sourceMappingURL=#{name}.map\n\z), '') or
-            fail "Cannot find source mapping URL to remove in #{name}. Last line: #{file.lines.last.inspect}"
         save_file("#{save_to}/#{name}", file)
       end
       log_processed "#{bootstrap_js_files * ' '}"
@@ -32,8 +27,10 @@ class Updater
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        gruntfile = get_file(file_url 'Gruntfile.js')
-        JSON.parse(/concat:.*?src: (\[[^\]]+\])/m.match(gruntfile)[1].tr("'", '"')).map { |p| p.sub %r(\Ajs/src/), '' }
+        package_json = get_file(file_url 'package.json')
+        JSON.parse(package_json)['scripts']['js-compile-bundle']
+            .match(/shx cat (.*?) \|/)[1].split(/\s+/)
+            .map { |p| p.sub %r(\Ajs/src/), '' }
       end
     end
   end
