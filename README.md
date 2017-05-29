@@ -44,37 +44,33 @@ Then, remove all the `*= require` and `*= require_tree` statements from the Sass
 
 Do not use `*= require` in Sass or your other stylesheets will not be able to access the Bootstrap mixins and variables.
 
-If you're using Rails 5.1+, you'll need to add the jquery gem to your Gemfile:
-```
-gem 'jquery-rails'
-```
-And you will need to include jquery into application.js:
-
-```js
-//= require jquery
-//= require bootstrap-sprockets
-```
-
-While `bootstrap-sprockets` provides individual Bootstrap components for ease of debugging, you may alternatively require the concatenated `bootstrap` for faster compilation:
-
-```js
-//= require jquery
-//= require bootstrap
-```
-
-Tooltips and popovers depend on [popper.js] for positioning.
-If you use them, add popper.js to the Gemfile:
+Bootstrap JavaScript depends on jQuery.
+If you're using Rails 5.1+, add the `jquery-rails` gem to your Gemfile:
 
 ```ruby
-gem 'popper_js', '>= 1.9.9'
+gem 'jquery-rails'
 ```
 
-Then, run `bundle`, restart the server, and require popper before bootstrap but after jQuery:
+Bootstrap tooltips and popovers depend on [popper.js] for positioning.
+The `bootstrap` gem already depends on the
+[popper_js](https://github.com/glebm/popper_js-rubygem) gem.
+
+Add Bootstrap dependencies and Bootstrap to your `application.js`:
 
 ```js
-//= require jquery
+//= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+```
+
+While `bootstrap-sprockets` provides individual Bootstrap components
+for ease of debugging, you may alternatively require
+the concatenated `bootstrap` for faster compilation:
+
+```js
+//= require jquery3
+//= require popper
+//= require bootstrap
 ```
 
 ### b. Compass without Rails

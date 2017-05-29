@@ -3,9 +3,5 @@ source 'https://rubygems.org'
 gem 'actionpack', '~> 4.2.7'
 gem 'activesupport', '~> 4.2.7'
 
-source 'https://rails-assets.org' do
-  gem 'popper_js', '>= 1.9.9'
-end
-
 gemspec path: '../../'
 
