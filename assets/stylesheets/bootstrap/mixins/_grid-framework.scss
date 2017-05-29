@@ -22,7 +22,8 @@
         @extend %grid-column;
       }
     }
-    .col#{$infix} {
+    .col#{$infix},
+    .col#{$infix}-auto {
       @extend %grid-column;
     }
 
@@ -36,6 +37,7 @@
       .col#{$infix}-auto {
         flex: 0 0 auto;
         width: auto;
+        max-width: none; // Reset earlier grid tiers
       }
 
       @for $i from 1 through $columns {
