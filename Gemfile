@@ -3,9 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  source 'https://rails-assets.org' do
-    gem 'rails-assets-tether', '>= 1.1.0'
-  end
+  gem 'popper_js', '>= 1.9.9'
 end
 
 group :debug do

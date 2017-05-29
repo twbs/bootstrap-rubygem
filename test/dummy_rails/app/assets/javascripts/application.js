@@ -1,5 +1,5 @@
 //= require jquery
-//= require tether
+//= require popper.js
 //= require bootstrap-sprockets
 
 jQuery(function ($) {

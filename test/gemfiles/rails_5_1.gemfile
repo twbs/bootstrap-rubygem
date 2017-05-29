@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'actionpack', '~> 4.2.7'
-gem 'activesupport', '~> 4.2.7'
+gem 'actionpack', '~> 5.1.0'
+gem 'activesupport', '~> 5.1.0'
+gem 'autoprefixer-rails', '>= 7.1.1'
 
 source 'https://rails-assets.org' do
   gem 'popper_js', '>= 1.9.9'

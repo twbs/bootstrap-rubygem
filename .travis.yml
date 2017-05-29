@@ -5,6 +5,7 @@ rvm:
 gemfile:
   - test/gemfiles/rails_4_2.gemfile
   - test/gemfiles/rails_5_0.gemfile
+  - test/gemfiles/rails_5_1.gemfile
 cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
 notifications:

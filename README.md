@@ -62,13 +62,11 @@ While `bootstrap-sprockets` provides individual Bootstrap components for ease of
 //= require bootstrap
 ```
 
-Tooltips and popovers depend on [tether][tether] for positioning.
-If you use them, add tether to the Gemfile:
+Tooltips and popovers depend on [popper.js] for positioning.
+If you use them, add popper.js to the Gemfile:
 
 ```ruby
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
+gem 'popper_js', '>= 1.9.9'
 ```
 
 Then, run `bundle`, restart the server, and require tether before bootstrap but after jQuery:
@@ -147,4 +145,4 @@ In the application Sass file, replace `@import 'bootstrap'` with:
 [bootstrap-home]: http://v4-alpha.getbootstrap.com/
 [bootstrap-variables.scss]: https://github.com/twbs/bootstrap-rubygem/blob/master/templates/project/_bootstrap-variables.scss
 [autoprefixer]: https://github.com/ai/autoprefixer
-[tether]: http://github.hubspot.com/tether/
+[popper.js]: https://popper.js.org
