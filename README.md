@@ -69,11 +69,11 @@ If you use them, add popper.js to the Gemfile:
 gem 'popper_js', '>= 1.9.9'
 ```
 
-Then, run `bundle`, restart the server, and require tether before bootstrap but after jQuery:
+Then, run `bundle`, restart the server, and require popper before bootstrap but after jQuery:
 
 ```js
 //= require jquery
-//= require tether
+//= require popper
 //= require bootstrap-sprockets
 ```
 
