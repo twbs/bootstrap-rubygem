@@ -17,7 +17,6 @@ require 'uglifier'
 
 require 'bootstrap'
 require 'jquery-rails'
-require 'popper_js'
 
 module Dummy
   class Application < Rails::Application
