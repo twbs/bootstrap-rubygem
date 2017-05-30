@@ -510,4 +510,3 @@ var Carousel = function ($) {
 
   return Carousel;
 }(jQuery);
-//# sourceMappingURL=carousel.js.map

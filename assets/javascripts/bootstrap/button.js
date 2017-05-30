@@ -171,4 +171,3 @@ var Button = function ($) {
 
   return Button;
 }(jQuery);
-//# sourceMappingURL=button.js.map

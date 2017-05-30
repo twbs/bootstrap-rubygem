@@ -672,4 +672,3 @@ var Tooltip = function ($) {
 
   return Tooltip;
 }(jQuery); /* global Popper */
-//# sourceMappingURL=tooltip.js.map

@@ -413,4 +413,3 @@ var Dropdown = function ($) {
 
   return Dropdown;
 }(jQuery); /* global Popper */
-//# sourceMappingURL=dropdown.js.map
