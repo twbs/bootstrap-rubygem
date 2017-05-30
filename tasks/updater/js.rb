@@ -3,8 +3,9 @@ class Updater
     def update_javascript_assets
       log_status 'Updating javascripts...'
       save_to  = @save_to[:js]
-      read_files('js/dist', bootstrap_js_files).each do |name, file|
-        save_file("#{save_to}/#{name}", file)
+      read_files('js/dist', bootstrap_js_files).each do |name, content|
+        content = content.sub(%r{^//# sourceMappingURL=.*\n?\z}, '')
+        save_file("#{save_to}/#{name}", content)
       end
       log_processed "#{bootstrap_js_files * ' '}"
 
