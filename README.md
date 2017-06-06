@@ -62,6 +62,10 @@ Add Bootstrap dependencies and Bootstrap to your `application.js`:
 //= require popper
 //= require bootstrap-sprockets
 ```
+ 
+Alternatively use jakegavin/teher-rails at https://github.com/jakegavin/tether-rails. Just add to your gem file
+
+gem 'tether-rails' 
 
 While `bootstrap-sprockets` provides individual Bootstrap components
 for ease of debugging, you may alternatively require
