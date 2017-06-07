@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'popper_js', '>= 1.9.9', '< 2.0'
 
   s.add_runtime_dependency 'sass', '>= 3.4.19'
-  s.add_runtime_dependency 'autoprefixer-rails', '>= 6.0.3'
 
   # Testing dependencies
   s.add_development_dependency 'minitest', '~> 5.8.0'
