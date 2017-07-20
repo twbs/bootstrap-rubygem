@@ -7,5 +7,5 @@ group :development do
 end
 
 group :debug do
-  gem 'byebug', platforms: [:mri_21, :mri_22], require: false
+  gem 'byebug', platforms: [:mri], require: false
 end
