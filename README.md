@@ -1,12 +1,5 @@
 # Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem) [![Gem](https://img.shields.io/gem/v/bootstrap.svg)](https://rubygems.org/gems/bootstrap)
 
----
-
-**This is the Readme for the master version.
-For the latest released alpha Readme, [click here](https://github.com/twbs/bootstrap-rubygem/tree/v4.0.0.alpha6).**
-
----
-
 [Bootstrap 4][bootstrap-home] ruby gem for Ruby on Rails (Sprockets) and Compass.
 
 For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/twbs/bootstrap-sass) instead.
