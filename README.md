@@ -78,7 +78,7 @@ the concatenated `bootstrap` for faster compilation:
 Install the gem:
 
 ```console
-$ gem install bootstrap -v 4.0.0.alpha6
+$ gem install bootstrap -v 4.0.0.beta
 ```
 
 **If you have an existing Compass project:**
