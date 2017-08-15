@@ -23,11 +23,18 @@ class Updater
       end
 
       log_status 'Generating variable template file'
+      template_file_header = <<-SCSS
+// Override Bootstrap variables here (defaults from bootstrap v#{upstream_version}):
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
+SCSS
       save_file 'templates/project/_bootstrap-variables.scss',
-                "// Override Bootstrap variables here (defaults from bootstrap v#{upstream_version}):\n" +
+                template_file_header +
                     File.read("#{save_to}/_variables.scss").
                         # The instructions in the file header are replaced with the line above
-                        lines[4..-1].
+                        lines[5..-1].
                         join.
                         # Comment out the assignments
                         gsub(/^(?=[$@)}]|[ ]{2})/, '// ').
