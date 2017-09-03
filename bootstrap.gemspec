@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/twbs/bootstrap-rubygem'
   s.license  = 'MIT'
 
-  s.add_runtime_dependency 'popper_js', '~> 1.11.1'
+  s.add_runtime_dependency 'popper_js', '>= 1.12.3', '< 2'
 
   s.add_runtime_dependency 'sass', '>= 3.4.19'
   s.add_runtime_dependency 'autoprefixer-rails', '>= 6.0.3'
