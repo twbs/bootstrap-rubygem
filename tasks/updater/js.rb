@@ -1,3 +1,5 @@
+require 'tsort'
+
 class Updater
   module Js
     def update_javascript_assets
@@ -28,10 +30,35 @@ class Updater
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        package_json = get_file(file_url 'package.json')
-        JSON.parse(package_json)['scripts']['js-compile-bundle']
-            .match(/shx cat (.*?) \|/)[1].split(/\s+/)
-            .map { |p| p.sub %r(\Ajs/src/), '' }
+        src_files = get_paths_by_type('js/src', /\.js$/) - %w[index.js]
+        imports = Deps.new
+        # Get the imports from the ES6 files to order requires correctly.
+        read_files('js/src', src_files).each do |name, content|
+          imports.add name,
+                      *content.scan(%r{import [a-zA-Z]* from '\./(\w+)})
+                           .flatten(1).map { |f| "#{f}.js" }
+        end
+        imports.tsort
+      end
+    end
+
+    class Deps
+      include TSort
+
+      def initialize
+        @imports = {}
+      end
+
+      def add(from, *tos)
+        (@imports[from] ||= []).push(*tos)
+      end
+
+      def tsort_each_child(node, &block)
+        @imports[node].each(&block)
+      end
+
+      def tsort_each_node(&block)
+        @imports.each_key(&block)
       end
     end
   end
