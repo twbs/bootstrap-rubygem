@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  gem 'popper_js', '>= 1.9.9'
+  gem 'popper_js', '>= 1.12.3'
 end
 
 group :debug do
