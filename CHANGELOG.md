@@ -6,6 +6,9 @@ The changelog only includes changes specific to the RubyGem.
 The Bootstrap framework changes can be found in [the Releases section of twbs/bootstrap](https://github.com/twbs/bootstrap/releases).
 Release announcement posts on [the official Bootstrap blog](http://blog.getbootstrap.com) contain summaries of the most noteworthy changes made in each release of Bootstrap.
 
+# 4.0.0.beta
+
+Compass is no longer supported.
 
 # 4.0.0.alpha3.1
 

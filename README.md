@@ -1,6 +1,6 @@
 # Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem) [![Gem](https://img.shields.io/gem/v/bootstrap.svg)](https://rubygems.org/gems/bootstrap)
 
-[Bootstrap 4][bootstrap-home] ruby gem for Ruby on Rails (Sprockets), Hanami (formerly Lotus) and Compass.
+[Bootstrap 4][bootstrap-home] ruby gem for Ruby on Rails (Sprockets) and Hanami (formerly Lotus).
 
 For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/twbs/bootstrap-sass) instead.
 
@@ -9,7 +9,7 @@ For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/t
 Please see the appropriate guide for your environment of choice:
 
 * [Ruby on Rails 4+](#a-ruby-on-rails) or other Sprockets environment.
-* [Compass](#b-compass-without-rails) not on Rails.
+* [Other Ruby frameworks](#b-other-ruby-frameworks) not on Rails.
 
 
 ### a. Ruby on Rails
@@ -73,47 +73,14 @@ the concatenated `bootstrap` for faster compilation:
 //= require bootstrap
 ```
 
-### b. Compass without Rails
+### b. Other Ruby frameworks
 
-Install the gem:
+If your framework uses Sprockets or Hanami,
+the assets will be registered with Sprockets when the gem is required,
+and you can use them as per the Rails section of the guide.
 
-```console
-$ gem install bootstrap -v 4.0.0.beta
-```
-
-**If you have an existing Compass project:**
-
-1. Require `bootstrap` in `config.rb`:
-
-    ```ruby
-    require 'bootstrap'
-    ```
-
-2. Install Bootstrap with:
-
-    ```console
-    $ bundle exec compass install bootstrap
-    ```
-
-**If you are creating a new Compass project, you can generate it with bootstrap support:**
-
-```console
-$ bundle exec compass create my-new-project -r bootstrap --using bootstrap
-```
-
-or, alternatively, if you're not using a Gemfile for your dependencies:
-
-```console
-$ compass create my-new-project -r bootstrap --using bootstrap
-```
-
-This will create a new Compass project with the following files in it:
-
-* [styles.scss](/templates/project/styles.scss) - main project Sass file, imports Bootstrap and variables.
-* [_bootstrap-variables.scss](/templates/project/_bootstrap-variables.scss) - all of Bootstrap variables, override them here.
-
-Some bootstrap mixins may conflict with the Compass ones.
-If this happens, change the import order so that Compass mixins are loaded later.
+Otherwise you may need to register the assets manually.
+Refer to your framework's documentation on the subject.
 
 ## Configuration
 
