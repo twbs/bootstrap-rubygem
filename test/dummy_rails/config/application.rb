@@ -11,7 +11,6 @@ require 'rails'
 end
 
 require 'autoprefixer-rails'
-require 'compass'
 require 'slim-rails'
 require 'uglifier'
 
