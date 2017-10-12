@@ -8,7 +8,8 @@ Release announcement posts on [the official Bootstrap blog](http://blog.getboots
 
 # 4.0.0.beta
 
-Compass is no longer supported.
+Compass is no longer supported. Minimum required Sass version is now v3.5.2.
+[#122](https://github.com/twbs/bootstrap-rubygem/pull/122)
 
 # 4.0.0.alpha3.1
 
