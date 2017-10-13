@@ -31,7 +31,7 @@ Import Bootstrap styles in `app/assets/stylesheets/application.scss`:
 @import "bootstrap";
 ```
 
-The available variables can be found [here][bootstrap-variables.scss].
+The available variables can be found [here](assets/stylesheets/bootstrap/_variables.scss).
 
 Make sure the file has `.scss` extension (or `.sass` for Sass syntax). If you have just generated a new Rails app,
 it may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so rename it:
