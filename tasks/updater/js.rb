@@ -6,8 +6,7 @@ class Updater
       log_status 'Updating javascripts...'
       save_to  = @save_to[:js]
       read_files('js/dist', bootstrap_js_files).each do |name, content|
-        content = content.sub(%r{^//# sourceMappingURL=.*\n?\z}, '')
-        save_file("#{save_to}/#{name}", content)
+        save_file("#{save_to}/#{name}", remove_source_mapping_url(content))
       end
       log_processed "#{bootstrap_js_files * ' '}"
 
@@ -23,7 +22,7 @@ class Updater
           'assets/javascripts/bootstrap.js'           => dist_js['bootstrap.js'],
           'assets/javascripts/bootstrap.min.js'       => dist_js['bootstrap.min.js'],
       }.each do |path, content|
-        save_file path, content
+        save_file path, remove_source_mapping_url(content)
         log_processed path
       end
     end
@@ -40,6 +39,10 @@ class Updater
         end
         imports.tsort
       end
+    end
+
+    def remove_source_mapping_url(content)
+      content.sub(%r{^//# sourceMappingURL=.*\n?\z}, '')
     end
 
     class Deps
