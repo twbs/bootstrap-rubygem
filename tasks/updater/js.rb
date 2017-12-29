@@ -53,7 +53,7 @@ class Updater
       end
 
       def add(from, *tos)
-        (@imports[from] ||= []).push(*tos)
+        (@imports[from] ||= []).push(*tos.sort)
       end
 
       def tsort_each_child(node, &block)
