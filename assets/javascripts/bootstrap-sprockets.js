@@ -1,11 +1,11 @@
+//= require ./bootstrap/button
 //= require ./bootstrap/util
-//= require ./bootstrap/modal
+//= require ./bootstrap/alert
+//= require ./bootstrap/dropdown
 //= require ./bootstrap/tooltip
 //= require ./bootstrap/popover
-//= require ./bootstrap/tab
-//= require ./bootstrap/collapse
 //= require ./bootstrap/scrollspy
+//= require ./bootstrap/tab
 //= require ./bootstrap/carousel
-//= require ./bootstrap/dropdown
-//= require ./bootstrap/button
-//= require ./bootstrap/alert
+//= require ./bootstrap/collapse
+//= require ./bootstrap/modal
