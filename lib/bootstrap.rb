@@ -11,9 +11,10 @@ module Bootstrap
         register_hanami
       elsif sprockets?
         register_sprockets
+      elsif defined?(::Sass) && ::Sass.respond_to?(:load_paths)
+        # The deprecated `sass` gem:
+        ::Sass.load_paths << stylesheets_path
       end
-
-      configure_sass
     end
 
     # Paths
@@ -47,12 +48,6 @@ module Bootstrap
     end
 
     private
-
-    def configure_sass
-      require 'sass'
-
-      ::Sass.load_paths << stylesheets_path
-    end
 
     def register_rails_engine
       require 'bootstrap/engine'
