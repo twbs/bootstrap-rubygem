@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bootstrap/version'
 require 'popper_js'
 
@@ -14,6 +16,12 @@ module Bootstrap
       elsif defined?(::Sass) && ::Sass.respond_to?(:load_paths)
         # The deprecated `sass` gem:
         ::Sass.load_paths << stylesheets_path
+      end
+
+      if defined?(::Sass::Script::Value::Number)
+        # Set precision to 6 as per:
+        # https://github.com/twbs/bootstrap/blob/da717b03e6e72d7a61c007acb9223b9626ae5ee5/package.json#L28
+        ::Sass::Script::Value::Number.precision = [6, ::Sass::Script::Value::Number.precision].max
       end
     end
 
