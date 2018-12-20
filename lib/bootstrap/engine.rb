@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'autoprefixer-rails'
+require 'sassc-rails'
 
 module Bootstrap
   module Rails
