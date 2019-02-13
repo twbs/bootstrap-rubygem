@@ -6,21 +6,9 @@ The changelog only includes changes specific to the RubyGem.
 The Bootstrap framework changes can be found in [the Releases section of twbs/bootstrap](https://github.com/twbs/bootstrap/releases).
 Release announcement posts on [the official Bootstrap blog](http://blog.getbootstrap.com) contain summaries of the most noteworthy changes made in each release of Bootstrap.
 
-# 4.1.1
+# 4.2.1
 
-No gem-specific changes.
-
-# 4.1.0
-
-No gem-specific changes.
-
-# 4.0.0
-
-No gem-specific changes.
-
-# 4.0.0.beta3
-
-No gem-specific changes.
+* Bootstrap rubygem now depends on SassC instead of Sass.
 
 # 4.0.0.beta2.1
 
