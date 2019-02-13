@@ -29,7 +29,7 @@ class Updater
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        src_files = get_paths_by_type('js/src', /\.js$/) - %w[index.js]
+        src_files = get_paths_by_type('js/src', /\.js$/) - %w[index.js tools/sanitizer.js]
         imports = Deps.new
         # Get the imports from the ES6 files to order requires correctly.
         read_files('js/src', src_files).each do |name, content|
