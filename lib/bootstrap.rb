@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'bootstrap/version'
+require 'bootstrap/vendor'
 require 'popper_js'
 
 module Bootstrap
