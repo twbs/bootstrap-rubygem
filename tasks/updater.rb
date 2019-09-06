@@ -6,6 +6,7 @@ require 'strscan'
 require 'forwardable'
 require 'term/ansicolor'
 require 'fileutils'
+require 'digest'
 
 require_relative 'updater/scss'
 require_relative 'updater/js'
@@ -45,7 +46,7 @@ class Updater
 
     update_scss_assets
     update_javascript_assets
-    store_version
+    store_metadata
   end
 
   def save_file(path, content, mode='w')
@@ -58,10 +59,22 @@ class Updater
     @upstream_version ||= get_json(file_url 'package.json')['version']
   end
 
-  # Update version.rb file with BOOTSTRAP_SHA
-  def store_version
-    path    = 'lib/bootstrap/version.rb'
-    content = File.read(path).sub(/BOOTSTRAP_SHA\s*=\s*['"][^'"]*['"]/, "BOOTSTRAP_SHA = '#@branch_sha'")
-    File.open(path, 'w') { |f| f.write(content) }
+  def store_metadata
+    integrity_lines = read_files('dist/js', %w(bootstrap.min.js bootstrap.bundle.min.js)).
+      merge(read_files('dist/css', %w(bootstrap.min.css))).
+      transform_values { |content| "sha384-#{Digest::SHA384.base64digest(content)}" }.
+      map { |filename, integrity| "    #{filename.inspect} => #{integrity.inspect}," }
+
+    File.write("lib/bootstrap/vendor.rb", <<~RUBY)
+      # frozen_string_literal: true
+
+      module Bootstrap
+        BOOTSTRAP_SHA    = #{@branch_sha.to_s.inspect}
+        VENDOR_VERSION   = #{upstream_version.to_s.inspect}
+        VENDOR_INTEGRITY = {
+      #{integrity_lines.join("\n")}
+        }
+      end
+    RUBY
   end
 end
