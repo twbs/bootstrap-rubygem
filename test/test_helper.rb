@@ -12,24 +12,29 @@ end
 
 GEM_PATH = File.expand_path('../', File.dirname(__FILE__))
 
-#= Capybara + Poltergeist
-require 'capybara/poltergeist'
+#= Capybara
+require 'capybara/cuprite'
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(
-      app,
-      # inspector:   '/Applications/Chromium.app/Contents/MacOS/Chromium', # open in inspector: page.driver.debug
-      window_size: [1280, 1024],
-      timeout: 90,
-      js_errors: true
-  )
+browser_path = ENV['CHROMIUM_BIN'] || %w[
+  /usr/bin/chromium-browser
+  /snap/bin/chromium
+  /Applications/Chromium.app/Contents/MacOS/Chromium
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+].find { |path| File.executable?(path) }
+
+Capybara.register_driver :cuprite do |app|
+  options = {
+      window_size: [1280, 1024]
+  }
+  options[:browser_path] = browser_path if browser_path
+  Capybara::Cuprite::Driver.new(app, options)
 end
 
 Capybara.configure do |config|
   config.server = :webrick
   config.app_host = 'http://localhost:7000'
-  config.default_driver = :poltergeist
-  config.javascript_driver = :poltergeist
+  config.default_driver = :cuprite
+  config.javascript_driver = :cuprite
   config.server_port = 7000
   config.default_max_wait_time = 10
 end

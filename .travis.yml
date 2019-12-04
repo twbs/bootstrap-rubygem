@@ -1,5 +1,9 @@
 language: ruby
 sudo: false
+addons:
+  apt:
+    packages:
+      - chromium-browser
 rvm:
   - 2.3.8
 gemfile:

@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'term-ansicolor'
   # Integration testing
   s.add_development_dependency 'capybara', '>= 2.6.0'
-  s.add_development_dependency 'poltergeist'
+  s.add_development_dependency 'cuprite'
   # Dummy Rails app dependencies
   s.add_development_dependency 'actionpack', '>= 4.1.5'
   s.add_development_dependency 'activesupport', '>= 4.1.5'
