@@ -5,7 +5,9 @@ addons:
     packages:
       - chromium-browser
 rvm:
-  - 2.3.8
+  - 2.5
+  - 2.6
+  - 2.7
 gemfile:
   - test/gemfiles/rails_4_2.gemfile
   - test/gemfiles/rails_5_0.gemfile
