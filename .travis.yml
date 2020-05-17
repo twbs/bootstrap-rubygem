@@ -8,11 +8,18 @@ rvm:
   - 2.5
   - 2.6
   - 2.7
+
 gemfile:
   - test/gemfiles/rails_4_2.gemfile
   - test/gemfiles/rails_5_0.gemfile
   - test/gemfiles/rails_5_1.gemfile
   - test/gemfiles/rails_6_0.gemfile
+
+jobs:
+  exclude:
+    rvm: 2.7
+    gemfile: test/gemfiles/rails_4_2.gemfile
+
 cache: bundler
 bundler_args: --path ../../vendor/bundle --without debug
 notifications:
