@@ -1,8 +1,11 @@
 # Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem) [![Gem](https://img.shields.io/gem/v/bootstrap.svg)](https://rubygems.org/gems/bootstrap)
 
-[Bootstrap 4][bootstrap-home] ruby gem for Ruby on Rails (Sprockets) and Hanami (formerly Lotus).
+[Bootstrap 4][bootstrap-home] ruby gem for Ruby on Rails (*Sprockets*) and Hanami (formerly Lotus).
 
 For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/twbs/bootstrap-sass) instead.
+
+**Ruby on Rails 6 Note:**: 
+With the release of Rails 6 there have been some minor changes made to the default configuration for The Asset Pipeline. In specific, by default _Sprockets no longer processes JavaScript_ and instead Webpack is set as the default. The `twbs/bootstrap-rubygem` is for use with Sprockets not Webpack.
 
 ## Installation
 
