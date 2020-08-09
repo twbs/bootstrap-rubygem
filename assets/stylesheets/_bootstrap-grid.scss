@@ -1,29 +1,65 @@
 /*!
- * Bootstrap Grid v4.5.2 (https://getbootstrap.com/)
+ * Bootstrap Grid v5.0.0-alpha1 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
-html {
-  box-sizing: border-box;
-  -ms-overflow-style: scrollbar;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
+$include-column-box-sizing: true !default;
 
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 
+@import "bootstrap/mixins/lists";
 @import "bootstrap/mixins/breakpoints";
-@import "bootstrap/mixins/grid-framework";
+@import "bootstrap/mixins/container";
 @import "bootstrap/mixins/grid";
+@import "bootstrap/mixins/utilities";
 
+@import "bootstrap/vendor/rfs";
+
+@import "bootstrap/containers";
 @import "bootstrap/grid";
-@import "bootstrap/utilities/display";
-@import "bootstrap/utilities/flex";
-@import "bootstrap/utilities/spacing";
+
+@import "bootstrap/utilities";
+// Only use the utilities we need
+// stylelint-disable-next-line scss/dollar-variable-default
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    "bootstrap/display",
+    "bootstrap/order",
+    "bootstrap/flex",
+    "bootstrap/flex-direction",
+    "bootstrap/flex-grow",
+    "bootstrap/flex-shrink"
+    "bootstrap/flex-wrap",
+    "bootstrap/justify-content",
+    "bootstrap/align-items",
+    "bootstrap/align-content",
+    "bootstrap/align-self",
+    "bootstrap/margin",
+    "bootstrap/margin-x",
+    "bootstrap/margin-y",
+    "bootstrap/margin-top",
+    "bootstrap/margin-right",
+    "bootstrap/margin-bottom",
+    "bootstrap/margin-left",
+    "bootstrap/negative-margin",
+    "bootstrap/negative-margin-x",
+    "bootstrap/negative-margin-y",
+    "bootstrap/negative-margin-top",
+    "bootstrap/negative-margin-right",
+    "bootstrap/negative-margin-bottom",
+    "bootstrap/negative-margin-left",
+    "bootstrap/padding",
+    "bootstrap/padding-x",
+    "bootstrap/padding-y",
+    "bootstrap/padding-top",
+    "bootstrap/padding-right",
+    "bootstrap/padding-bottom",
+    "bootstrap/padding-left",
+  )
+);
+
+@import "bootstrap/utilities/api";

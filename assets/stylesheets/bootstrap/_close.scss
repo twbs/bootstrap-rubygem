@@ -1,5 +1,4 @@
 .close {
-  float: right;
   @include font-size($close-font-size);
   font-weight: $close-font-weight;
   line-height: 1;
@@ -8,15 +7,19 @@
   opacity: .5;
 
   // Override <a>'s hover style
-  @include hover() {
+  &:hover {
     color: $close-color;
     text-decoration: none;
   }
 
-  &:not(:disabled):not(.disabled) {
-    @include hover-focus() {
-      opacity: .75;
-    }
+  &:hover,
+  &:focus {
+    opacity: .75;
+  }
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
   }
 }
 
@@ -30,11 +33,4 @@ button.close {
   padding: 0;
   background-color: transparent;
   border: 0;
-}
-
-// Future-proof disabling of clicks on `<a>` elements
-
-// stylelint-disable-next-line selector-no-qualifying-type
-a.close.disabled {
-  pointer-events: none;
 }
