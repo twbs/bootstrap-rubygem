@@ -14,10 +14,16 @@
 .nav-link {
   display: block;
   padding: $nav-link-padding-y $nav-link-padding-x;
+  @include font-size($nav-link-font-size);
+  font-weight: $nav-link-font-weight;
+  color: $nav-link-color;
   text-decoration: if($link-decoration == none, null, none);
+  @include transition($nav-link-transition);
 
-  @include hover-focus() {
-    text-decoration: none;
+  &:hover,
+  &:focus {
+    color: $nav-link-hover-color;
+    text-decoration: if($link-hover-decoration == underline, none, null);
   }
 
   // Disabled state lightens text
@@ -35,15 +41,13 @@
 .nav-tabs {
   border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
 
-  .nav-item {
-    margin-bottom: -$nav-tabs-border-width;
-  }
-
   .nav-link {
+    margin-bottom: -$nav-tabs-border-width;
     border: $nav-tabs-border-width solid transparent;
     @include border-top-radius($nav-tabs-border-radius);
 
-    @include hover-focus() {
+    &:hover,
+    &:focus {
       border-color: $nav-tabs-link-hover-border-color;
     }
 
@@ -82,7 +86,7 @@
   .nav-link.active,
   .show > .nav-link {
     color: $nav-pills-link-active-color;
-    background-color: $nav-pills-link-active-bg;
+    @include gradient-bg($nav-pills-link-active-bg);
   }
 }
 

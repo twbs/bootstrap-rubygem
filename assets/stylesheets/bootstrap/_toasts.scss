@@ -1,7 +1,4 @@
 .toast {
-  // Prevents from shrinking in IE11, when in a flex container
-  // See https://github.com/twbs/bootstrap/issues/28341
-  flex-basis: $toast-max-width;
   max-width: $toast-max-width;
   @include font-size($toast-font-size);
   color: $toast-color;
@@ -39,6 +36,11 @@
   background-clip: padding-box;
   border-bottom: $toast-border-width solid $toast-header-border-color;
   @include border-top-radius(subtract($toast-border-radius, $toast-border-width));
+
+  .btn-close {
+    margin-right: $toast-padding-x / -2;
+    margin-left: $toast-padding-x;
+  }
 }
 
 .toast-body {
