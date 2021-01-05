@@ -2,6 +2,8 @@ require 'tsort'
 
 class Updater
   module Js
+    INLINED_SRCS = %w[base-component.js util/index.js util/sanitizer.js].freeze
+
     def update_javascript_assets
       log_status 'Updating javascripts...'
       save_to  = @save_to[:js]
@@ -29,13 +31,13 @@ class Updater
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        src_files = get_paths_by_type('js/src', /\.js$/) - %w[util/index.js util/sanitizer.js]
+        src_files = get_paths_by_type('js/src', /\.js$/) - INLINED_SRCS
+        puts "src_files: #{src_files.inspect}"
         imports = Deps.new
         # Get the imports from the ES6 files to order requires correctly.
         read_files('js/src', src_files).each do |name, content|
-          imports.add name,
-                      *content.scan(%r{import [a-zA-Z]* from '\./([\w/-]+)})
-                           .flatten(1).map { |f| "#{f}.js" }.uniq
+          file_imports = content.scan(%r{import *(?:[a-zA-Z]*|\{[a-zA-Z ,]*\}) *from '\./([\w/-]+)}).flatten(1).map { |f| "#{f}.js" }.uniq
+          imports.add name, *(file_imports - INLINED_SRCS)
         end
         imports.tsort
       end
