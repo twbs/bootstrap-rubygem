@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   # SassC requires Ruby 2.3.3. Also specify here to make it obvious.
   s.required_ruby_version = '>= 2.3.3'
 
-  s.add_runtime_dependency 'popper_js', '>= 1.14.3', '< 2'
+  s.add_runtime_dependency 'popper_js', '>= 2.6.0', '< 3'
 
   s.add_runtime_dependency 'sassc-rails', '>= 2.0.0'
   s.add_runtime_dependency 'autoprefixer-rails', '>= 9.1.0'
