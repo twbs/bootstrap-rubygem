@@ -2,7 +2,7 @@ require 'tsort'
 
 class Updater
   module Js
-    INLINED_SRCS = %w[base-component.js util/index.js util/sanitizer.js].freeze
+    INLINED_SRCS = %w[util/index.js util/sanitizer.js].freeze
 
     def update_javascript_assets
       log_status 'Updating javascripts...'

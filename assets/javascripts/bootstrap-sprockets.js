@@ -1,4 +1,5 @@
 //= require ./bootstrap/dom/data
+//= require ./bootstrap/base-component
 //= require ./bootstrap/dom/event-handler
 //= require ./bootstrap/alert
 //= require ./bootstrap/button
