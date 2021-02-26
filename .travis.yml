@@ -14,6 +14,7 @@ gemfile:
   - test/gemfiles/rails_5_0.gemfile
   - test/gemfiles/rails_5_1.gemfile
   - test/gemfiles/rails_6_0.gemfile
+  - test/gemfiles/rails_6_1.gemfile
 
 jobs:
   exclude:
