@@ -13,13 +13,26 @@ class Updater
       log_processed "#{bootstrap_js_files * ' '}"
 
       log_status 'Updating javascript manifest'
-      manifest = ''
+      manifest = "//= require ./bootstrap-global-this-define\n"
       bootstrap_js_files.each do |name|
         name = name.gsub(/\.js$/, '')
         manifest << "//= require ./bootstrap/#{name}\n"
       end
+      manifest << "//= require ./bootstrap-global-this-undefine\n"
       dist_js = read_files('dist/js', %w(bootstrap.js bootstrap.min.js))
       {
+          'assets/javascripts/bootstrap-global-this-define.js' => <<~JS,
+            // Set a `globalThis` so that bootstrap components are defined on window.bootstrap instead of window.
+            window['bootstrap'] = {
+              Popper: window.Popper,
+              _originalGlobalThis: window['globalThis']
+            };
+            window['globalThis'] = window['bootstrap'];
+          JS
+          'assets/javascripts/bootstrap-global-this-undefine.js' => <<~JS,
+            window['globalThis'] = window['bootstrap']._originalGlobalThis;
+            window['bootstrap']._originalGlobalThis = null;
+          JS
           'assets/javascripts/bootstrap-sprockets.js' => manifest,
           'assets/javascripts/bootstrap.js'           => dist_js['bootstrap.js'],
           'assets/javascripts/bootstrap.min.js'       => dist_js['bootstrap.min.js'],
