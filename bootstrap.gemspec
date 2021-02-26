@@ -31,8 +31,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'activesupport', '>= 4.1.5'
   s.add_development_dependency 'json', '>= 1.8.1'
   s.add_development_dependency 'sprockets-rails', '>= 2.3.2'
-  s.add_development_dependency 'jquery-rails', '>= 3.1.0'
-  s.add_development_dependency 'slim-rails'
   s.add_development_dependency 'uglifier'
 
   s.files      = `git ls-files`.split("\n")

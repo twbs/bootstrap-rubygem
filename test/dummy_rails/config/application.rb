@@ -11,11 +11,8 @@ require 'rails'
 end
 
 require 'autoprefixer-rails'
-require 'slim-rails'
 require 'uglifier'
-
 require 'bootstrap'
-require 'jquery-rails'
 
 module Dummy
   class Application < Rails::Application
