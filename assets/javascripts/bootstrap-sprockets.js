@@ -10,6 +10,7 @@
 //= require ./bootstrap/collapse
 //= require ./bootstrap/dropdown
 //= require ./bootstrap/modal
+//= require ./bootstrap/offcanvas
 //= require ./bootstrap/tooltip
 //= require ./bootstrap/popover
 //= require ./bootstrap/scrollspy
