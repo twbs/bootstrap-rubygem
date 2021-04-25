@@ -25,7 +25,13 @@ class Updater
       log_http_get_files files, path_url, false
       files.map do |name|
         Thread.start {
-          contents[name] = URI.open("#{path_url}/#{name}").read
+          begin
+            url = "#{path_url}/#{name}"
+            contents[name] = URI.open(url).read
+          rescue Exception => e
+            log "Error downloading #{url}: #{e}"
+            exit 1
+          end
           WRITE_FILES_MUTEX.synchronize { write_cached_files path, name => contents[name] }
         }
       end.each(&:join)
