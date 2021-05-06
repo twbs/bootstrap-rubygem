@@ -1,7 +1,7 @@
 //= require ./bootstrap-global-this-define
 //= require ./bootstrap/dom/data
-//= require ./bootstrap/base-component
 //= require ./bootstrap/dom/event-handler
+//= require ./bootstrap/base-component
 //= require ./bootstrap/alert
 //= require ./bootstrap/button
 //= require ./bootstrap/dom/manipulator
