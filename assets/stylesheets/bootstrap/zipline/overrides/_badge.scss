@@ -1,0 +1,59 @@
+// Zipline Badge overrides
+
+.badge {
+  line-height: $badge-line-height;
+
+  .btn & {
+    margin-bottom: -1px; //cheat to keep the button height consistent
+    margin-left: .33333em; //4px
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .badge-#{$color} {
+    border: $border-width solid $value;
+  }
+}
+
+@each $color, $value in $badge-colors {
+  .badge-#{$color} {
+    @include badge-variant($value);
+    border: $border-width solid $value;
+  }
+}
+
+.badge-pill {
+  padding-right: $badge-pill-padding-x;
+  padding-left: $badge-pill-padding-x;
+}
+
+.badge-outline {
+  background-color: $white;
+  border-color: $border-color;
+}
+
+$all-badge-colors: map-merge(
+  $badge-colors,
+  $theme-colors
+);
+
+@each $color, $value in $all-badge-colors {
+  .badge-#{$color} {
+
+    &.badge-outline {
+      color: $value;
+    }
+  }
+}
+
+.badge-secondary {
+  color: $badge-text-color-default;
+
+  &.badge-outline {
+    color: $badge-text-color-default;
+  }
+}
+
+.badge-warning {
+  color: $badge-text-color-default;
+}

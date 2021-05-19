@@ -1,0 +1,28 @@
+// Zipline reboot overrides
+
+p {
+
+  &:last-child {
+    margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+  }
+}
+
+ol, ul, dl { /* stylelint-disable-line selector-list-comma-newline-after */
+
+  &:last-child {
+    margin: 0 !important; /* stylelint-disable-line declaration-no-important */
+  }
+}
+
+a {
+  font-weight: $font-weight-bolder;
+
+  &:focus {
+    @include focus-ring();
+    border-radius: $anchor-focus-border-radius; /* stylelint-disable-line property-disallowed-list */
+  }
+}
+
+::selection {
+  background-color: $selection-background-color;
+}

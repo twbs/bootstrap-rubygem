@@ -1,0 +1,85 @@
+// Zipline Popover overrides
+
+.popover {
+
+  .arrow {
+
+    &::before {
+      background-image: escape-svg($popover-caret-icon);
+      background-repeat: no-repeat;
+      border: 0;
+    }
+
+    &::after {
+      border: 0;
+    }
+  }
+}
+
+.bs-popover-top {
+
+  > .arrow {
+
+    &::before {
+      bottom: -4px;
+      left: 4px;
+      width: $popover-arrow-height;
+      height: $popover-arrow-width;
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.bs-popover-right {
+  margin-left: $popover-arrow-height;
+
+  > .arrow {
+    margin: $popover-arrow-height 0;
+
+    &::before {
+      top: -1px;
+      left: 1px;
+      width: $popover-arrow-height;
+      height: $popover-arrow-width;
+    }
+  }
+}
+
+.bs-popover-bottom {
+
+  > .arrow {
+
+    &::before {
+      top: -4px;
+      left: 4px;
+      width: $popover-arrow-height;
+      height: $popover-arrow-width;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.bs-popover-left {
+  margin-right: $popover-arrow-height;
+
+  > .arrow {
+    margin: $popover-arrow-height 0;
+
+    &::before {
+      top: 1px;
+      left: -1px;
+      width: $popover-arrow-height;
+      height: $popover-arrow-width;
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.popover-header {
+  font-weight: $popover-header-font-weight;
+}
+
+.popover-body {
+  font-weight: $popover-body-font-weight;
+  line-height: $popover-body-line-height;
+}

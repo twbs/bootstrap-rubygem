@@ -1,0 +1,320 @@
+// Zipline Form overrides
+
+.form-control {
+  padding-left: $input-padding-x-start;
+
+  &:disabled {
+    opacity: $input-disabled-opacity;
+  }
+}
+
+.form-control-lg {
+  padding-left: $input-padding-x-start;
+}
+
+.form-control-sm{
+  padding-left: $input-padding-x-start-sm;
+}
+
+@mixin help-text-spacing() {
+  .form-control + &,
+  .custom-select + &,
+  .custom-file-label + &,
+  .input-group + & {
+    padding-left: space(2) + .0625; // + 1px
+  }
+
+  .form-control-sm + &,
+  .custom-select-sm + &,
+  .custom-file-label-sm + &,
+  .input-group-sm + & {
+    padding-left: space(1) + .0625; // + 1px
+  }
+}
+
+.form-text {
+  font-size: $form-text-font-size;
+  font-weight: $form-text-font-weight;
+  line-height: $form-text-line-height;
+  @include help-text-spacing();
+}
+
+@each $state, $data in $form-validation-states {
+
+  .#{$state}-feedback {
+    font-size: $form-text-font-size;
+    font-weight: $form-text-font-weight;
+    line-height: $form-text-line-height;
+
+    @include help-text-spacing();
+  }
+}
+
+label {
+  font-size: $input-label-font-size;
+  font-weight: $input-label-font-weight;
+  color: $input-label-font-color;
+}
+
+.col-form-label {
+  font-size: $input-label-font-size;
+}
+
+.input-group-text {
+  font-weight: $input-font-weight;
+}
+
+.form-control-plaintext {
+
+  &:focus {
+    @include focus-ring();
+  }
+}
+
+/* stylelint-disable selector-no-qualifying-type */
+// Aligning select.form-control with select.custom-select
+select {
+
+  &.form-control,
+  &.form-control-lg {
+    display: inline-block;
+    width: 100%;
+    height: $custom-select-height;
+    padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
+    font-family: $custom-select-font-family;
+    @include font-size($custom-select-font-size);
+    font-weight: $custom-select-font-weight;
+    line-height: $custom-select-line-height;
+    color: $custom-select-color;
+    vertical-align: middle;
+    background: $custom-select-bg $custom-select-background;
+    border: $custom-select-border-width solid $custom-select-border-color;
+    @include border-radius($custom-select-border-radius, 0);
+    @include box-shadow($custom-select-box-shadow);
+    appearance: none;
+
+    &:focus {
+      border-color: $custom-select-focus-border-color;
+      outline: 0;
+      @if $enable-shadows {
+        @include box-shadow($custom-select-box-shadow, $custom-select-focus-box-shadow);
+      } @else {
+        // Avoid using mixin so we can pass custom focus shadow properly
+        box-shadow: $custom-select-focus-box-shadow;
+      }
+
+      &::-ms-value {
+        // For visual consistency with other platforms/browsers,
+        // suppress the default white text on blue background highlight given to
+        // the selected option text when the (still closed) <select> receives focus
+        // in IE and (under certain conditions) Edge.
+        // See https://github.com/twbs/bootstrap/issues/19398.
+        color: $input-color;
+        background-color: $input-bg;
+      }
+    }
+
+    &[multiple],
+    &[size]:not([size="1"]) {
+      height: auto;
+      padding-right: $custom-select-padding-x;
+      background-image: none;
+    }
+
+    &:disabled {
+      color: $custom-select-disabled-color;
+      background-color: $custom-select-disabled-bg;
+    }
+
+    // Hides the default caret in IE11
+    &::-ms-expand {
+      display: none;
+    }
+
+    // Remove outline from select box in FF
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 $custom-select-color;
+    }
+  }
+
+  &.form-control-sm {
+    height: $custom-select-height-sm;
+    padding-top: $custom-select-padding-y-sm;
+    padding-bottom: $custom-select-padding-y-sm;
+    padding-left: $custom-select-padding-x-sm;
+    @include font-size($custom-select-font-size-sm);
+  }
+}
+
+@each $state, $data in $form-validation-states {
+  $color: map-get($data, color);
+  $icon: map-get($data, icon);
+  select.form-control {
+    @include form-validation-state-selector($state) {
+      border-color: $color;
+
+      @if $enable-validation-icons {
+        padding-right: $custom-select-feedback-icon-padding-right !important; // stylelint-disable-line declaration-no-important
+        background: $custom-select-background, $custom-select-bg escape-svg($icon) $custom-select-feedback-icon-position / $custom-select-feedback-icon-size no-repeat;
+      }
+
+      &:focus {
+        border-color: $color;
+        box-shadow: 0 0 0 $input-focus-width rgba($color, .25);
+      }
+    }
+  }
+}
+
+// Aligning range.form-control-range with range.custom-range
+input[type="range"].form-control-range {
+  width: 100%;
+  height: add($custom-range-thumb-height, $custom-range-thumb-focus-box-shadow-width * 2);
+  padding: 0; // Need to reset padding
+  background-color: transparent;
+  appearance: none;
+
+  &:focus {
+    outline: 0;
+
+    // Pseudo-elements must be split across multiple rulesets to have an effect.
+    // No box-shadow() mixin for focus accessibility.
+    &::-webkit-slider-thumb { box-shadow: $custom-range-thumb-focus-box-shadow; }
+    &::-moz-range-thumb     { box-shadow: $custom-range-thumb-focus-box-shadow; }
+    &::-ms-thumb            { box-shadow: $custom-range-thumb-focus-box-shadow; }
+  }
+
+  &::-moz-focus-outer {
+    border: 0;
+  }
+
+  &::-webkit-slider-thumb {
+    position: relative;
+    top: $custom-range-thumb-top-offset;
+    width: $custom-range-thumb-width;
+    height: $custom-range-thumb-height;
+    margin-top: ($custom-range-track-height - $custom-range-thumb-height) / 2; // Webkit specific
+    @include gradient-bg($custom-range-thumb-bg);
+    border: $custom-range-thumb-border;
+    @include border-radius($custom-range-thumb-border-radius);
+    @include box-shadow($custom-range-thumb-box-shadow);
+    @include transition($custom-forms-transition);
+    appearance: none;
+
+    &:active {
+      @include gradient-bg($custom-range-thumb-active-bg);
+    }
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: $custom-range-track-width;
+    height: $custom-range-track-height;
+    color: transparent; // Why?
+    cursor: $custom-range-track-cursor;
+    background-color: $custom-range-track-bg;
+    border: $custom-range-track-border;
+    @include border-radius($custom-range-track-border-radius);
+    @include box-shadow($custom-range-track-box-shadow);
+  }
+
+  &::-moz-range-thumb {
+    width: $custom-range-thumb-width;
+    height: $custom-range-thumb-height;
+    @include gradient-bg($custom-range-thumb-bg);
+    border: $custom-range-thumb-border;
+    @include border-radius($custom-range-thumb-border-radius);
+    @include box-shadow($custom-range-thumb-box-shadow);
+    @include transition($custom-forms-transition);
+    appearance: none;
+
+    &:active {
+      @include gradient-bg($custom-range-thumb-active-bg);
+    }
+  }
+
+  &::-moz-range-track {
+    width: $custom-range-track-width;
+    height: $custom-range-track-height;
+    color: transparent;
+    cursor: $custom-range-track-cursor;
+    background-color: $custom-range-track-bg;
+    border: $custom-range-track-border;
+    @include border-radius($custom-range-track-border-radius);
+    @include box-shadow($custom-range-track-box-shadow);
+  }
+
+  &::-ms-thumb {
+    width: $custom-range-thumb-width;
+    height: $custom-range-thumb-height;
+    margin-top: 0; // Edge specific
+    margin-right: $custom-range-thumb-focus-box-shadow-width; // Workaround that overflowed box-shadow is hidden.
+    margin-left: $custom-range-thumb-focus-box-shadow-width;  // Workaround that overflowed box-shadow is hidden.
+    @include gradient-bg($custom-range-thumb-bg);
+    border: $custom-range-thumb-border;
+    @include border-radius($custom-range-thumb-border-radius);
+    @include box-shadow($custom-range-thumb-box-shadow);
+    @include transition($custom-forms-transition);
+    appearance: none;
+
+    &:active {
+      @include gradient-bg($custom-range-thumb-active-bg);
+    }
+  }
+
+  &::-ms-track {
+    width: $custom-range-track-width;
+    height: $custom-range-track-height;
+    color: transparent;
+    cursor: $custom-range-track-cursor;
+    background-color: transparent;
+    border: $custom-range-track-border;
+    @include box-shadow($custom-range-track-box-shadow);
+  }
+
+  &::-ms-fill-lower {
+    background-color: $custom-range-track-bg-progress;
+    border: $custom-range-track-border-progress;
+    @include border-radius($custom-range-track-border-radius);
+  }
+
+  &::-moz-range-progress {
+    background: $custom-range-track-bg-progress;
+    border: $custom-range-track-border-progress;
+    @include border-radius($custom-range-track-border-radius);
+  }
+
+  &::-ms-fill-upper {
+    margin-right: 15px; // arbitrary?
+    background-color: $custom-range-track-bg;
+    @include border-radius($custom-range-track-border-radius);
+  }
+
+  &:disabled {
+    opacity: $input-disabled-opacity;
+
+    &::-webkit-slider-thumb {
+      background-color: $custom-range-thumb-disabled-bg;
+      border-color: $custom-range-thumb-disabled-border-color;
+    }
+
+    &::-webkit-slider-runnable-track {
+      cursor: default;
+    }
+
+    &::-moz-range-thumb {
+      background-color: $custom-range-thumb-disabled-bg;
+      border-color: $custom-range-thumb-disabled-border-color;
+    }
+
+    &::-moz-range-track {
+      cursor: default;
+    }
+
+    &::-ms-thumb {
+      background-color: $custom-range-thumb-disabled-bg;
+      border-color: $custom-range-thumb-disabled-border-color;
+    }
+  }
+}
+/* stylelint-enable selector-no-qualifying-type */

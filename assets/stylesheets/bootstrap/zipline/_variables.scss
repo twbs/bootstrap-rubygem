@@ -1,0 +1,591 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+$enable-responsive-font-sizes: true;
+
+// Color system
+
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
+
+$red-200: #fde6ee;
+$red-400: #ea0054;
+
+$yellow-200: #fff1c6;
+$yellow-400: #ffcd1b;
+
+$green-200: #e9f5ee;
+$green-400: #1e9656;
+
+$teal-200: #f3fafb;
+$teal-400: #17a2b8;
+
+$blue-200: #e6effd;
+
+$colors: (
+  "white":      $white
+);
+
+// $theme-default: $blue;
+// $theme-secondary-default: $gray-800;
+
+$theme-tint: (
+  "100": #fddcf0,
+  "200": #ffa0d9,
+  "300": #ea53ac,
+  "400": #e51992,
+  "500": #d00c80
+);
+
+$theme: theme-tint("400");
+
+$theme-tint-secondary: (
+  "100": #f5f8ff,
+  "200": #b1bfef,
+  "300": #142663,
+  "400": #061751,
+  "500": #051340
+);
+
+$theme-secondary: theme-tint-secondary("400");
+
+$primary:       $theme;
+$success:       $green-400;
+$info:          $teal-400;
+$warning:       $yellow-400;
+$danger:        $red-400;
+$light:         $gray-100;
+
+$theme-colors: (
+  "theme":                      $theme,
+  "theme-inverse":              $white,
+  "theme-secondary":            $theme-secondary,
+  "theme-secondary-inverse":    $white,
+  "primary":                    $primary,
+  "success":                    $success,
+  "info":                       $info,
+  "warning":                    $warning,
+  "danger":                     $danger,
+  "light":                      $light
+);
+
+$theme-color-interval: 10%;
+
+$contextual-colors: (
+  "contextual-1": #005989,
+  "contextual-2": #2e3dc7,
+  "contextual-3": #e51992,
+  "contextual-4": #5a15cb,
+  "contextual-5": #3da9a2,
+  "contextual-6": #ff891d
+);
+
+$spacer: 1.5rem;
+// Don't merge the spacers. Override them completely.
+$spacers: (
+  0: 0,
+  1: ($spacer * .33333334), // 8px
+  2: ($spacer * .66666667), // 16px
+  3: $spacer,               // 24px
+  4: ($spacer * 1.3333334), // 32px
+  5: ($spacer * 2),         // 48px
+  6: ($spacer * 2.6666667), // 64px
+  7: ($spacer * 4),         // 96px
+  8: ($spacer * 8)          // 192px
+);
+
+// ***** Type ******
+
+$font-size-base: .875rem; // 14px
+$font-size-lg: 1rem; // 16px
+$font-size-sm: .75rem; // 12px
+$font-weight-light: 400;
+$font-weight-normal: 500;
+$font-weight-base: $font-weight-normal;
+$font-weight-bold: 600;
+$font-weight-bolder: 700;
+$line-height-base: 1.5;
+$lead-font-size: 1rem; // 16px
+$lead-font-weight: $font-weight-light;
+$h1-font-size: 2rem; // 32px
+$h2-font-size: 1.5rem; // 24px
+$h3-font-size: 1.125rem; // 18px
+$h4-font-size: 1rem; // 16px
+$h5-font-size: .875rem; // 14px
+$h6-font-size: .5rem; // 9px
+
+$headings-font-weight: 400;
+$headings-line-height: 1.25;
+
+// ***** Body ******
+
+$body-color: $gray-800;
+
+// Customizations
+$selection-background-color: theme-tint("100");
+$anchor-focus-border-radius: .125rem; // 2px
+
+// ***** Links ******
+
+$link-color: $body-color;
+$link-hover-color: theme-color("theme");
+$link-decoration: underline;
+
+// Use em so that it scales to the parent element font-size
+$small-font-size: .75em;
+
+// Components
+
+$line-height-lg:              1.5;
+$line-height-sm:              1.5;
+
+$border-width:                1px;
+
+$border-radius:               .5rem; // 8px
+$border-radius-lg:            .8rem;
+$border-radius-sm:            .3rem;
+
+$caret-width:                 .5em;
+$caret-vertical-align:        -.125em;
+$caret-spacing:               .25em;
+
+// Customizatons
+$caret-border-width:          .125rem; // 2px
+$caret-border-radius:         .125rem; //2px
+$caret-down-vertical-align:   $caret-vertical-align;
+$caret-up-vertical-align:     -.25em;
+$caret-right-vertical-align:  -.15em;
+$caret-left-vertical-align:   $caret-right-vertical-align;
+$caret-down-transform:        rotate(315deg);
+$caret-up-transform:          rotate(135deg);
+$caret-right-transform:       rotate(225deg);
+$caret-left-transform:        rotate(45deg);
+
+// Shadows
+$box-shadow-sm:               0 .0625rem .25rem rgba($black, .1);
+$box-shadow:                  0 .25rem .625rem rgba($black, .12);
+$box-shadow-lg:               0 .5rem 2.185rem rgba($black, .16);
+
+$component-active-color:      $white;
+$component-active-bg:         $theme;
+
+// Customizations
+$component-hover-bg:              theme-tint("500");
+$component-border-color:          $gray-300;
+$component-border:                $border-width solid $component-border-color;
+$focus-border-color:              theme-tint("200");
+$focus-width:                     .125rem; // 2px
+$focus-box-shadow:                0 0 0 $focus-width $focus-border-color;
+
+
+// ***** Grid *******
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:                12;
+$grid-gutter-width:           24px;
+$grid-row-columns:            6;
+
+// Modals
+
+// Padding applied to the modal body
+$modal-inner-padding:               space(3);
+
+$modal-content-border-color:        $component-border-color;
+$modal-content-border-radius:       $border-radius;
+
+$modal-backdrop-opacity:            .6;
+$modal-header-padding-y:            1.125rem; // 18px
+$modal-header-padding-x:            space(3);
+
+// Customizations
+$modal-title-marging-top: .125rem; //2px
+$modal-close-padding-y: 1rem; // 16px
+$modal-close-padding-x: 1.43rem; //20px
+$modal-close-font-size: 1.5rem; // 24px
+
+// ***** Alerts *******
+
+$alert-padding-y:                   .625rem; // 10px
+$alert-padding-x:                   1.5rem; // 24px
+$alert-border-radius:               $border-radius;
+$alert-link-font-weight:            $font-weight-bold;
+$alert-border-width:                0;
+
+// Customizations
+$alert-text-color: $gray-900;
+$alert-link-color: $alert-text-color;
+$alert-hr-color: $alert-text-color;
+$alert-line-height: 1.45;
+$alert-heading-font-size: $h3-font-size;
+$alert-heading-margin-bottom: space(1);
+$alert-dismissible-close-padding-top: .375rem; // 6px
+$alert-dismissible-close-padding-bottom: .625rem; // 10px
+$alert-dismissible-close-font-size: 1.5rem; // 24px
+
+$alert-colors: (
+  "primary": $blue-200,
+  "secondary": $gray-200,
+  "success": $green-200,
+  "danger": $red-200,
+  "warning": $yellow-200,
+  "info": $teal-200,
+  "light": $white,
+  "dark": $gray-500
+);
+
+// Progress bars
+
+$progress-height:                   .25rem; // 4px
+
+// List group
+
+$list-group-item-padding-y:          1.25rem; //20px
+$list-group-item-padding-x:         space(3);
+
+$list-group-hover-bg:               $gray-100;
+
+// ***** Buttons ******
+
+$input-btn-padding-y: .625rem; // 10px
+$input-btn-padding-x: 1rem; // 16px
+$input-btn-font-size: $font-size-sm;
+$input-btn-line-height: $line-height-base;
+$input-btn-padding-y-lg: $input-btn-padding-y;
+$input-btn-padding-x-lg: $input-btn-padding-x;
+$input-btn-font-size-lg: $input-btn-font-size;
+
+$input-btn-focus-width: .25rem; //4px
+$input-btn-focus-color: theme-tint("100");
+$input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color;
+$input-btn-focus-box-shadow-on-dark: 0 0 0 $input-btn-focus-width rgba(theme-tint("500"), .6);
+$input-btn-padding-y-sm: .375rem; // 6px
+$input-btn-padding-x-sm: 1rem; // 16px
+
+$input-btn-padding-y-sm:      .25rem !default;
+$input-btn-padding-x-sm:      .5rem !default;
+$input-btn-font-size-sm: $input-btn-font-size;
+$input-btn-line-height-sm: $line-height-sm;
+
+$input-btn-border-width:      $border-width;
+
+$btn-font-size:               $font-size-base;
+$btn-line-height:             1.43; // 20px
+
+$btn-padding-y:               .5625rem; // 9px
+$btn-padding-x:               .875rem; // 14px
+
+$btn-padding-y-sm:            .5rem; // 8px
+$btn-padding-x-sm:            $btn-padding-x;
+$btn-font-size-sm:            $font-size-sm;
+$btn-line-height-sm:          1.16667; // 14px
+
+$btn-padding-y-lg:            $btn-padding-y;
+$btn-padding-x-lg:            $btn-padding-x;
+$btn-font-size-lg:            $font-size-base;
+$btn-line-height-lg:          $btn-line-height;
+
+$btn-border-radius:           $border-radius;
+$btn-border-radius-lg:        $btn-border-radius;
+$btn-border-radius-sm:        $btn-border-radius;
+
+$btn-font-weight:             $font-weight-bolder;
+$btn-focus-width:             $input-btn-focus-width;
+$btn-focus-box-shadow:        $input-btn-focus-box-shadow;
+$btn-focus-box-shadow-on-dark: $input-btn-focus-box-shadow-on-dark;
+$btn-disabled-opacity:        .3;
+
+// ***** Badges ******
+
+$badge-font-size:                   .857142em; // 12px
+$badge-font-weight:                 $font-weight-bold;
+$badge-padding-x:                   .666667em; // 8px
+$badge-padding-y:                   .25em; // 4px
+$badge-border-radius:               $border-radius; // 8px
+
+// Custom badge variables
+$badge-pill-padding-x:              .625rem; // 8px
+$badge-line-height:                 1; // 1px
+$badge-text-color-default:          $body-color;
+
+$badge-colors: map-merge(
+  (
+    "secondary": $gray-300
+  ),
+  $contextual-colors,
+);
+
+// Forms
+
+$input-padding-y:                       .625rem; // 10px
+$input-font-size:                       $input-btn-font-size;
+$input-font-weight:                     $font-weight-bold;
+$input-line-height:                     $input-btn-line-height;
+
+$input-padding-y-sm:                    .375rem; // 6px
+$input-font-size-sm:                    $input-btn-font-size-sm;
+$input-line-height-sm:                  $line-height-base;
+
+$input-padding-y-lg:                    $input-btn-padding-y-lg;
+$input-padding-x-lg:                    $input-btn-padding-x-lg;
+$input-font-size-lg:                    $input-btn-font-size-lg;
+
+$input-bg:                              $gray-100;
+$input-disabled-bg:                     $input-bg;
+
+$input-color:                           $gray-800;
+$input-border-color:                    $gray-300;
+$input-border-width:                    $input-btn-border-width;
+
+$input-border-radius:                   $border-radius;
+$input-border-radius-lg:                $border-radius;
+$input-border-radius-sm:                $border-radius;
+
+$input-focus-bg:                        $input-bg;
+$input-focus-border-color:              $focus-border-color;
+$input-focus-width:                     .0625rem; //1px;
+$input-focus-box-shadow:                0 0 0 $input-focus-width $input-focus-border-color;
+
+$input-placeholder-color:               $gray-600;
+
+$input-height-border:                   $input-border-width * 2;
+
+$input-height:                          add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false));
+$input-height-sm:                       add($input-line-height-sm * 1em, add($input-padding-y-sm * 2, $input-height-border, false));
+$input-height-lg:                       $input-height;
+
+
+// Customization
+$input-label-font-size:                 $input-font-size;
+$input-label-font-weight:                $font-weight-bolder;
+$input-label-font-color:                $gray-600;
+$input-disabled-opacity:                .5;
+$input-padding-x-start:                 space(2);
+$input-padding-x-start-sm:              space(1);
+
+$form-text-margin-top:                  space(1);
+
+// Customization
+$form-text-font-size: $font-size-sm;
+$form-text-font-weight: $font-weight-light;
+$form-text-line-height: 1.25;
+
+
+// Form validation
+
+$form-feedback-margin-top:          $form-text-margin-top;
+
+$custom-control-indicator-size:                 1.25rem; // 20px
+$custom-control-indicator-bg:                   $white;
+$custom-control-indicator-bg-size:              70% 70%;
+$custom-control-indicator-focus-width:          .1875rem; // 3px
+$custom-control-indicator-focus-box-shadow:     0 0 0 $custom-control-indicator-focus-width $focus-border-color;
+$custom-control-indicator-border-color:         $input-border-color;
+$custom-control-indicator-focus-border-color:   $custom-control-indicator-border-color;
+$custom-control-indicator-active-bg:            theme-tint("100");
+$custom-control-indicator-active-border-color:  $custom-control-indicator-active-bg;
+$custom-control-indicator-checked-bg:           $component-active-bg;
+$custom-control-indicator-checked-disabled-bg:  $custom-control-indicator-checked-bg;
+$custom-control-indicator-disabled-bg:          $gray-400;
+$custom-control-indicator-disabled-border:      $gray-500;
+$custom-control-indicator-disabled-opacity:                        $input-disabled-opacity;
+
+$custom-control-indicator-checked-color:        $component-active-color;
+$custom-control-indicator-checked-bg:           $component-active-bg;
+$custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg;
+
+$custom-checkbox-indicator-border-radius:       .25rem; //4px
+$custom-checkbox-indicator-icon-checked:        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$custom-control-indicator-checked-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>");
+
+$custom-checkbox-indicator-indeterminate-bg:           $component-active-bg;
+$custom-checkbox-indicator-indeterminate-border-color: $custom-checkbox-indicator-indeterminate-bg;
+$custom-control-indicator-hover-bg: $component-hover-bg;
+$custom-control-indicator-top: -.0625rem; //1px
+
+
+$custom-switch-indicator-border-radius:         10rem;
+$custom-switch-border-width:                    .125rem; //2px
+$custom-switch-indicator-size:                  1.3125rem; //21px
+$custom-switch-indicator-bg-color:              $white;
+
+$custom-switch-indicator-top:                   -.125rem; // + 2px
+
+$custom-switch-indicator-track-height:          $custom-switch-indicator-size + .25rem; // + 4px
+$custom-switch-indicator-track-top:             -.25rem; // + 4px
+$custom-switch-indicator-track-bg-color:        $gray-400;
+$custom-switch-indicator-track-border-color:    $custom-switch-indicator-track-bg-color;
+$custom-switch-width:                           $custom-switch-indicator-track-height * 2 - .0625rem; // - 1px
+$custom-switch-padding-top:                     space(1);
+
+$input-group-addon-border-color:        $input-border-color;
+
+$custom-select-bg:                  $input-bg;
+$custom-select-border-radius:       $border-radius;
+$custom-select-border-color:        $input-border-color;
+$custom-select-border-width:        $input-border-width;
+$custom-select-border-color:        $input-border-color;
+$custom-select-border-radius:       $border-radius;
+$custom-select-font-size:           $input-font-size;
+$custom-select-font-weight:         $input-font-weight;
+$custom-select-focus-border-color:  $input-focus-border-color;
+$custom-select-focus-width:         $input-focus-width;
+$custom-select-focus-box-shadow:    $input-focus-box-shadow;
+$custom-select-height:              $input-height;
+$custom-select-font-size-sm:        $input-font-size;
+$custom-select-font-size-lg:        $input-font-size;
+$custom-select-height-lg:           $input-height;
+$custom-select-disabled-bg:         $input-bg;
+
+//Customization
+$custom-select-disabled-opacity: $input-disabled-opacity;
+
+$custom-file-height:                $input-height;
+$custom-file-focus-border-color:    $input-focus-border-color;
+$custom-file-focus-box-shadow:      $input-focus-box-shadow;
+
+$custom-range-track-height:         .25rem; // 4px
+$custom-range-track-bg:             $gray-100;
+
+$custom-range-thumb-width:                   .625rem; // 10px
+$custom-range-thumb-height:                  $custom-range-thumb-width;
+$custom-range-thumb-bg:                      $white;
+$custom-range-thumb-border:                  theme-tint("500") solid .125rem; // 2px
+$custom-range-thumb-focus-box-shadow:        $input-btn-focus-box-shadow;
+$custom-range-thumb-active-bg:               theme-tint("200");
+$custom-range-thumb-disabled-bg:             $gray-500;
+$custom-range-thumb-disabled-border-color:   $custom-range-thumb-disabled-bg;
+
+// Customizations
+$custom-range-track-border:                  $border-width solid $gray-300;
+$custom-range-track-bg-progress:             theme-tint("500");
+$custom-range-track-border-progress:         $border-width solid $custom-range-track-bg-progress;
+$custom-range-thumb-top-offset:              -1px; // For --webkit
+
+// Navs
+
+$nav-tabs-border-color:             transparent;
+$nav-tabs-border-width:             0;
+$nav-tabs-border-radius:            0;
+$nav-tabs-link-hover-border-color:  transparent;
+$nav-tabs-link-active-color:        $body-color;
+$nav-tabs-link-active-bg:           transparent;
+$nav-tabs-link-active-border-color: transparent;
+
+$nav-pills-link-active-color:       $component-active-bg;
+$nav-pills-link-active-bg:          $white;
+
+// Customizations
+$nav-color: $gray-600;
+$nav-active-color: $theme;
+$nav-font-size: $font-size-sm;
+$nav-font-weight: $font-weight-bolder;
+$nav-line-height: 1.2; // 14.4px;
+$nav-link-disabled-color-opacity: $btn-disabled-opacity;
+
+$nav-tabs-transition: color .15s ease-in-out;
+$nav-tabs-font-size: 1.125rem; // 18px
+$nav-tabs-line-height: 1.25; // 22.5px
+$nav-tabs-link-padding-y: 1.25rem; // 20px
+$nav-tabs-link-padding-x: .75rem; // 12px
+$nav-tabs-link-underline-color: $nav-active-color;
+$nav-tabs-link-underline-height: .25rem; // 4px
+$nav-tabs-link-underline-border-radius: .125rem; // 2px
+$nav-tabs-link-underline-transition: width .15s ease-in-out, left .15s ease-in-out;
+
+$nav-pills-border: $component-border;
+$nav-pills-border-width: $border-width;
+$nav-pills-link-bg: rgba($white, 0);
+$nav-pills-link-border: $nav-pills-border-width solid rgba($component-border-color, 0);
+$nav-pills-link-border-active-color: $component-border-color;
+$nav-pills-link-dropdown-active-bg: transparent;
+$nav-pills-link-transition: border .15s ease-in-out, background .3s ease-in-out, color .15s ease-in-out;
+$nav-pills-border-radius: $border-radius;
+$nav-pills-bg-color: $gray-100;
+$nav-pills-box-shadow-active: $box-shadow-sm;
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-color:                    $body-color;
+$dropdown-border-color:             $component-border-color;
+$dropdown-divider-margin-y:         0;
+$dropdown-box-shadow:               $box-shadow;
+
+$dropdown-link-color:               $dropdown-color;
+$dropdown-link-hover-bg:            theme-tint("100");
+
+$dropdown-item-padding-y:           .75rem; // 12px
+$dropdown-item-padding-x:           1.5rem; // 24px
+
+$dropdown-header-padding:           $dropdown-item-padding-y $dropdown-item-padding-x .25rem;
+
+// Customizations
+$dropdown-font-weight: $font-weight-bolder;
+$dropdown-header-font-size: .625rem; // 10px
+$dropdown-header-text-transform: uppercase;
+
+// Cards
+
+$card-spacer-y:                     space(2);
+$card-spacer-x:                     space(3);
+$card-border-color:                 $component-border-color;
+
+$card-img-overlay-padding:          $card-spacer-x;
+
+// Customizataions
+$card-subtitle-color: $gray-600;
+$card-subtitle-font-size: .625rem; // 10px
+$card-subtitle-font-weight: $font-weight-light;
+$card-subtitle-text-transform: uppercase;
+$card-subtitle-margin: 0 0 space(3);
+
+// Popovers
+
+$popover-bg:                        $white;
+$popover-border-color:              $component-border-color;
+$popover-border-radius:             $border-radius;
+
+$popover-header-padding-x:          space(2);
+
+$popover-arrow-width:               1rem; // 16px
+$popover-arrow-height:              .375rem; // 6px
+$popover-arrow-color:               $popover-bg;
+
+$popover-arrow-outer-color:        $popover-border-color;
+
+//Customizations
+$popover-header-font-weight:          $font-weight-bolder;
+$popover-body-font-weight:            $font-weight-bolder;
+$popover-body-line-height:            1.4;
+$popover-caret-icon:                  url("data:image/svg+xml,<svg width='9' height='18' viewBox='0 0 9 18' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M8.04116 0.185547C8.01407 0.453411 8.00019 0.725179 8.00019 1.00019V17.0002C8.00019 17.3029 8.017 17.6016 8.04974 17.8956L1.92407 11.8468C0.352135 10.2946 0.352132 7.77802 1.92407 6.22582L8.04116 0.185547Z' fill='#{$popover-arrow-color}'/><path fill-rule='evenodd' clip-rule='evenodd' d='M8.04116 0.185547L1.92407 6.22582C0.352132 7.77802 0.352135 10.2946 1.92407 11.8468L8.04974 17.8956C8.017 17.6016 8.00019 17.3029 8.00019 17.0002V1.00019C8.00019 0.725179 8.01407 0.453411 8.04116 0.185547ZM8.00019 1.5L2.62669 6.93738C1.45126 8.09806 1.45126 9.97459 2.6267 11.1353L8.00019 16.5V1.5Z' fill='#{$popover-arrow-outer-color}'/></svg>");
+
+// Spinners
+
+$spinner-width:         3rem; // 48px
+$spinner-border-width:  .5rem; // 8px
+
+$spinner-width-sm:        1.5rem; // 24px
+$spinner-border-width-sm: .25rem; // 4x
+
+// Customizations
+$spinner-border-color: $theme;
+$spinner-border-end-position: .125rem; // 2px
+$spinner-border-end-position-sm: .0625rem; // 1px
+$spinner-width-in-btn: 1rem; // 16px
+$spinner-height-in-btn: $spinner-width-in-btn;
+$spinner-border-width-in-btn: .25em;
+$spinner-track-border-color: $gray-200;

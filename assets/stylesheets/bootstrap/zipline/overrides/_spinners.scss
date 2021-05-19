@@ -1,0 +1,66 @@
+// Zipline Spinners overrides
+
+.spinner-border {
+  position: relative;
+  border-color: $spinner-border-color;
+  border-right-color: $spinner-track-border-color;
+
+  &::before {
+    position: absolute;
+    top: -$spinner-border-end-position;
+    right: -$spinner-border-end-position;
+    display: block;
+    width: $spinner-border-width;
+    height: $spinner-border-width;
+    content: "";
+    background: $spinner-border-color;
+    border-radius: 4rem; /* stylelint-disable-line property-disallowed-list */
+
+    .btn & {
+      display: none;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    right: -$spinner-border-end-position;
+    bottom: -$spinner-border-end-position;
+    display: block;
+    width: $spinner-border-width;
+    height: $spinner-border-width;
+    content: "";
+    background: $spinner-border-color;
+    border-radius: 4rem; /* stylelint-disable-line property-disallowed-list */
+
+    .btn & {
+      display: none;
+    }
+  }
+
+  .btn & {
+    width: $spinner-width-in-btn;
+    height: $spinner-height-in-btn;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    border-color: currentColor;
+    border-width: $spinner-border-width-in-btn;
+    border-right-color: transparent;
+  }
+}
+
+.spinner-border-sm {
+
+  &::before {
+    top: -$spinner-border-end-position-sm;
+    right: -$spinner-border-end-position-sm;
+    width: $spinner-border-width-sm;
+    height: $spinner-border-width-sm;
+  }
+
+  &::after {
+    right: -$spinner-border-end-position-sm;
+    bottom: -$spinner-border-end-position-sm;
+    width: $spinner-border-width-sm;
+    height: $spinner-border-width-sm;
+  }
+}

@@ -1,0 +1,206 @@
+// Zipline Button overrides
+
+.btn {
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+  }
+}
+
+.btn-primary {
+
+  &:hover,
+  &.hover {
+    background-color: theme-tint("500");
+    border-color: theme-tint("500");
+  }
+
+  &:focus,
+  &.focus {
+    background-color: $theme;
+    border-color: $theme;
+    box-shadow: $btn-focus-box-shadow;
+  }
+
+  &:not(:disabled):not(.disabled) {
+
+    &:active,
+    &.active {
+      background-color: $theme;
+      border-color: $theme;
+    }
+  }
+
+  &.btn-on-dark {
+    background-color: theme-tint("300");
+    border-color: theme-tint("300");
+
+    &:hover,
+    &.hover {
+      background-color: $theme;
+      border-color: $theme;
+    }
+
+    &:focus,
+    &.focus {
+      box-shadow: $btn-focus-box-shadow-on-dark !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    &:not(:disabled):not(.disabled) {
+
+      &:active,
+      &.active {
+        background-color: theme-tint("300");
+        border-color: theme-tint("300");
+      }
+    }
+  }
+}
+
+.btn-secondary {
+  @include button-outline-variant($theme, $color-hover: $theme, $active-background: $white);
+  background-color: $white;
+
+  &:hover,
+  &.hover {
+    color: theme-tint("500");
+    border-color: theme-tint("500");
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: $btn-focus-box-shadow;
+  }
+
+  &:not(:disabled):not(.disabled) {
+
+    &:active,
+    &.active {
+      color: $theme;
+    }
+  }
+
+  &.btn-on-dark {
+    color: theme-tint("300");
+    background-color: $theme-secondary;
+    border-color: theme-tint("300");
+
+    &:hover,
+    &.hover {
+      color: theme-tint("200");
+      border-color: theme-tint("200");
+    }
+
+    &:focus,
+    &.focus {
+      box-shadow: $btn-focus-box-shadow-on-dark !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    &:not(:disabled):not(.disabled) {
+
+      &:active,
+      &.active {
+        color: theme-tint("300");
+        background-color: $theme-secondary;
+        border-color: theme-tint("300");
+      }
+    }
+  }
+}
+
+.btn-default {
+  @include button-outline-variant($gray-300, $color-hover: $body-color, $active-background: $gray-100);
+  color: $body-color;
+  background-color: $gray-100;
+
+  &:focus,
+  &.focus {
+    box-shadow: $btn-focus-box-shadow !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  &:hover,
+  &.hover {
+    background-color: $gray-300;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $body-color;
+    background-color: $gray-100;
+  }
+
+  &:not(:disabled):not(.disabled) {
+
+    &:active,
+    &.active {
+      color: $body-color;
+    }
+  }
+
+  &.btn-on-dark {
+    color: $white;
+    background-color: theme-tint-secondary("300");
+    border-color: rgba($white, .2);
+
+    &:hover,
+    &.hover {
+      background-color: theme-tint-secondary("500");
+      border-color: theme-tint-secondary("500");
+    }
+
+    &:focus,
+    &.focus {
+      box-shadow: $btn-focus-box-shadow-on-dark !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    &:not(:disabled):not(.disabled) {
+
+      &:active,
+      &.active {
+        color: $white;
+        background-color: theme-tint-secondary("300");
+        border-color: rgba($white, .2);
+      }
+    }
+  }
+}
+
+.btn-link {
+  font-weight: $font-weight-bolder;
+
+  &:hover,
+  &.hover {
+    color: $theme;
+  }
+
+  &:not(:disabled):not(.disabled) {
+
+    &:active,
+    &.active {
+      color: theme-tint("500");
+    }
+  }
+
+  &.btn-on-dark {
+    color: $white;
+
+    &:hover,
+    &.hover {
+      color: theme-tint("300");
+    }
+
+    &:focus,
+    &.focus {
+      box-shadow: $btn-focus-box-shadow-on-dark !important; /* stylelint-disable-line declaration-no-important */
+    }
+
+    &:not(:disabled):not(.disabled) {
+
+      &:active,
+      &.active {
+        color: theme-tint("200");
+      }
+    }
+  }
+}

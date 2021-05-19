@@ -1,0 +1,67 @@
+// Zipline Bootstrap mixin overrides
+
+@mixin caret-down() {
+  width: $caret-width;
+  height: $caret-width;
+  vertical-align: $caret-down-vertical-align;
+  border: $caret-border-width solid currentColor;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-radius: $caret-border-radius; // stylelint-disable-line property-disallowed-list
+  transform: $caret-down-transform;
+}
+
+@mixin caret-up() {
+  vertical-align: $caret-up-vertical-align;
+  transform: $caret-up-transform;
+}
+
+@mixin caret-right() {
+  vertical-align: $caret-right-vertical-align !important; // stylelint-disable-line declaration-no-important
+  transform: $caret-right-transform;
+}
+
+@mixin caret-left() {
+  width: $caret-width;
+  height: $caret-width;
+  vertical-align: $caret-left-vertical-align !important; // stylelint-disable-line declaration-no-important
+  border: $caret-border-width solid currentColor;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-radius: $caret-border-radius; // stylelint-disable-line property-disallowed-list
+  transform: $caret-left-transform;
+}
+
+@mixin caret($direction: down) {
+  @if $enable-caret {
+    &::after {
+      display: inline-block;
+      margin: $caret-spacing;
+      content: "";
+      @if $direction == down {
+        @include caret-down();
+      } @else if $direction == up {
+        @include caret-up();
+      } @else if $direction == right {
+        @include caret-right();
+      }
+    }
+
+    @if $direction == left {
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        display: inline-block;
+        margin: $caret-spacing;
+        content: "";
+        @include caret-left();
+      }
+    }
+
+    &:empty::after {
+      margin-left: 0;
+    }
+  }
+}

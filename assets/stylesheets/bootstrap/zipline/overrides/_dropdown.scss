@@ -1,0 +1,23 @@
+// Zipline Dropdown overrides
+
+
+.dropdown-toggle {
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  box-shadow: $dropdown-box-shadow;
+}
+
+.dropdown-item {
+  font-weight: $dropdown-font-weight;
+}
+
+.dropdown-item-text  {
+  font-weight: $dropdown-font-weight;
+}
+
+.dropdown-header {
+  font-size: $dropdown-header-font-size;
+  text-transform: $dropdown-header-text-transform;
+}

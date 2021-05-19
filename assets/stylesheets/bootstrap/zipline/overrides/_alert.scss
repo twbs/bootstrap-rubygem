@@ -1,0 +1,45 @@
+// Zipline Alert overrides
+
+.alert {
+  font-weight: $font-weight-bold;
+  line-height: $alert-line-height;
+  color: $alert-text-color;
+
+  hr {
+    border-top-color: $alert-hr-color;
+  }
+}
+
+@each $color, $value in $alert-colors {
+  .alert-#{$color} {
+    background-color: $value;
+
+    .alert-link {
+      color: $alert-link-color;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.alert-heading {
+  margin-bottom: $alert-heading-margin-bottom;
+  font-size: $alert-heading-font-size;
+  font-weight: $font-weight-bolder;
+}
+
+.alert-dismissible {
+
+  .close {
+    @include border-radius();
+    padding-top: $alert-dismissible-close-padding-top;
+    padding-bottom: $alert-dismissible-close-padding-bottom;
+    font-size: $alert-dismissible-close-font-size;
+
+    &:focus {
+      @include focus-ring();
+    }
+  }
+}

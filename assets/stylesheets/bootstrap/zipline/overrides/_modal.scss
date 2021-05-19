@@ -1,0 +1,22 @@
+// Zipline Modal overrides
+
+.modal-header {
+
+  .close {
+    @include border-radius();
+    padding: $modal-close-padding-y $modal-close-padding-x;
+    font-size: $modal-close-font-size;
+
+    &:focus {
+      @include focus-ring();
+    }
+  }
+}
+
+.modal-title  {
+  @include font-size($h3-font-size);
+  margin-top: $modal-title-marging-top;
+  font-family: $headings-font-family;
+  font-weight: $font-weight-bolder !important; // stylelint-disable-line declaration-no-important
+  line-height: $headings-line-height;
+}

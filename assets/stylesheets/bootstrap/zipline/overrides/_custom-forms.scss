@@ -1,0 +1,218 @@
+// Zipline Custom Forms overrides
+
+
+.custom-select {
+  padding-left: $input-padding-x-start;
+
+  &:disabled {
+    opacity: $custom-select-disabled-opacity;
+  }
+}
+
+.custom-select-sm{
+  padding-left: $input-padding-x-start-sm;
+}
+
+.custom-select-lg {
+  padding-left: $input-padding-x-start;
+}
+
+.custom-file-label-lg {
+  padding-left: $input-padding-x-start;
+}
+
+.custom-file {
+  font-size: $input-label-font-size;
+}
+
+.custom-file-input {
+  font-size: $input-label-font-size;
+}
+
+.custom-file-label {
+  display: flex;
+  align-items: center;
+  padding-left: $input-padding-x-start;
+  font-weight: $input-font-weight;
+
+  &::after {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.custom-file-label-sm{
+  padding-left: $input-padding-x-start-sm;
+}
+
+.custom-control {
+  margin-bottom: space(1);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.custom-control-input {
+  ~ .custom-control-label {
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      top: $custom-control-indicator-top;
+    }
+  }
+
+  &:not(:checked):not(:disabled) ~ .custom-control-label {
+
+    &:hover {
+
+      &::before {
+        border-color: $gray-600;
+      }
+    }
+  }
+
+  &:checked:not(:disabled) ~ .custom-control-label,
+  &[type="checkbox"]:indeterminate:not(:disabled) ~ .custom-control-label {
+
+    &:hover {
+
+      &::before {
+        background-color: $custom-control-indicator-hover-bg;
+        border-color: $custom-control-indicator-hover-bg;
+      }
+    }
+  }
+
+  &:checked:disabled ~ .custom-control-label,
+  &[type="checkbox"]:indeterminate:disabled ~ .custom-control-label {
+
+    &::before {
+      border-color: $custom-control-indicator-checked-border-color;
+    }
+  }
+
+  &[disabled],
+  &:disabled {
+    ~ .custom-control-label {
+      pointer-events: none;
+      cursor: default;
+
+      &::before {
+        border-color: $custom-control-indicator-disabled-border;
+        opacity: $custom-control-indicator-disabled-opacity;
+      }
+    }
+  }
+}
+
+.custom-switch {
+  padding-top: $custom-switch-padding-top;
+
+  .custom-control-label {
+
+    &::before {
+      top: $custom-switch-indicator-track-top;
+      height: $custom-switch-indicator-track-height;
+      background-color: $custom-switch-indicator-track-bg-color;
+      border-color: $custom-switch-indicator-track-border-color;
+      border-width: $custom-switch-border-width;
+    }
+
+    &::after {
+      top: $custom-switch-indicator-top;
+      background-color: $custom-switch-indicator-bg-color;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label {
+
+    &::after {
+      transform: translateX($custom-switch-width - $custom-switch-indicator-size - .25rem);
+    }
+  }
+
+  .custom-control-input:not(:checked):not(:disabled) {
+
+    &:focus ~ .custom-control-label::before {
+      border-color: $custom-switch-indicator-track-border-color;
+    }
+
+    &:active ~ .custom-control-label::before {
+      border-color: $custom-control-indicator-active-border-color;
+    }
+
+    ~ .custom-control-label:hover {
+
+      &::before {
+        background-color: $gray-500;
+        border-color: $gray-500;
+      }
+    }
+  }
+
+  .custom-control-input:checked:disabled ~ .custom-control-label {
+
+    &::before {
+      border-color: $custom-control-indicator-checked-border-color;
+    }
+  }
+
+  .custom-control-input[disabled],
+  .custom-control-input:disabled {
+    ~ .custom-control-label {
+
+      &::before {
+        border-color: $custom-control-indicator-disabled-bg;
+      }
+    }
+  }
+}
+
+.custom-range {
+
+  &::-webkit-slider-thumb {
+    position: relative;
+    top: $custom-range-thumb-top-offset;
+  }
+
+  &::-webkit-slider-runnable-track {
+    border: $custom-range-track-border;
+  }
+
+  &::-moz-range-track {
+    border: $custom-range-track-border;
+  }
+
+  &::-ms-track {
+    border: $custom-range-track-border !important; // stylelint-disable-line declaration-no-important
+  }
+
+  &::-ms-fill-lower {
+    background-color: $custom-range-track-bg-progress;
+    border: $custom-range-track-border-progress;
+  }
+
+  &::-moz-range-progress {
+    background: $custom-range-track-bg-progress;
+    border: $custom-range-track-border-progress;
+    @include border-radius($custom-range-track-border-radius);
+  }
+
+  &:disabled {
+    opacity: $input-disabled-opacity;
+
+    &::-webkit-slider-thumb {
+      border-color: $custom-range-thumb-disabled-border-color;
+    }
+
+    &::-moz-range-thumb {
+      border-color: $custom-range-thumb-disabled-border-color;
+    }
+
+    &::-ms-thumb {
+      border-color: $custom-range-thumb-disabled-border-color;
+    }
+  }
+}

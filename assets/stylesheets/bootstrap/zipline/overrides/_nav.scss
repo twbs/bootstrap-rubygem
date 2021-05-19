@@ -1,0 +1,176 @@
+// Zipline Nav overrides
+
+/* stylelint-disable */
+.nav {
+  font-size: $nav-font-size;
+  font-weight: $nav-font-weight;
+  line-height: $nav-line-height;
+  color: $nav-color;
+}
+
+.nav-link {
+  color: $nav-color;
+
+  &.active {
+    color: $nav-active-color;
+  }
+
+  &.disabled {
+    opacity: $nav-link-disabled-color-opacity;
+  }
+}
+
+.nav-pills {
+  background: $nav-pills-bg-color;
+  border: $nav-pills-border;
+  border-radius: $nav-pills-border-radius;
+
+  .nav-link {
+    margin-top: -$nav-pills-border-width;
+    margin-bottom: -$nav-pills-border-width;
+    background: $nav-pills-link-bg;
+    border: $nav-pills-link-border;
+    border-radius: $nav-pills-border-radius;
+    @include transition($nav-pills-link-transition);
+
+    &.active {
+      border-color: $nav-pills-link-border-active-color;
+      box-shadow: $nav-pills-box-shadow-active;
+    }
+  }
+
+  .show > .nav-link {
+    background: $nav-pills-link-dropdown-active-bg;
+  }
+
+  .nav-item {
+
+    &:first-child {
+
+      .nav-link {
+        margin-left: -$nav-pills-border-width;
+      }
+    }
+
+    &:last-child {
+
+      .nav-link {
+        margin-right: -$nav-pills-border-width;
+      }
+    }
+  }
+
+  > .nav-link {
+    margin-left: -$nav-pills-border-width;
+
+    &:last-child {
+      margin-right: -$nav-pills-border-width;
+    }
+  }
+
+  &.flex-column {
+
+    .nav-link {
+      margin: (-$nav-pills-border-width) (-$nav-pills-border-width) 0 (-$nav-pills-border-width);
+
+      &:last-child {
+        margin-bottom: -$nav-pills-border-width;
+      }
+    }
+
+    .nav-item {
+
+      &:last-child {
+
+        .nav-link {
+          margin-bottom: -$nav-pills-border-width;
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs {
+  font-size: $nav-tabs-font-size;
+  line-height: $nav-tabs-line-height;
+
+  .nav-link {
+    position: relative;
+    padding: $nav-tabs-link-padding-y $nav-tabs-link-padding-x;
+    @include transition($nav-tabs-transition);
+    border-radius: 0;
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      width: 0;
+      height: $nav-tabs-link-underline-height;
+      content: "";
+      background: $nav-tabs-link-underline-color;
+      border-radius: $nav-tabs-link-underline-border-radius;
+      @include transition($nav-tabs-link-underline-transition);
+    }
+
+    &.active {
+      box-shadow: none;
+
+      &::before {
+        left: $nav-tabs-link-padding-x;
+        width: calc(100% - #{$nav-tabs-link-padding-x * 2});
+      }
+    }
+  }
+
+  > .nav-link {
+
+    &:first-child {
+      padding-left: 0;
+
+      &.active::before {
+        left: 0;
+        width: calc(100% - #{$nav-tabs-link-padding-x});
+      }
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &.active::before {
+        width: calc(100% - #{$nav-tabs-link-padding-x});
+      }
+    }
+  }
+
+  .nav-item {
+
+    &:first-child {
+
+      .nav-link {
+        padding-left: 0;
+
+        &.active::before {
+          left: 0;
+          width: calc(100% - #{$nav-tabs-link-padding-x});
+        }
+      }
+    }
+
+    &:last-child {
+
+      .nav-link {
+        padding-right: 0;
+
+        &.active::before {
+          width: calc(100% - #{$nav-tabs-link-padding-x});
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: $dropdown-border-radius;
+  }
+}
+/* stylelint-enable */

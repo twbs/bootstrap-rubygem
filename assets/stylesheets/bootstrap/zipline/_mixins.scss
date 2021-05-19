@@ -1,0 +1,38 @@
+
+
+// Zipline custom mixins/functions
+
+@function space($size) {
+  $value: map-get($spacers, $size);
+
+  @if map-has-key($spacers, $size) {
+    @return map-get($spacers, $size);
+  } @else {
+    @error "`#{$size}` is an invalid argument in space() . Try: #{map-keys($spacers)}.";
+  }
+}
+
+@mixin focus-ring() {
+  outline: 0;
+  box-shadow: $focus-box-shadow;
+}
+
+@function theme-tint($key: "100") {
+  $value: map-get($theme-tint, $key);
+
+  @if map-has-key($theme-tint, $key) {
+    @return map-get($theme-tint, $key);
+  } @else {
+    @error "`#{$key}` is an invalid argument in space() . Try: #{map-keys($theme-tint)}.";
+  }
+}
+
+@function theme-tint-secondary($key: "100") {
+  $value: map-get($theme-tint-secondary, $key);
+
+  @if map-has-key($theme-tint-secondary, $key) {
+    @return map-get($theme-tint-secondary, $key);
+  } @else {
+    @error "`#{$key}` is an invalid argument in space() . Try: #{map-keys($theme-tint-secondary)}.";
+  }
+}

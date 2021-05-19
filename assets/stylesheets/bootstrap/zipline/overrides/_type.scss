@@ -1,0 +1,30 @@
+// Zipline Type overrides
+
+/* stylelint-disable declaration-no-important, selector-list-comma-newline-after, selector-no-qualifying-type */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+
+  &.font-weight-bold,
+  > .font-weight-bold,
+  > strong {
+    font-weight: $font-weight-bolder !important;
+  }
+
+  &:last-child {
+    margin: 0 !important;
+  }
+}
+
+.lead {
+
+  &.font-weight-bold,
+  > .font-weight-bold,
+  > strong {
+    font-weight: $font-weight-base !important;
+  }
+
+  &:last-child {
+    margin: 0 !important;
+  }
+}
+/* stylelint-enable declaration-no-important, selector-list-comma-newline-after, selector-no-qualifying-type */

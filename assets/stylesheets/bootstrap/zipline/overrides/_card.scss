@@ -1,0 +1,27 @@
+// Zipline Card overrides
+
+.card-header  {
+  @include font-size($h3-font-size);
+  font-family: $headings-font-family;
+  font-weight: $font-weight-bolder !important; // stylelint-disable-line declaration-no-important
+  line-height: $headings-line-height;
+}
+
+.card-title  {
+  @include font-size($lead-font-size);
+  font-weight: $lead-font-weight;
+
+  &.font-weight-bold,
+  > .font-weight-bold,
+  > strong {
+    font-weight: $font-weight-base !important; // stylelint-disable-line declaration-no-important
+  }
+}
+
+.card-subtitle {
+  margin: $card-subtitle-margin;
+  font-size: $card-subtitle-font-size;
+  font-weight: $card-subtitle-font-weight;
+  color: $card-subtitle-color;
+  text-transform: $card-subtitle-text-transform;
+}
