@@ -2,7 +2,7 @@ require 'tsort'
 
 class Updater
   module Js
-    INLINED_SRCS = %w[util/index.js util/backdrop.js util/sanitizer.js util/scrollbar.js].freeze
+    INLINED_SRCS = %w[util/backdrop.js util/component-functions.js util/focustrap.js util/index.js util/sanitizer.js util/scrollbar.js].freeze
 
     def update_javascript_assets
       log_status 'Updating javascripts...'
@@ -72,7 +72,11 @@ class Updater
       end
 
       def tsort_each_child(node, &block)
-        @imports[node].each(&block)
+        node_imports = @imports[node]
+        if node_imports.nil?
+          raise "No imports found for #{node.inspect}"
+        end
+        node_imports.each(&block)
       end
 
       def tsort_each_node(&block)
