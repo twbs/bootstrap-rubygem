@@ -20,7 +20,7 @@ Please see the appropriate guide for your environment of choice:
 Add `bootstrap` to your Gemfile:
 
 ```ruby
-gem 'bootstrap', '~> 5.0.2'
+gem 'bootstrap', '~> 5.1.0'
 ```
 
 Ensure that `sprockets-rails` is at least v2.3.2.
