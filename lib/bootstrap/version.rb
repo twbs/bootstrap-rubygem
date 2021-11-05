@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module Bootstrap
-  VERSION       = '5.1.0'
-  BOOTSTRAP_SHA = 'f20fece3a8cdd0e76a42c2737524b7652bf54d26'
+  VERSION       = '5.1.1'
+  BOOTSTRAP_SHA = '0d81d3cbc14dfcdca8a868e3f25189a4f1ab273c'
 end
