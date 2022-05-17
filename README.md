@@ -90,7 +90,7 @@ Refer to your framework's documentation on the subject.
 ### Sass: Autoprefixer
 
 Bootstrap requires the use of [Autoprefixer][autoprefixer].
-[Autoprefixer][autoprefixer] adds vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com/).
+[Autoprefixer][autoprefixer] adds vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com/). Autoprefixer has an [online version](https://goonlinetools.com/autoprefixer/) that allows you to enter your non-prefixed CSS and gives you a prefix-added CSS.
 
 If you are using bootstrap with Rails, autoprefixer is set up for you automatically.
 Otherwise, please consult the [Autoprefixer documentation][autoprefixer].
