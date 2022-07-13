@@ -1,11 +1,12 @@
 # Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem) [![Gem](https://img.shields.io/gem/v/bootstrap.svg)](https://rubygems.org/gems/bootstrap)
 
-[Bootstrap 5][bootstrap-home] ruby gem for Ruby on Rails (*Sprockets*) and Hanami (formerly Lotus).
+[Bootstrap 5][bootstrap-home] ruby gem for Ruby on Rails (*Sprockets*/*Importmaps*) and Hanami (formerly Lotus).
 
 For Sass versions of Bootstrap 3 and 2 see [bootstrap-sass](https://github.com/twbs/bootstrap-sass) instead.
 
-**Ruby on Rails 6 Note:**: 
-With the release of Rails 6 there have been some minor changes made to the default configuration for The Asset Pipeline. In specific, by default _Sprockets no longer processes JavaScript_ and instead Webpack is set as the default. The `twbs/bootstrap-rubygem` is for use with Sprockets not Webpack.
+**Ruby on Rails Note**: Newer releases of Rails have added additional ways for
+assets to be processed. The `twbs/bootstrap-rubygem` is for use with Importmaps
+or Sprockets, but not Webpack.
 
 ## Installation
 
@@ -57,6 +58,25 @@ gem 'jquery-rails'
 Bootstrap tooltips and popovers depend on [popper.js] for positioning.
 The `bootstrap` gem already depends on the
 [popper_js](https://github.com/glebm/popper_js-rubygem) gem.
+
+#### Importmaps
+
+You can pin either `bootstrap.js` or `bootstrap.min.js` in `config/importmap.rb`
+as well as `popper.js`:
+
+```ruby
+pin "bootstrap", to: "bootstrap.min.js", preload: true
+pin "@popperjs/core", to: "popper.js", preload: true
+```
+
+Whichever files you pin will need to be added to `config.assets.precompile`:
+
+```ruby
+# config/initializers/assets.rb
+Rails.application.config.assets.precompile += %w(bootstrap.min.js popper.js)
+```
+
+#### Sprockets
 
 Add Bootstrap dependencies and Bootstrap to your `application.js`:
 
