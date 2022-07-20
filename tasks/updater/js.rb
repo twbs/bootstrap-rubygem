@@ -1,8 +1,9 @@
+require 'pathname'
 require 'tsort'
 
 class Updater
   module Js
-    INLINED_SRCS = %w[util/backdrop.js util/component-functions.js util/focustrap.js util/index.js util/sanitizer.js util/scrollbar.js].freeze
+    INLINED_SRCS = %w[].freeze
 
     def update_javascript_assets
       log_status 'Updating javascripts...'
@@ -49,7 +50,9 @@ class Updater
         imports = Deps.new
         # Get the imports from the ES6 files to order requires correctly.
         read_files('js/src', src_files).each do |name, content|
-          file_imports = content.scan(%r{import *(?:[a-zA-Z]*|\{[a-zA-Z ,]*\}) *from '\./([\w/-]+)}).flatten(1).map { |f| "#{f}.js" }.uniq
+          file_imports = content.scan(%r{import *(?:[a-zA-Z]*|\{[a-zA-Z ,]*\}) *from '([\w/.-]+)}).flatten(1).map do |f|
+            Pathname.new(name).dirname.join("#{f}.js").cleanpath.to_s
+          end.uniq
           imports.add name, *(file_imports - INLINED_SRCS)
         end
         imports.tsort
@@ -68,13 +71,15 @@ class Updater
       end
 
       def add(from, *tos)
-        (@imports[from] ||= []).push(*tos.sort)
+        imports = (@imports[from] ||= [])
+        imports.push(*tos)
+        imports.sort!
       end
 
       def tsort_each_child(node, &block)
         node_imports = @imports[node]
         if node_imports.nil?
-          raise "No imports found for #{node.inspect}"
+          raise "No imports found for #{node.inspect}\nImports:\n#{@imports.inspect}"
         end
         node_imports.each(&block)
       end
