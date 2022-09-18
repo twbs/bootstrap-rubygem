@@ -1,7 +1,11 @@
+require 'pathname'
 require 'tsort'
 
 class Updater
   module Js
+    INLINED_SRCS = %w[index.js tools/sanitizer.js].freeze
+    EXTERNAL_JS = %w[popper.js].freeze
+
     def update_javascript_assets
       log_status 'Updating javascripts...'
       save_to  = @save_to[:js]
@@ -29,13 +33,15 @@ class Updater
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        src_files = get_paths_by_type('js/src', /\.js$/) - %w[index.js tools/sanitizer.js]
+        src_files = get_paths_by_type('js/src', /\.js$/) - INLINED_SRCS
+        puts "src_files: #{src_files.inspect}"
         imports = Deps.new
         # Get the imports from the ES6 files to order requires correctly.
         read_files('js/src', src_files).each do |name, content|
-          imports.add name,
-                      *content.scan(%r{import [a-zA-Z]* from '\./(\w+)})
-                           .flatten(1).map { |f| "#{f}.js" }
+          file_imports = content.scan(%r{import *(?:[a-zA-Z]*|\{[a-zA-Z ,]*\}) *from '([\w/.-]+)}).flatten(1).map do |f|
+            Pathname.new(name).dirname.join(f.end_with?(".js") ? f : "#{f}.js").cleanpath.to_s
+          end.uniq
+          imports.add name, *(file_imports - INLINED_SRCS - EXTERNAL_JS)
         end
         imports.tsort
       end
@@ -53,11 +59,17 @@ class Updater
       end
 
       def add(from, *tos)
-        (@imports[from] ||= []).push(*tos.sort)
+        imports = (@imports[from] ||= [])
+        imports.push(*tos)
+        imports.sort!
       end
 
       def tsort_each_child(node, &block)
-        @imports[node].each(&block)
+        node_imports = @imports[node]
+        if node_imports.nil?
+          raise "No imports found for #{node.inspect}\nImports:\n#{@imports.inspect}"
+        end
+        node_imports.each(&block)
       end
 
       def tsort_each_node(&block)
