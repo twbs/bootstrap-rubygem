@@ -18,10 +18,10 @@ class Updater
   include Js
   include Scss
 
-  def initialize(repo: 'twbs/bootstrap', branch: 'master', save_to: {}, cache_path: 'tmp/bootstrap-cache')
+  def initialize(repo: 'twbs/bootstrap', branch: 'main', save_to: {}, cache_path: 'tmp/bootstrap-cache')
     @logger     = Logger.new
     @repo       = repo
-    @branch     = branch || 'master'
+    @branch     = branch || 'main'
     @branch_sha = get_branch_sha
     @cache_path = cache_path
     @repo_url   = "https://github.com/#@repo"
