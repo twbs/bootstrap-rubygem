@@ -11,17 +11,38 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby_version: ['2.5', '2.6', '2.7']
+        ruby_version: ['2.5', '2.6', '2.7', '3.0', '3.1']
         gemfile:
           - test/gemfiles/rails_5_0.gemfile
           - test/gemfiles/rails_5_1.gemfile
+          - test/gemfiles/rails_5_2.gemfile
           - test/gemfiles/rails_6_0.gemfile
           - test/gemfiles/rails_6_1.gemfile
+          - test/gemfiles/rails_7_0.gemfile
         include:
           - ruby_version: '2.5'
             gemfile: test/gemfiles/rails_4_2.gemfile
           - ruby_version: '2.6'
             gemfile: test/gemfiles/rails_4_2.gemfile
+        exclude:
+          - ruby_version: '2.5'
+            gemfile: test/gemfiles/rails_7_0.gemfile
+          - ruby_version: '2.6'
+            gemfile: test/gemfiles/rails_7_0.gemfile
+          - ruby_version: '3.0'
+            gemfile: test/gemfiles/rails_5_0.gemfile
+          - ruby_version: '3.0'
+            gemfile: test/gemfiles/rails_5_1.gemfile
+          - ruby_version: '3.0'
+            gemfile: test/gemfiles/rails_5_2.gemfile
+          - ruby_version: '3.1'
+            gemfile: test/gemfiles/rails_5_0.gemfile
+          - ruby_version: '3.1'
+            gemfile: test/gemfiles/rails_5_1.gemfile
+          - ruby_version: '3.1'
+            gemfile: test/gemfiles/rails_5_2.gemfile
+          - ruby_version: '3.1'
+            gemfile: test/gemfiles/rails_6_0.gemfile
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
