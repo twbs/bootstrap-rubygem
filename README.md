@@ -1,4 +1,4 @@
-# Bootstrap Ruby Gem [![Build Status](https://travis-ci.org/twbs/bootstrap-rubygem.svg?branch=master)](https://travis-ci.org/twbs/bootstrap-rubygem) [![Gem](https://img.shields.io/gem/v/bootstrap.svg)](https://rubygems.org/gems/bootstrap)
+# Bootstrap Ruby Gem [![CI](https://github.com/twbs/bootstrap-rubygem/actions/workflows/ci.yml/badge.svg)](https://github.com/twbs/bootstrap-rubygem/actions/workflows/ci.yml) [![Gem](https://img.shields.io/gem/v/bootstrap.svg)](https://rubygems.org/gems/bootstrap)
 
 [Bootstrap 5][bootstrap-home] ruby gem for Ruby on Rails (*Sprockets*/*Importmaps*) and Hanami (formerly Lotus).
 
