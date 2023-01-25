@@ -1,84 +1,71 @@
-/*!
-  * Bootstrap manipulator.js v5.2.3 (https://getbootstrap.com/)
-  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-  */
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Manipulator = factory());
-})(this, (function () { 'use strict';
+/**
+ * --------------------------------------------------------------------------
+ * Bootstrap (v5.3.0-alpha1): dom/manipulator.js
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ * --------------------------------------------------------------------------
+ */
 
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v5.2.3): dom/manipulator.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-  function normalizeData(value) {
-    if (value === 'true') {
-      return true;
-    }
-
-    if (value === 'false') {
-      return false;
-    }
-
-    if (value === Number(value).toString()) {
-      return Number(value);
-    }
-
-    if (value === '' || value === 'null') {
-      return null;
-    }
-
-    if (typeof value !== 'string') {
-      return value;
-    }
-
-    try {
-      return JSON.parse(decodeURIComponent(value));
-    } catch (_unused) {
-      return value;
-    }
+function normalizeData(value) {
+  if (value === 'true') {
+    return true
   }
 
-  function normalizeDataKey(key) {
-    return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`);
+  if (value === 'false') {
+    return false
   }
 
-  const Manipulator = {
-    setDataAttribute(element, key, value) {
-      element.setAttribute(`data-bs-${normalizeDataKey(key)}`, value);
-    },
+  if (value === Number(value).toString()) {
+    return Number(value)
+  }
 
-    removeDataAttribute(element, key) {
-      element.removeAttribute(`data-bs-${normalizeDataKey(key)}`);
-    },
+  if (value === '' || value === 'null') {
+    return null
+  }
 
-    getDataAttributes(element) {
-      if (!element) {
-        return {};
-      }
+  if (typeof value !== 'string') {
+    return value
+  }
 
-      const attributes = {};
-      const bsKeys = Object.keys(element.dataset).filter(key => key.startsWith('bs') && !key.startsWith('bsConfig'));
+  try {
+    return JSON.parse(decodeURIComponent(value))
+  } catch {
+    return value
+  }
+}
 
-      for (const key of bsKeys) {
-        let pureKey = key.replace(/^bs/, '');
-        pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
-        attributes[pureKey] = normalizeData(element.dataset[key]);
-      }
+function normalizeDataKey(key) {
+  return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`)
+}
 
-      return attributes;
-    },
+const Manipulator = {
+  setDataAttribute(element, key, value) {
+    element.setAttribute(`data-bs-${normalizeDataKey(key)}`, value)
+  },
 
-    getDataAttribute(element, key) {
-      return normalizeData(element.getAttribute(`data-bs-${normalizeDataKey(key)}`));
+  removeDataAttribute(element, key) {
+    element.removeAttribute(`data-bs-${normalizeDataKey(key)}`)
+  },
+
+  getDataAttributes(element) {
+    if (!element) {
+      return {}
     }
 
-  };
+    const attributes = {}
+    const bsKeys = Object.keys(element.dataset).filter(key => key.startsWith('bs') && !key.startsWith('bsConfig'))
 
-  return Manipulator;
+    for (const key of bsKeys) {
+      let pureKey = key.replace(/^bs/, '')
+      pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length)
+      attributes[pureKey] = normalizeData(element.dataset[key])
+    }
 
-}));
+    return attributes
+  },
+
+  getDataAttribute(element, key) {
+    return normalizeData(element.getAttribute(`data-bs-${normalizeDataKey(key)}`))
+  }
+}
+
+export default Manipulator
