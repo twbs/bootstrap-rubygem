@@ -3,6 +3,6 @@ source 'https://rubygems.org'
 gem 'actionpack', '~> 5.1.0'
 gem 'activesupport', '~> 5.1.0'
 gem 'autoprefixer-rails', '>= 7.1.1'
+gem 'sassc-rails', '~> 2.0'
 
 gemspec path: '../../'
-

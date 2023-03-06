@@ -24,7 +24,11 @@ Add `bootstrap` to your Gemfile:
 gem 'bootstrap', '~> 5.3.1'
 ```
 
-Ensure that `sprockets-rails` is at least v2.3.2.
+This gem requires a Sass engine, so make sure you have **one** of these two gems in your Gemfile:
+- [`dartsass-sprockets`](https://github.com/tablecheck/dartsass-sprockets): Dart Sass engine, recommended but only works for Ruby 2.6+ and Rails 5+
+- [`sassc-rails`](https://github.com/sass/sassc-rails): SassC engine, deprecated but compatible with Ruby 2.3+ and Rails 4
+
+Also ensure that `sprockets-rails` is at least v2.3.2.
 
 `bundle install` and restart your server to make the files available through the pipeline.
 
