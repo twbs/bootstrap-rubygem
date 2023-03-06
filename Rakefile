@@ -45,12 +45,20 @@ end
 
 desc 'Dumps output to a CSS file for testing'
 task :debug do
-  require 'sassc'
+  begin
+    require 'dartsass-ruby'
+  rescue LoadError
+    require 'sassc'
+  rescue LoadError
+    raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets or sassc-rails to your dependencies.")
+  end
   require './lib/bootstrap'
   require 'term/ansicolor'
   require 'autoprefixer-rails'
   path = Bootstrap.stylesheets_path
   %w(_bootstrap _bootstrap-reboot _bootstrap-grid).each do |file|
+    # For ease of upgrading, the root namespace ::SassC is still used by dartsass-sprockets.
+    # This is planned to be renamed in a future major version release.
     engine = SassC::Engine.new(File.read("#{path}/#{file}.scss"), syntax: :scss, load_paths: [path])
     out = File.join('tmp', "#{file[1..-1]}.css")
     css = engine.render

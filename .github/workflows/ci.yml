@@ -1,8 +1,9 @@
 name: CI
 
 on:
-  push:
-  pull_request:
+  - push
+  - pull_request
+  - workflow_dispatch
 
 jobs:
   test:
@@ -18,7 +19,8 @@ jobs:
           - test/gemfiles/rails_5_2.gemfile
           - test/gemfiles/rails_6_0.gemfile
           - test/gemfiles/rails_6_1.gemfile
-          - test/gemfiles/rails_7_0.gemfile
+          - test/gemfiles/rails_7_0_sassc.gemfile
+          - test/gemfiles/rails_7_0_dartsass.gemfile
         include:
           - ruby_version: '2.5'
             gemfile: test/gemfiles/rails_4_2.gemfile
@@ -26,9 +28,13 @@ jobs:
             gemfile: test/gemfiles/rails_4_2.gemfile
         exclude:
           - ruby_version: '2.5'
-            gemfile: test/gemfiles/rails_7_0.gemfile
+            gemfile: test/gemfiles/rails_7_0_sassc.gemfile
+          - ruby_version: '2.5'
+            gemfile: test/gemfiles/rails_7_0_dartsass.gemfile
           - ruby_version: '2.6'
-            gemfile: test/gemfiles/rails_7_0.gemfile
+            gemfile: test/gemfiles/rails_7_0_sassc.gemfile
+          - ruby_version: '2.6'
+            gemfile: test/gemfiles/rails_7_0_dartsass.gemfile
           - ruby_version: '3.0'
             gemfile: test/gemfiles/rails_5_0.gemfile
           - ruby_version: '3.0'
