@@ -4,7 +4,7 @@ class Updater
       log_status 'Updating scss...'
       save_to = @save_to[:scss]
       contents = {}
-      bootstrap_scss_files = get_paths_by_type('scss', /\.scss$/)
+      bootstrap_scss_files = get_paths_by_type('scss', /\.scss$/).reject { |p| p.start_with?('tests/') }
       read_files('scss', bootstrap_scss_files).each do |name, file|
         contents[name] = file
         save_file("#{save_to}/#{name}", file)
