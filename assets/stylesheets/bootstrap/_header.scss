@@ -1,0 +1,24 @@
+.headerVitat {
+    background-color: $neutral-color-high-pure;
+    height: 75px;
+    box-shadow: $shadow-level-1;
+    padding: $spacing-xxxs 0;
+    margin-bottom: $spacing-sm;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            width: 100px;
+    
+            img {
+                max-width: 100%;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    
+}

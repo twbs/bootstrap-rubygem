@@ -1,0 +1,152 @@
+@import "_variables.scss";
+@import "../_typography";
+@import "../../../bootstrap/modal";
+
+
+.cardapp-bg {
+  background-color: $well-being-color-secondary;
+}
+
+.cardapp__link {
+  @extend .btn__primary;
+  display: flex;
+  justify-content: center;
+  padding: $font-size-xxxs 0;
+}
+
+.cardapp__btn {
+  display: contents;
+  border: none;
+}
+
+.cardapp {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: $sizing-xxxs;
+
+  @media (min-width: 1200px) {
+    text-align: start;
+    padding: $sizing-xxs;
+    align-items: flex-start;
+
+    &__wrapper {
+      padding-left: $sizing-xxs;
+    }
+  }
+
+  &__img {
+    width: $spacing-xl;
+    padding-bottom: $sizing-xxxs;
+    @media (min-width: 1200px) {
+      width: $spacing-xxl;
+      height: $spacing-xxl;
+      padding-bottom: 0%;
+    }
+  }
+
+  &__title {
+    margin-bottom: $sizing-nano;
+    color: $neutral-color-low-pure;
+  }
+
+  &__text {
+    padding-bottom: $sizing-xxxs;
+    @media (min-width: 1200px) {
+      padding-top: $spacing-nano;
+      padding-bottom: $spacing-xxs;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 1200px) {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 0;
+    }
+  }
+
+  &__imgbox {
+    padding: 0;
+  }
+
+  a,
+  p {
+    color: $neutral-color-low-pure;
+    text-decoration: none;
+  }
+}
+
+// Modal
+
+.modal {
+  display: none;
+}
+
+.cardapp__modal {
+  border-radius: $border-radius-md;
+  color: $neutral-color-low-pure;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-header {
+  border: none;
+  padding: 12px 12px 12px auto;
+}
+
+.btn-close-modal {
+  width: $sizing-sm;
+  height: $sizing-sm;
+  border-radius: $border-radius-circular;
+  background-color: $neutral-color-high-light;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  &::after {
+    background-repeat: no-repeat;
+    content: "";
+    background-image: url("/img/close.png");
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+  }
+}
+
+.modal-footer-text {
+  margin: $spacing-quarck 0 $spacing-xl 0;
+}
+
+.modal-heading {
+  margin-bottom: $spacing-quarck;
+}
+
+.desktop {
+  display: none;
+  @media (min-width: 1200px) {
+    display: block;
+  }
+}
+
+.mobile {
+  display: block;
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}
