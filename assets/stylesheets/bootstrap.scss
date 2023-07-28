@@ -68,10 +68,10 @@
 //FONT LIVVIC
 @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap');
 
-//GUIDE VITAT
-@import "/_variables";
-@import "/_colors";
+@import "scss/_variables";
+@import "scss/_colors";
 @import "scss/components/_typography";
+
 
 //HEADER
 @import "scss/components/_header";
