@@ -64,16 +64,13 @@
 // @import "bootstrap/scss/containers";
 // @import "bootstrap/scss/bootstrap-grid";
 
-//BOOTSTRAP
-// @import "public/assets/bootstrap/bootstrap";
-@import "node_modules/bootstrap/scss/bootstrap";
 
 //FONT LIVVIC
 @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap');
 
 //GUIDE VITAT
-@import "scss/_variables";
-@import "scss/_colors";
+@import "/_variables";
+@import "/_colors";
 @import "scss/components/_typography";
 
 //HEADER
