@@ -1,0 +1,9 @@
+@import "_variables.scss";
+@import "../_typography";
+
+.card__horizontal__small {
+  @extend .card;
+  .card__wrapper {
+    padding-bottom: $spacing-sm;
+  }
+}

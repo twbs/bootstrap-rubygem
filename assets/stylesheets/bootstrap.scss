@@ -3,7 +3,6 @@
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
  */
 
 // scss-docs-start import-stack
@@ -53,4 +52,77 @@
 @import "utilities/api";
 // scss-docs-end import-stack
 
-@import "**/*"
+//BOOTSTRAP PARTES OBRIGATÓRIAS
+
+// @import "bootstrap/scss/_functions";
+// @import "bootstrap/scss/_variables";
+// @import "bootstrap/scss/_mixins";
+
+//BOOTSTRAP PARTES OPCIONAIS
+
+// @import "bootstrap/scss/grid";
+// @import "bootstrap/scss/containers";
+// @import "bootstrap/scss/bootstrap-grid";
+
+//BOOTSTRAP
+// @import "public/assets/bootstrap/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+//FONT LIVVIC
+@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap');
+
+//GUIDE VITAT
+@import "scss/_variables";
+@import "scss/_colors";
+@import "scss/components/_typography";
+
+//HEADER
+@import "scss/components/_header";
+
+//NAVBAR
+@import "scss/components/_navbar";
+
+//BUTTONS
+@import "scss/components/_buttons";
+
+//PILLS
+@import "scss/components/_pills";
+
+//CARDS
+@import "scss/components/_cards";
+
+//TABS
+@import "scss/components/_tabs";
+
+//STEPS
+@import "scss/components/_steps";
+
+//FORMS
+@import "scss/components/_forms";
+
+//TIMELINE
+@import "scss/components/_timeline";
+
+//MODAL
+@import "scss/components/_modal";
+
+//SHADOWS
+@import "scss/components/_shadows";
+
+//TABLE
+@import "scss/components/_table";
+
+
+
+
+//SCSS DO PROJETO
+* {
+  font-family: "Livvic", sans-serif;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $neutral-color-high-light;
+}
+

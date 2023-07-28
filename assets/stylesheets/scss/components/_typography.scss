@@ -1,0 +1,182 @@
+@import "../variables";
+
+//DESIGN SYSTEM VITAT -- TYPOGRAPHY
+
+body {
+  font-family: $font-family-base;
+  margin-bottom: $spacing-xxxs;
+  color: $neutral-color-low-medium;
+  font-weight: $font-weight-regular;
+  font-size: $font-size-xs;
+  line-height: $line-height-lg;
+  @media (max-width: 1200px) {
+    font-size: $font-size-xxs;
+  }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: $neutral-color-low-medium;
+}
+
+.heading {
+  font-family: $font-family-highlight;
+  margin-bottom: $spacing-xxxs;
+  color: $neutral-color-low-pure;
+  &-1 {
+    font-weight: $font-weight-medium;
+    font-size: $font-size-xxxl;
+    line-height: $line-height-xs;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-xl;
+    }
+  }
+  &-2 {
+    font-weight: $font-weight-regular;
+    font-size: $font-size-xl;
+    line-height: $line-height-sm;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-lg;
+    }
+  }
+  &-3 {
+    font-weight: $font-weight-medium;
+    font-size: $font-size-lg;
+    line-height: $line-height-sm;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-md;
+    }
+  }
+  &-4 {
+    font-weight: $font-weight-regular;
+    font-size: $font-size-lg;
+    line-height: $line-height-sm;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-md;
+    }
+  }
+  &-5 {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-md;
+    line-height: $line-height-sm;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-sm;
+    }
+  }
+  &-6 {
+    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-xs;
+    }
+  }
+  &-7 {
+    font-weight: $font-weight-medium;
+    font-size: $font-size-xs;
+    line-height: $line-height-sm;
+
+    // MOBILE
+    @media (max-width: 1200px) {
+      font-size: $font-size-xxs;
+    }
+  }
+}
+
+.body {
+  font-family: $font-family-base;
+  margin-bottom: $spacing-xxxs;
+  color: $neutral-color-low-medium;
+  &-1 {
+    font-weight: $font-weight-regular;
+    font-size: $font-size-xs;
+    line-height: $line-height-lg;
+    @media (max-width: 1200px) {
+      font-size: $font-size-xxs;
+    }
+  }
+  &-2 {
+    font-weight: $font-weight-regular;
+    font-size: $font-size-xxs;
+    line-height: $line-height-lg;
+    @media (max-width: 1200px) {
+      font-size: $font-size-xxxs;
+    }
+  }
+}
+.overline {
+  font-family: $font-family-base;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-xxxs;
+  line-height: $line-height-lg;
+  margin-bottom: $spacing-quarck;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: $neutral-color-low-light;
+}
+.pillText {
+  font-family: $font-family-base;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-xxxs;
+  line-height: $line-height-sm;
+  letter-spacing: 0.03em;
+  color: $neutral-color-low-medium;
+  @media (min-width: 1200px) {
+    font-size: $font-size-xxxs;
+  }
+}
+// .link {
+//   font-family: $font-family-base;
+//   font-weight: $font-weight-bold;
+//   font-size: $font-size-xs;
+//   line-height: $line-height-lg;
+//   letter-spacing: 0.03em;
+//   text-decoration: underline;
+//   cursor: pointer;
+  
+//   @media (max-width: 1200px) {
+//     font-size: $font-size-xxs;
+//   }
+
+//   &.link-primary {
+//     color: $brand-color-primary-pure;
+//   }
+
+//   &.link-secondary {
+//     color: $brand-color-secondary-pure;
+//   }
+
+//   &.link-tertiary {
+//     color: $neutral-color-low-pure;
+//   }
+// }
+
+
+.bold {
+  font-weight: $font-weight-bold;
+}
+.bold-medium {
+  font-weight: $font-weight-medium;
+}
+.italic {
+  font-style: italic;
+}
+
+a {
+  color: $brand-color-secondary-pure;
+}
+
+.page-link {
+  color: $brand-color-secondary-pure;
+}
