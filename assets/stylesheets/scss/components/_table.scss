@@ -215,7 +215,7 @@ table.dataTable>tbody>tr{
 }
 table.dataTable>tbody>tr.selected>*{
     box-shadow:inset 0 0 0 9999px rgb(13, 110, 253);
-    box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));
+    //box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));
     color:rgb(255, 255, 255);
     color:rgb(var(--dt-row-selected-text))
 }
