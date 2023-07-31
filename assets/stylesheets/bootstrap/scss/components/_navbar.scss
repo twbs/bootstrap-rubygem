@@ -1,0 +1,29 @@
+.navbar-aside {
+    min-width: 250px;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        .navbar-aside_item {
+
+            a {
+                padding: $spacing_inset-nano $spacing_inset-sm;
+                text-decoration: none;
+                display: block;
+                color: $neutral-color-low-pure;
+
+                &:hover, &.active {
+                    color: $neutral-color-low-pure;
+                    background-color: $brand-color-primary-pure;
+                    font-weight: $font-weight-medium;
+                    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+                }
+            }
+        }
+    }
+
+   
+
+}

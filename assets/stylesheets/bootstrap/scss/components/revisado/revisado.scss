@@ -1,0 +1,52 @@
+@import "_variables.scss";
+@import "../_typography";
+@import "../animations";
+
+.revisado {
+  background-color: $neutral-color-high-pure;
+  border-radius: $border-radius-md;
+  border: $border-width-hairline solid $neutral-color-high-medium;
+  width: 100%;
+  .body {
+    color: $neutral-color-low-pure;
+  }
+  .overline {
+    color: $neutral-color-low-pure;
+  }
+  .pillText {
+    color: $neutral-color-low-pure;
+  }
+  h3 {
+    margin: $spacing-nano 0 0 0;
+    @media (min-width: 1200px) {
+      margin: $spacing-quarck 0 0 0;
+    }
+  }
+  p {
+    margin: 0;
+  }
+  &__ancora {
+    text-decoration: none;
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: $spacing-xxxs;
+    color: $neutral-color-low-pure;
+  }
+  &__img {
+    border-radius: 50%;
+    width: $sizing-md;
+    height: $sizing-md;
+    @media (min-width: 1200px) {
+      width: $sizing-xl;
+      height: $sizing-xl;
+    }
+  }
+  &__text {
+    padding-left: $spacing-xxxs;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
