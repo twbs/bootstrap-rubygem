@@ -95,3 +95,14 @@
 
 //TABLE
 @import "scss/components/_table";
+
+//SCSS DO PROJETO
+* {
+  font-family: "Livvic", sans-serif;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $neutral-color-high-light;
+}
