@@ -94,7 +94,7 @@ div.dataTables_processing>div:last-child>div{
     height:13px;
     border-radius:50%;
     background:rgb(13, 110, 253);
-    background:rgb(var(--dt-row-selected));
+    //background:rgb(var(--dt-row-selected));
     animation-timing-function:cubic-bezier(0, 1, 1, 0)
 }
 div.dataTables_processing>div:last-child>div:nth-child(1){
