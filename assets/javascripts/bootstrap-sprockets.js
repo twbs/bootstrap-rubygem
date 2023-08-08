@@ -5,10 +5,10 @@
 //= require ./bootstrap/dom/manipulator
 //= require ./bootstrap/util/config
 //= require ./bootstrap/base-component
+//= require ./bootstrap/dom/selector-engine
 //= require ./bootstrap/util/component-functions
 //= require ./bootstrap/alert
 //= require ./bootstrap/button
-//= require ./bootstrap/dom/selector-engine
 //= require ./bootstrap/util/swipe
 //= require ./bootstrap/carousel
 //= require ./bootstrap/collapse
