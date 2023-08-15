@@ -18,53 +18,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap');
 
 //GUIDE VITAT
-@import "public/assets/scss/_variables";
-@import "public/assets/scss/_colors";
-@import "public/assets/scss/components/_typography";
+@import "./_variables";
+@import "./_colors";
+@import "./components/_typography";
 
 //HEADER
-@import "public/assets/scss/components/_header";
+@import "./components/_header";
 
 //NAVBAR
-@import "public/assets/scss/components/_navbar";
+@import "./components/_navbar";
 
 //BUTTONS
-@import "public/assets/scss/components/_buttons";
+@import "./components/_buttons";
 
 //PILLS
-@import "public/assets/scss/components/_pills";
+@import "./components/_pills";
 
 //CARDS
-@import "public/assets/scss/components/_cards";
+@import "./components/_cards";
 
 //TABS
-@import "public/assets/scss/components/_tabs";
+@import "./components/_tabs";
 
 //STEPS
-@import "public/assets/scss/components/_steps";
+@import "./components/_steps";
 
 //FORMS
-@import "public/assets/scss/components/_forms";
+@import "./components/_forms";
 
 //DROPDOWN
-@import "public/assets/scss/components/_dropdown";
+@import "./components/_dropdown";
 
 //TIMELINE
-@import "public/assets/scss/components/_timeline";
+@import "./components/_timeline";
 
 //MODAL
-@import "public/assets/scss/components/_modal";
+@import "./components/_modal";
 
 //SHADOWS
-@import "public/assets/scss/components/_shadows";
+@import "./components/_shadows";
 
 //TABLE
-@import "public/assets/scss/components/_table";
+@import "./components/_table";
 
 //VITSCORE
-@import "public/assets/scss/components/_vitscore";
-
-
+@import "./components/_vitscore";
 
 
 //SCSS DO PROJETO
