@@ -1,6 +1,6 @@
-@import "../../_variables";
+@import "../variables";
 @import "_typography";
-@import "../_colors";
+@import "./_colors";
 
 
 
@@ -94,7 +94,7 @@ div.dataTables_processing>div:last-child>div{
     height:13px;
     border-radius:50%;
     background:rgb(13, 110, 253);
-    //background:rgb(var(--dt-row-selected));
+    background:rgb(var(--dt-row-selected));
     animation-timing-function:cubic-bezier(0, 1, 1, 0)
 }
 div.dataTables_processing>div:last-child>div:nth-child(1){
@@ -215,13 +215,13 @@ table.dataTable>tbody>tr{
 }
 table.dataTable>tbody>tr.selected>*{
     box-shadow:inset 0 0 0 9999px rgb(13, 110, 253);
-    //box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));
+    box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));
     color:rgb(255, 255, 255);
-    //color:rgb(var(--dt-row-selected-text))
+    color:rgb(var(--dt-row-selected-text))
 }
 table.dataTable>tbody>tr.selected a{
     color:rgb(9, 10, 11);
-    //color:rgb(var(--dt-row-selected-link))
+    color:rgb(var(--dt-row-selected-link))
 }
 table.dataTable.table-striped>tbody>tr.odd>*{
     box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-stripe), 0.05)
