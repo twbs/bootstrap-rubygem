@@ -94,7 +94,7 @@ div.dataTables_processing>div:last-child>div{
     height:13px;
     border-radius:50%;
     background:rgb(13, 110, 253);
-    background:rgb(var(--dt-row-selected));
+    // background:rgb(var(--dt-row-selected));
     animation-timing-function:cubic-bezier(0, 1, 1, 0)
 }
 div.dataTables_processing>div:last-child>div:nth-child(1){
@@ -215,7 +215,7 @@ table.dataTable>tbody>tr{
 }
 table.dataTable>tbody>tr.selected>*{
     box-shadow:inset 0 0 0 9999px rgb(13, 110, 253);
-    box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));
+    // box-shadow:inset 0 0 0 9999px rgb(var(--dt-row-selected));
     color:rgb(255, 255, 255);
     color:rgb(var(--dt-row-selected-text))
 }
@@ -228,14 +228,14 @@ table.dataTable.table-striped>tbody>tr.odd>*{
 }
 table.dataTable.table-striped>tbody>tr.odd.selected>*{
     box-shadow:inset 0 0 0 9999px rgba(13, 110, 253, 0.95);
-    box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.95)
+    // box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.95)
 }
 table.dataTable.table-hover>tbody>tr:hover>*{
     box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-hover), 0.075)
 }
 table.dataTable.table-hover>tbody>tr.selected:hover>*{
     box-shadow:inset 0 0 0 9999px rgba(13, 110, 253, 0.975);
-    box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.975)
+    // box-shadow:inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.975)
 }
 div.dataTables_wrapper div.dataTables_length select{
     width:auto;
