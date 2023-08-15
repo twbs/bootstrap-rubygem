@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-br">
+
+    <%- include('../partials/head'); %>
+    
+    <body class="navbar-expand-lg">
+        <%- include('../partials/header'); %>
+
+        <div class="main d-flex">
+            <%- include('../partials/navbar-aside.ejs'); %>
+
+            <div class="container px-5">
+              <h2 class="heading-2 brand-color-secondary-pure mt-5"><i class="bi bi-caret-right-fill"></i> VitScore</h2>
+
+              <div class="row my-5">
+                <div class="col-lg-12 my-4">
+                  <div class="cardes mb-5">
+
+                    <div class="vitScore-container">
+                      <div class="vitScore-pilar habitos">
+                        <div class="vitScore-icon">
+                          <img src="/assets/img/pilares/habitos.png"/>
+                        </div>
+                        <div class="vitScore-progress">
+                          <p class="heading-3">60</p>
+                          <span style="height: 60%;"></span>
+                        </div>
+                        <p class="pillText">Hábitos</p>
+                      </div>
+
+                      <div class="vitScore-pilar nutricao">
+                        <div class="vitScore-icon">
+                          <img src="/assets/img/pilares/nutricao.png"/>
+                        </div>
+                        <div class="vitScore-progress">
+                          <p class="heading-3">24</p>
+                          <span style="height: 24%;"></span>
+                        </div>
+                        <p class="pillText">Nutrição</p>
+                      </div>
+
+                      <div class="vitScore-pilar movimento">
+                        <div class="vitScore-icon">
+                          <img src="/assets/img/pilares/movimento.png"/>
+                        </div>
+                        <div class="vitScore-progress">
+                          <p class="heading-3">85</p>
+                          <span style="height: 85%;"></span>
+                        </div>
+                        <p class="pillText">Movimento</p>
+                      </div>
+
+                      <div class="vitScore-pilar sono">
+                        <div class="vitScore-icon">
+                          <img src="/assets/img/pilares/sono.png"/>
+                        </div>
+                        <div class="vitScore-progress">
+                          <p class="heading-3">5</p>
+                          <span style="height: 5%;"></span>
+                        </div>
+                        <p class="pillText">Sono</p>
+                      </div>
+
+                      <div class="vitScore-pilar equilibrio">
+                        <div class="vitScore-icon">
+                          <img src="/assets/img/pilares/equilibrio.png"/>
+                        </div>
+                        <div class="vitScore-progress">
+                          <p class="heading-3">100</p>
+                          <span style="height: 100%;"></span>
+                        </div>
+                        <p class="pillText">Equilibrio</p>
+                      </div>
+                    </div>
+
+                    <pre class="line-numbers mt-4">
+                        <code class="language-markup">
+                        </code>
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <%- include('../partials/footer'); %>
+    </body>
+</html>
