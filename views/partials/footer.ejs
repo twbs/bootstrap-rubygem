@@ -1,0 +1,34 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/assets/js/bootstrap.js"></script>
+<script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script>
+    let cards = document.querySelectorAll(".cardes");
+    cards.forEach((card) => {
+        contentHTML = card.querySelector(".language-markup");
+        let content = card.children[0].outerHTML;
+        let newContent = content.replaceAll(/</g, "&lt;");
+        let finalContent = newContent.replaceAll(/>/g, "&gt;");
+        contentHTML.innerHTML = finalContent;
+    });
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+        "remove-trailing": true,
+        "remove-indent": true,
+        "left-trim": true,
+        "right-trim": true,
+    });
+
+    $(document).ready(function() {
+    $('#table').DataTable( {
+        language: {
+            'url': '//cdn.datatables.net/plug-ins/1.13.5/i18n/pt-PT.json',
+            'paginate': {
+                'previous': '<span class="prev-icon"><</span>',
+                'next': '<span class="next-icon">></span>'
+                }   
+        }
+    } );
+    $('div.dataTables_length select').addClass( "form-control" );
+} );
+</script>

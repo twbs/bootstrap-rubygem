@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-br">
+
+    <%- include('../partials/head'); %>
+    
+    <body class="navbar-expand-lg">
+        <%- include('../partials/header'); %>
+
+        <div class="main d-flex">
+            <%- include('../partials/navbar-aside.ejs'); %>
+
+            <div class="container px-5">
+              <h2 class="heading-2 brand-color-secondary-pure mt-5"><i class="bi bi-caret-right-fill"></i> Tabs</h2>
+
+                <div class="row">
+                  <div class="col-lg-12 my-4">
+
+                    <div class="cardes mb-5">
+                      
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="Tab 1" aria-selected="true">Tab 1</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="Tab 2" aria-selected="false">Tab 2</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="Tab 3" aria-selected="false">Tab 3</a>
+                        </li>
+                      </ul>
+
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
+                          <p>Lorem ipsum dolor sit amet. In dolores dolor sit natus quaerat non laudantium consequatur eos quos provident. Sed deserunt porro ut modi laudantium in nemo dolor. Non voluptatum magnam sit vitae temporibus est officia tempora a quia cupiditate aut obcaecati ipsam?</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="profile-tab">
+                          <p>Ex omnis magnam vel aperiam sunt qui molestias necessitatibus qui neque voluptatem et porro minima. Id molestiae consequatur est libero dignissimos est asperiores laborum ut ipsam nesciunt eum laboriosam alias ea fugiat eaque. Id amet dicta sit consequuntur officiis sit deserunt dolores et omnis optio est laudantium voluptatem.</p>
+                        </div>
+                        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="contact-tab">
+                          <p>Ut placeat dolores et dolores aliquid sit recusandae sint! Qui velit dolorem ea saepe odit qui reprehenderit rerum aut corporis tempore eum repudiandae omnis ut earum nostrum et incidunt doloremque. Est dolorem neque et sapiente molestiae est sint magnam est repudiandae blanditiis aut consectetur dolor.</p>
+                        </div>
+                      </div>
+
+                        <pre class="line-numbers mt-4">
+                            <code class="language-markup">
+    
+                            </code>
+                        </pre>
+                    </div>
+                      
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%- include('../partials/footer'); %>
+    </body>
+</html>
