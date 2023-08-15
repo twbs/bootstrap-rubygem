@@ -1,0 +1,113 @@
+//GLOBAL TOKENS
+
+//GLOBAL TOKENS -- LINE HEIGHT
+
+$line-height-default: 100%;
+$line-height-xs: 115%;
+$line-height-sm: 120%;
+$line-height-md: 133%;
+$line-height-lg: 150%;
+$line-height-xl: 170%;
+$line-height-xxl: 200%;
+
+//GLOBAL TOKENS -- FONT SIZE
+
+$font-size-nano: 10px;
+$font-size-xxxs: 12px;
+$font-size-xxs: 14px;
+$font-size-xs: 16px;
+$font-size-sm: 18px;
+$font-size-md: 20px;
+$font-size-lg: 24px;
+$font-size-xl: 32px;
+$font-size-xxl: 40px;
+$font-size-xxxl: 48px;
+$font-size-display: 64px;
+$font-size-giant: 80px;
+
+//GLOBAL TOKENS -- BORDER RADIUS
+
+$border-radius-none: 0px;
+$border-radius-xs: 4px;
+$border-radius-sm: 8px;
+$border-radius-md: 16px;
+$border-radius-lg: 24px;
+$border-radius-pill: 500px;
+$border-radius-circular: 50%;
+
+//GLOBAL TOKENS -- BORDER WIDTH
+
+$border-width-hairline: 1px;
+$border-width-thin: 2px;
+$border-width-thick: 4px;
+$border-width-heavy: 8px;
+
+//GLOBAL TOKENS -- OPACITY LEVELS
+
+$opacity-level-semiopaque: 0.8;
+$opacity-level-intense: 0.64;
+$opacity-level-medium: 0.32;
+$opacity-level-light: 0.16;
+$opacity-level-semitransparent: 0.08;
+
+//GLOBAL TOKENS -- OPACITY SHADOW
+
+$shadow-level-1: 0px 4px 8px rgba(0, 0, 0, 0.08);
+$shadow-level-2: 0px 8px 24px rgba(0, 0, 0, 0.16);
+$shadow-level-3: 0px 16px 32px rgba(0, 0, 0, 0.16);
+$shadow-level-4: 0px 16px 48px rgba(0, 0, 0, 0.24);
+
+//GLOBAL TOKENS -- SIZING
+
+$sizing-quarck: 4px;
+$sizing-nano: 8px;
+$sizing-xxxs: 16px;
+$sizing-xxs: 24px;
+$sizing-xs: 32px;
+$sizing-sm: 40px;
+$sizing-md: 48px;
+$sizing-lg: 56px;
+$sizing-xl: 64px;
+$sizing-xxl: 80px;
+$sizing-xxxl: 120px;
+$sizing-huge: 160px;
+$sizing-giant: 200px;
+
+//GLOBAL TOKENS -- SPACING
+
+$spacing-quarck: 4px;
+$spacing-nano: 8px;
+$spacing-xxxs: 16px;
+$spacing-xxs: 24px;
+$spacing-xs: 32px;
+$spacing-sm: 40px;
+$spacing-md: 48px;
+$spacing-lg: 56px;
+$spacing-xl: 64px;
+$spacing-xxl: 80px;
+$spacing-xxxl: 120px;
+$spacing-huge: 160px;
+$spacing-giant: 200px;
+
+//GLOBAL TOKENS -- SPACING INSET
+
+$spacing_inset-quarck: 4px;
+$spacing_inset-nano: 8px;
+$spacing_inset-xs: 16px;
+$spacing_inset-sm: 24px;
+$spacing_inset-md: 32px;
+$spacing_inset-lg: 40px;
+$spacing_inset-xl: 64px;
+
+//DESIGN SYSTEM VITAT
+
+//DESIGN SYSTEM VITAT -- FONT FAMILY
+
+$font-family-highlight: "Livvic", sans-serif;
+$font-family-base: "Livvic", sans-serif;
+
+//DESIGN SYSTEM VITAT -- FONT WEIGHT
+
+$font-weight-bold: 700;
+$font-weight-medium: 600;
+$font-weight-regular: 400;

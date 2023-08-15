@@ -1,0 +1,81 @@
+@import "_variables.scss";
+@import "../_typography";
+@import "../animations";
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  @media (min-width: 1200px) {
+    width: 388px;
+    height: $spacing-xs;
+  }
+
+  a:focus {
+    color: $brand-color-primary-pure;
+  }
+
+  &__previous {
+    background-image: url(/img/arrow.png);
+    background-repeat: no-repeat;
+  }
+
+  &__previousDisable {
+    background-image: url(/img/arrow-disable.png);
+  }
+
+  &__previousHover:hover {
+    background-image: url(/img/arrow-active.png);
+  }
+
+  &__next {
+    background-image: url(/img/arrow.png);
+    background-repeat: no-repeat;
+    transform: rotate(180deg);
+  }
+
+  &__nextDisable {
+    background-image: url(/img/arrow-disable.png);
+    transform: rotate(180deg);
+  }
+
+  &__nextHover:hover {
+    background-image: url(/img/arrow-active.png);
+    transform: rotate(180deg);
+  }
+
+  &__previous,
+  &__next {
+    width: 10.5px;
+    height: 19.5px;
+    @media (min-width: 1200px) {
+      width: 14px;
+      height: 20px;
+    }
+  }
+
+  &__pages {
+    text-decoration: none;
+    font-size: $font-size-sm;
+    color: $neutral-color-high-dark;
+    cursor: pointer;
+    @media (min-width: 1200px) {
+      font-size: $font-size-md;
+    }
+  }
+
+  &__visibleDesk {
+    display: none;
+    @media (min-width: 1200px) {
+      display: block;
+    }
+  }
+
+  &__active,
+  &__pages:hover {
+    color: $brand-color-primary-pure;
+  }
+  &__disable {
+    color: $neutral-color-high-medium;
+  }
+}
