@@ -2,6 +2,6 @@ source 'https://rubygems.org'
 
 gem 'actionpack', '~> 6.0.3'
 gem 'activesupport', '~> 6.0.3'
-gem 'autoprefixer-rails', '>= 9.7.6'
+gem 'autoprefixer-rails', '~> 10.4', '>= 10.4.13.0'
 
 gemspec path: '../../'

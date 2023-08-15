@@ -1,0 +1,90 @@
+//BOOTSTRAP PARTES OBRIGATÓRIAS
+
+// @import "bootstrap/scss/_functions";
+// @import "bootstrap/scss/_variables";
+// @import "bootstrap/scss/_mixins";
+
+//BOOTSTRAP PARTES OPCIONAIS
+
+// @import "bootstrap/scss/grid";
+// @import "bootstrap/scss/containers";
+// @import "bootstrap/scss/bootstrap-grid";
+
+//BOOTSTRAP
+// @import "public/assets/bootstrap/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+//FONT LIVVIC
+@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@400;600;700&display=swap');
+
+//GUIDE VITAT
+@import "public/assets/scss/_variables";
+@import "public/assets/scss/_colors";
+@import "public/assets/scss/components/_typography";
+
+//HEADER
+@import "public/assets/scss/components/_header";
+
+//NAVBAR
+@import "public/assets/scss/components/_navbar";
+
+//BUTTONS
+@import "public/assets/scss/components/_buttons";
+
+//PILLS
+@import "public/assets/scss/components/_pills";
+
+//CARDS
+@import "public/assets/scss/components/_cards";
+
+//TABS
+@import "public/assets/scss/components/_tabs";
+
+//STEPS
+@import "public/assets/scss/components/_steps";
+
+//FORMS
+@import "public/assets/scss/components/_forms";
+
+//DROPDOWN
+@import "public/assets/scss/components/_dropdown";
+
+//TIMELINE
+@import "public/assets/scss/components/_timeline";
+
+//MODAL
+@import "public/assets/scss/components/_modal";
+
+//SHADOWS
+@import "public/assets/scss/components/_shadows";
+
+//TABLE
+@import "public/assets/scss/components/_table";
+
+//VITSCORE
+@import "public/assets/scss/components/_vitscore";
+
+
+
+
+//SCSS DO PROJETO
+* {
+  font-family: "Livvic", sans-serif;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $neutral-color-high-light;
+}
+
+body,html {
+  height: 100%;
+}
+
+.main {
+  padding-top: 90px;
+  >.container {
+    overflow: hidden;
+  }
+}

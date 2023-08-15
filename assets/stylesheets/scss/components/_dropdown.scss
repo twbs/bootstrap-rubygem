@@ -1,0 +1,18 @@
+.dropdown-menu {
+    border: $border-radius-none;
+    box-shadow: $shadow-level-3;
+
+    .dropdown-item {
+        color: $neutral-color-low-medium;
+        padding: $spacing-nano $spacing-xxs;
+
+        i {
+            margin-right: $spacing-quarck;
+        }
+    }
+
+    hr {
+        border-top: $border-width-hairline solid $neutral-color-high-dark;
+        margin: $spacing-nano 0;
+    }
+}

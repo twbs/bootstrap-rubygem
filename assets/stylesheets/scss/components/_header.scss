@@ -1,0 +1,160 @@
+.header-vitat {
+    background-color: $neutral-color-high-pure;
+    height: 90px;
+    box-shadow: $shadow-level-1;
+    padding: $spacing-xxxs 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $neutral-color-high-medium;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: $spacing-nano;
+
+            .img {
+                width: 100px;
+    
+                img {
+                    max-width: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+
+        .header-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 24px;
+
+            .status-upload {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+                align-items: center;
+
+                i {
+                    font-size: $font-size-md;
+                }
+                .status-upload-bar {
+
+                    .progress {
+                        height: $sizing-quarck;
+                    }
+                }
+
+                @media (max-width: 767px) {
+                    display: none;
+                }
+            }
+
+            .user-menu {
+                .dropdown-toggle {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    .user-name {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .user-icon {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: $border-radius-circular;
+                        background-color: $brand-color-primary-medium;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: $neutral-color-high-pure;
+                    }
+                }
+            }
+
+            .notification-menu {
+                .dropdown-toggle {
+                    i {
+                        font-size: $font-size-md;
+                    }
+
+                    .bullet {
+                        width: 8px;
+                        height: 8px;
+                        display: block;
+                        background-color: $feedback-color-danger-pure;
+                        border-radius: $border-radius-pill;
+                        position: absolute;
+                        right: 0;
+                    }
+
+                    &::after {
+                        display: none;
+                    }  
+                }
+                .dropdown-menu {
+                    padding: 0;
+
+                    li {
+                        .dropdown-item {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            padding: $spacing-xxs $spacing-xxxs;
+                            border-bottom: 1px solid $neutral-color-high-light;
+                            color: $neutral-color-low-light;
+        
+                            i {
+                                font-size: $font-size-lg;
+                                margin-right: $spacing-xxxs;
+                            }
+        
+                            .notification-msg {
+                                p {
+                                    margin: 0;
+                                }
+                                small {
+                                    color: $neutral-color-high-dark;
+                                }
+                            }
+
+                            &.active {
+                                background-color: rgba(212, 214, 224, 0.1);
+                                color: $neutral-color-low-medium;
+                            }
+                        }
+
+                        &:last-child {
+                            .dropdown-item {
+                                border-bottom: none;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+        }
+
+    }
+    
+}
+
+.navbar-toggler {
+    display: none;
+    font-size: 24px;
+    color: $neutral-color-low-medium;
+
+    @media (max-width: 992px) {
+        display: block;
+    }
+}
