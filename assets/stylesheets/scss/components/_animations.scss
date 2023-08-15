@@ -1,8 +1,0 @@
-@import "../variables";
-
-
-@keyframes focus {
-  0% {box-shadow: 0px 0px 0px $border-width-thick $highlight-color-pure;}
-  50% {box-shadow: 0px 0px 0px $border-width-thin $highlight-color-pure;}
-  100% {box-shadow: 0px 0px 0px $border-width-thick $highlight-color-pure;}
-}
