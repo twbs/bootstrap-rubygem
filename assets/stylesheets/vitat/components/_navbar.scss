@@ -1,12 +1,5 @@
 .navbar-aside {
-    // min-width: 250px;
-    // background-color: $neutral-color-high-pure;
-    // box-shadow: $shadow-level-1;
-    // position: sticky;
-    // top: 90px;
-    // display: block !important;
-    // height: calc(100vh - 90px);
-    // overflow-y: auto;
+    width: 100%;
     padding-top: $spacing-xxs;
 
     ul {
@@ -40,7 +33,7 @@
 }
 
 .navbar-expand-lg .offcanvas {
-    min-width: 250px;
+    max-width: 250px;
     background-color: $neutral-color-high-pure !important;
     box-shadow: $shadow-level-1;
     position: sticky;
