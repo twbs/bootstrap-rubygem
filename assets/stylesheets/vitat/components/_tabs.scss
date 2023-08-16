@@ -1,0 +1,20 @@
+.nav-tabs {
+    margin-bottom: $spacing-xxxs;
+
+    .nav-item {
+        .nav-link { 
+            color: $neutral-color-high-dark;
+            border: none;
+
+            &.active,
+            &:hover {
+                background-color: transparent;
+                color: $brand-color-secondary-pure;
+                font-weight: $font-weight-medium;
+                border: none;
+                border-bottom: 2px solid $brand-color-secondary-pure;
+            }
+
+        }
+    }
+}

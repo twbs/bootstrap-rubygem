@@ -1,0 +1,100 @@
+.timeline {
+    display: flex;
+    flex-direction: column;
+
+    .timeline-item {
+        display: flex;
+        flex-direction: row;
+        padding-bottom: $sizing-xxs;
+        position: relative;
+
+        .timeline-icon {
+            display: flex;
+            align-items: flex-start;
+            margin-right: $sizing-nano;
+            margin-top: 1px;
+            z-index: 9;
+
+            i {
+                background-color: $brand-color-primary-pure;
+                color: $neutral-color-high-pure;
+                border-radius: $border-radius-pill;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+            }
+        }
+
+        .timeline-text {
+            p {
+                margin: 0;
+                line-height: $line-height-default;
+            }
+
+            small {
+                font-size: $font-size-nano;
+            }
+
+        }
+
+        &:after {
+            content: "";
+            width: 2px;
+            background: $neutral-color-high-medium;
+            height: 100%;
+            display: block;
+            position: absolute;
+            left: 9px;
+            top: 1px;
+        }
+
+        &:last-of-type {
+            &::after {
+                display: none;
+            }
+        }
+
+        &.current {
+            .timeline-icon {
+                i {
+                    background-color: $neutral-color-low-pure;
+                    color: $neutral-color-high-pure;
+                }
+            }
+
+            .timeline-text {
+
+                .timeline-buttons {
+                    display: flex;
+                    gap: $sizing-nano;
+                    margin-top: $sizing-nano;
+                }
+
+                p {
+                    font-weight: $font-weight-medium;
+                }
+    
+            }
+        }
+
+        &.next {
+            .timeline-icon {
+                i {
+                    background-color: $neutral-color-high-medium;
+                    color: $neutral-color-high-dark;
+                }
+            }
+
+            .timeline-text {
+
+                p, small {
+                    color: $neutral-color-high-medium;
+                }
+    
+            }
+        }
+    }
+}

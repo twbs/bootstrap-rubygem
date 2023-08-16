@@ -1,0 +1,112 @@
+.step-vertical {
+    .step-container {
+        .step-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: $spacing-xxxs;
+            position: relative;
+
+            .number {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: $spacing-xxxs;
+                z-index: 9;
+
+                span {
+                    font-size: $font-size-lg;
+                    background-color: $brand-color-primary-pure;
+                    border-radius: $border-radius-pill;
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            .text {
+                h6 {
+                    margin-bottom: 0;
+                    color: $neutral-color-low-pure;
+                }
+                p {
+                    margin-bottom: 0;
+                }
+            }
+
+            &::before {
+                content: "";
+                width: 2px;
+                background: $neutral-color-high-medium;
+                height: 50px;
+                display: block;
+                position: absolute;
+                left: 25px;
+                top: 25px;
+            }
+        }
+        .step-content {
+            padding: 0 0 $spacing-md 66px;
+            position: relative;
+
+            &::before {
+                content: "";
+                width: 2px;
+                background: $neutral-color-high-medium;
+                height: 100%;
+                display: block;
+                position: absolute;
+                left: 25px;
+            }
+
+        }
+
+        &:last-of-type {
+            .step-header {
+                &::before {
+                    display: none;
+                }
+            }
+            .step-content {
+    
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        &.disabled {
+            .step-header {
+    
+                .number {
+
+                    span {
+                        color: $neutral-color-high-dark;
+                        background-color: $neutral-color-high-medium;
+                    }
+                }
+                .text {
+                    h6 {
+                        color: $neutral-color-high-medium;
+                        background-color: $neutral-color-high-medium;
+                        margin-bottom: $spacing-quarck;
+                        width: 70%;
+                    }
+                    p {
+                        color: $neutral-color-high-medium;
+                        background-color: $neutral-color-high-medium;
+
+                        a {
+                            color: $neutral-color-high-medium;
+                        }
+                    }
+                }
+            }
+
+            .step-content {
+                display: none;
+            }
+        }
+    }
+}

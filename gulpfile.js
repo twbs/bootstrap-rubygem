@@ -5,7 +5,7 @@ var autoprefixer = require('gulp-autoprefixer');
 // COMPILA O SASS E ADICONA PREFIXER
 function compilaSass() {
     return gulp
-        .src('assets/stylesheets/scss/*.scss')
+        .src('assets/stylesheets/*.scss')
         .pipe(sass({
             outputStyle: 'compressed'
         }))
@@ -24,7 +24,7 @@ gulp.task('sass', compilaSass);
 
 // WATCH DO GULP
 function watch() {
-    gulp.watch('assets/stylesheets/scss/*.scss', compilaSass);
+    gulp.watch('assets/stylesheets/*.scss', compilaSass);
 }
 
 // TAREFA DO WATCH

@@ -1,0 +1,117 @@
+.vitScore-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  .vitScore-pilar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .vitScore-icon {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      top: 20px;
+      background-color: rgb(0, 118, 214);
+      border-radius: $border-radius-circular;
+      padding: 8px;
+      z-index: 9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .vitScore-progress {
+      position: relative;
+      border-radius: 10px;
+      width: 100%;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 8px;
+
+      p {
+        z-index: 9;
+        margin: 0;
+      }
+
+      span {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+
+    &.habitos {
+      .vitScore-icon {
+        background-color: rgb(0, 118, 214);
+      }
+      .vitScore-progress {
+        background-color: rgba(0, 118, 214, 0.1);
+
+        span {
+          background-color: rgba(0, 118, 214, 0.5);
+        }
+      }
+    }
+
+    &.nutricao {
+      .vitScore-icon {
+        background-color: $brand-color-primary-medium;
+      }
+      .vitScore-progress {
+        background-color: rgba(191, 227, 56, 0.1);
+
+        span {
+          background-color: rgba(191, 227, 56, 0.5);
+        }
+      }
+    }
+
+    &.movimento {
+      .vitScore-icon {
+        background-color: $highlight-color-medium;
+      }
+      .vitScore-progress {
+        background-color: rgba(240, 130, 35, 0.1);
+
+        span {
+          background-color: rgba(240, 130, 35, 0.5);
+        }
+      }
+    }
+
+    &.sono {
+      .vitScore-icon {
+        background-color: $brand-color-secondary-pure;
+      }
+      .vitScore-progress {
+        background-color: rgba(165, 143, 196, 0.1);
+        span {
+          background-color: rgba(165, 143, 196, 0.5);
+        }
+      }
+    }
+
+    &.equilibrio {
+      .vitScore-icon {
+        background-color: $feedback-color-danger-pure;
+      }
+      .vitScore-progress {
+        background-color: rgba(245, 160, 197, 0.1);
+        span {
+          background-color: rgba(245, 160, 197, 0.5);
+        }
+      }
+    }
+  }
+}
