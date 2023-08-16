@@ -1,0 +1,58 @@
+.card {
+    border-radius: $border-radius-md;
+    padding: $spacing-xxxs;
+    margin: $spacing-nano;
+    border: none;
+}
+
+
+.cards-program {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    .program-item {
+        position: relative;
+        max-width: 150px;
+        border-radius: $border-radius-md;
+        overflow: hidden;
+        box-shadow: $shadow-level-2;
+        border: $border-width-thick solid transparent;
+
+        img {
+            width: 100%;
+        }
+
+        .form-group {
+            position: absolute;
+            top:10px;
+            right:10px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            text-decoration: none;
+            opacity: 0;
+            bottom:0;
+            background-color:$brand-color-secondary-light;
+            height:80px;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+
+        }
+
+        &:hover {
+            a {
+                opacity: 1;
+            }
+        }
+
+        &.active {
+            border: $border-width-thick solid $brand-color-primary-pure;
+        }
+    }
+    
+}
