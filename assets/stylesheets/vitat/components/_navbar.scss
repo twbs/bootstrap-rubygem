@@ -38,11 +38,22 @@
     box-shadow: $shadow-level-1;
     position: sticky;
     top: 90px;
-    display: block !important;
+    display: flex !important;
     height: calc(100vh - 90px)!important;
     overflow-y: auto;
 
     @media (max-width: 992px) {
         position: absolute;
     }
+}
+
+.offcanvas-body {
+    flex: 1;
+}
+
+.offcanvas-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xxs;
 }

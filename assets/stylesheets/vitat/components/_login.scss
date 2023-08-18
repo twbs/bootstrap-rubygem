@@ -1,0 +1,21 @@
+.login-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .img {
+    max-height: 70px;
+    max-width: 150px;
+
+    img {
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 710px) {
+      min-width: 70px;
+      max-width: 120px;
+    }
+  }
+}
