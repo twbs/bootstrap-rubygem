@@ -50,6 +50,8 @@
 //VITSCORE
 @import "components/vitscore";
 
+// LOGIN
+@import "components/login";
 
 //SCSS DO PROJETO
 * {
@@ -71,4 +73,10 @@ body,html {
   >.container {
     overflow: hidden;
   }
+}
+
+.full-bg-container {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
 }
