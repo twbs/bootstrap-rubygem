@@ -3,7 +3,6 @@
 
 //GUIDE VITAT
 @import "variables";
-@import "colors";
 
 // TYPOGRAPHY
 @import "components/typography";
@@ -52,6 +51,9 @@
 
 // LOGIN
 @import "components/login";
+
+// COLORS
+@import "components/colors";
 
 //SCSS DO PROJETO
 * {
