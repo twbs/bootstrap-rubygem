@@ -49,9 +49,11 @@ task :debug do
   begin
     require 'dartsass-ruby'
   rescue LoadError
-    require 'sassc'
-  rescue LoadError
-    raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets or sassc-rails to your dependencies.")
+    begin
+      require 'sassc'
+    rescue LoadError
+      raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets or sassc-rails to your dependencies.")
+    end
   end
   require './lib/bootstrap'
   require 'term/ansicolor'
