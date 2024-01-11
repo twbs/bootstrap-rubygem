@@ -1,22 +1,20 @@
 # frozen_string_literal: true
 
 require 'autoprefixer-rails'
-begin
-  require 'dartsass-sprockets'
-rescue LoadError
+
+SASS_ENGINES = ['dartsass-sprockets', 'sassc-rails', 'dartsass-rails', 'cssbundling-rails']
+
+engine_loaded = SASS_ENGINES.any? do |engine|
   begin
-    require 'sassc-rails'
+    require engine
+    true
   rescue LoadError
-    begin
-      require 'dartsass-rails'
-    rescue LoadError
-      begin
-        require 'cssbundling-rails'
-      rescue LoadError
-        raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets, sassc-rails, dartsass-rails or cssbundling-rails to your dependencies.")
-      end
-    end
+    false
   end
+end
+
+unless engine_loaded
+  raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add one of the following to your dependencies: #{SASS_ENGINES.join(', ')}")
 end
 
 module Bootstrap
