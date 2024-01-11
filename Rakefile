@@ -67,7 +67,7 @@ task :debug do
             Sass.compile(filename).css
           end
     css = AutoprefixerRails.process(css)
-    out = File.join('tmp', "#{file[1..]}.css")
+    out = File.join('tmp', "#{file[1..-1]}.css")
     File.write(out, css)
     $stderr.puts Term::ANSIColor.green "Compiled #{out}"
   end
