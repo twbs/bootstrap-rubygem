@@ -47,7 +47,7 @@ end
 desc 'Dumps output to a CSS file for testing'
 task :debug do
   begin
-    require 'dartsass-ruby'
+    require 'sass-embedded'
   rescue LoadError
     begin
       require 'sassc'
@@ -60,12 +60,14 @@ task :debug do
   require 'autoprefixer-rails'
   path = Bootstrap.stylesheets_path
   %w(_bootstrap _bootstrap-reboot _bootstrap-grid).each do |file|
-    # For ease of upgrading, the root namespace ::SassC is still used by dartsass-sprockets.
-    # This is planned to be renamed in a future major version release.
-    engine = SassC::Engine.new(File.read("#{path}/#{file}.scss"), syntax: :scss, load_paths: [path])
-    out = File.join('tmp', "#{file[1..-1]}.css")
-    css = engine.render
+    filename = "#{path}/#{file}.scss"
+    css = if defined?(SassC::Engine)
+            SassC::Engine.new(File.read(filename), filename: filename, syntax: :scss).render
+          else
+            Sass.compile(filename).css
+          end
     css = AutoprefixerRails.process(css)
+    out = File.join('tmp', "#{file[1..-1]}.css")
     File.write(out, css)
     $stderr.puts Term::ANSIColor.green "Compiled #{out}"
   end
