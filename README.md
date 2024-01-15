@@ -26,6 +26,8 @@ gem 'bootstrap', '~> 5.3.2'
 
 This gem requires a Sass engine, so make sure you have **one** of these two gems in your Gemfile:
 - [`dartsass-sprockets`](https://github.com/tablecheck/dartsass-sprockets): Dart Sass engine, recommended but only works for Ruby 2.6+ and Rails 5+
+- [`dartsass-rails`](https://github.com/rails/dartsass-rails): Dart Sass engine, recommended for Rails projects that use Propshaft
+- [`cssbundling-rails`](https://github.com/rails/cssbundling-rails): External Sass engine
 - [`sassc-rails`](https://github.com/sass/sassc-rails): SassC engine, deprecated but compatible with Ruby 2.3+ and Rails 4
 
 Also ensure that `sprockets-rails` is at least v2.3.2.
