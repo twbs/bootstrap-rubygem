@@ -32,6 +32,9 @@ This gem requires a Sass engine, so make sure you have **one** of these two gems
 
 Also ensure that `sprockets-rails` is at least v2.3.2.
 
+For wider browser compatibility, use [Autoprefixer][autoprefixer].
+If you are using Rails, add the `autoprefixer-rails` gem to your app and ensure you have a JavaScript runtime (e.g. NodeJS).
+
 `bundle install` and restart your server to make the files available through the pipeline.
 
 Import Bootstrap styles in `app/assets/stylesheets/application.scss`:
@@ -112,14 +115,6 @@ Otherwise you may need to register the assets manually.
 Refer to your framework's documentation on the subject.
 
 ## Configuration
-
-### Sass: Autoprefixer
-
-Bootstrap requires the use of [Autoprefixer][autoprefixer].
-[Autoprefixer][autoprefixer] adds vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com/).
-
-If you are using bootstrap with Rails, autoprefixer is set up for you automatically.
-Otherwise, please consult the [Autoprefixer documentation][autoprefixer].
 
 ### Sass: Individual components
 
