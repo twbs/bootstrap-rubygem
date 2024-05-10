@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.3.3'
 
   s.add_runtime_dependency 'popper_js', '>= 2.11.8', '< 3'
-  s.add_runtime_dependency 'autoprefixer-rails', '>= 9.1.0'
 
   s.add_development_dependency 'rake'
 

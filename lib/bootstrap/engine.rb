@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'autoprefixer-rails'
 begin
   require 'dartsass-sprockets'
 rescue LoadError
