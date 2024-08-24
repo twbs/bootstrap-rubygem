@@ -17,7 +17,7 @@ Please see the appropriate guide for your environment of choice:
 Add `bootstrap` to your Gemfile:
 
 ```ruby
-gem 'bootstrap', '~> 4.6.2'
+gem 'bootstrap', '~> 4.6.2.1'
 ```
 
 This gem requires a Sass engine, so make sure you have **one** of these four gems in your Gemfile:
