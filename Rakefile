@@ -1,4 +1,5 @@
 require 'bundler/gem_tasks'
+require 'bundler/setup'
 
 lib_path = File.join(File.dirname(__FILE__), 'lib')
 $:.unshift(lib_path) unless $:.include?(lib_path)
@@ -45,16 +46,26 @@ end
 
 desc 'Dumps output to a CSS file for testing'
 task :debug do
-  require 'sassc'
+  begin
+    require 'sass-embedded'
+  rescue LoadError
+    begin
+      require 'sassc'
+    rescue LoadError
+      raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets or sassc-rails to your dependencies.")
+    end
+  end
   require './lib/bootstrap'
   require 'term/ansicolor'
-  require 'autoprefixer-rails'
   path = Bootstrap.stylesheets_path
   %w(_bootstrap _bootstrap-reboot _bootstrap-grid).each do |file|
-    engine = SassC::Engine.new(File.read("#{path}/#{file}.scss"), syntax: :scss, load_paths: [path])
+    filename = "#{path}/#{file}.scss"
+    css = if defined?(SassC::Engine)
+            SassC::Engine.new(File.read(filename), filename: filename, syntax: :scss).render
+          else
+            Sass.compile(filename).css
+          end
     out = File.join('tmp', "#{file[1..-1]}.css")
-    css = engine.render
-    css = AutoprefixerRails.process(css)
     File.write(out, css)
     $stderr.puts Term::ANSIColor.green "Compiled #{out}"
   end

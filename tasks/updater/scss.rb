@@ -12,7 +12,7 @@ class Updater
       log_processed "#{bootstrap_scss_files * ' '}"
 
       log_status 'Updating scss main files'
-      %w(bootstrap bootstrap-grid bootstrap-reboot).each do |name|
+      %w(bootstrap bootstrap-grid bootstrap-reboot bootstrap-utilities).each do |name|
         # Compass treats non-partials as targets to copy into the main project, so make them partials.
         # Also move them up a level to clearly indicate entry points.
         from = "#{save_to}/#{name}.scss"

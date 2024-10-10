@@ -21,10 +21,19 @@ Please see the appropriate guide for your environment of choice:
 Add `bootstrap` to your Gemfile:
 
 ```ruby
-gem 'bootstrap', '~> 5.3.0.alpha3'
+gem 'bootstrap', '~> 5.3.3'
 ```
 
-Ensure that `sprockets-rails` is at least v2.3.2.
+This gem requires a Sass engine, so make sure you have **one** of these gems in your Gemfile:
+- [`dartsass-sprockets`](https://github.com/tablecheck/dartsass-sprockets): Dart Sass engine, recommended but only works for Ruby 2.6+ and Rails 5+
+- [`dartsass-rails`](https://github.com/rails/dartsass-rails): Dart Sass engine, recommended for Rails projects that use Propshaft
+- [`cssbundling-rails`](https://github.com/rails/cssbundling-rails): External Sass engine
+- [`sassc-rails`](https://github.com/sass/sassc-rails): SassC engine, deprecated but compatible with Ruby 2.3+ and Rails 4
+
+Also ensure that `sprockets-rails` is at least v2.3.2.
+
+For wider browser compatibility, use [Autoprefixer][autoprefixer].
+If you are using Rails, add the `autoprefixer-rails` gem to your app and ensure you have a JavaScript runtime (e.g. NodeJS).
 
 `bundle install` and restart your server to make the files available through the pipeline.
 
@@ -114,14 +123,6 @@ Otherwise you may need to register the assets manually.
 Refer to your framework's documentation on the subject.
 
 ## Configuration
-
-### Sass: Autoprefixer
-
-Bootstrap requires the use of [Autoprefixer][autoprefixer].
-[Autoprefixer][autoprefixer] adds vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com/).
-
-If you are using bootstrap with Rails, autoprefixer is set up for you automatically.
-Otherwise, please consult the [Autoprefixer documentation][autoprefixer].
 
 ### Sass: Individual components
 

@@ -10,7 +10,6 @@ require 'rails'
   require "#{framework}/railtie"
 end
 
-require 'autoprefixer-rails'
 require 'uglifier'
 require 'bootstrap'
 
@@ -29,4 +28,3 @@ module Dummy
     end
   end
 end
-
