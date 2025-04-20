@@ -6,6 +6,11 @@ The changelog only includes changes specific to the RubyGem.
 The Bootstrap framework changes can be found in [the Releases section of twbs/bootstrap](https://github.com/twbs/bootstrap/releases).
 Release announcement posts on [the official Bootstrap blog](http://blog.getbootstrap.com) contain summaries of the most noteworthy changes made in each release of Bootstrap.
 
+# 5.3.4
+
+* Autoprefixer is now optional.
+  [#283](https://github.com/twbs/bootstrap-rubygem/pull/283)
+
 # 5.3.3
 
 * Adds support for other Sass engines: dartsass-sprockets, dartsass-rails, and cssbundling-rails.
