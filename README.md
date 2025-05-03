@@ -61,7 +61,7 @@ Bootstrap JavaScript can optionally use jQuery.
 If you're using Rails 5.1+, you can add the `jquery-rails` gem to your Gemfile:
 
 ```ruby
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3.1'
 ```
 
 Bootstrap tooltips and popovers depend on [popper.js] for positioning.
