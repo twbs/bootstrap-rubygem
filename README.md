@@ -85,6 +85,14 @@ Whichever files you pin will need to be added to `config.assets.precompile`:
 Rails.application.config.assets.precompile += %w(bootstrap.min.js popper.js)
 ```
 
+You will also need to import `@popperjs/core` and `bootstrap` in the following order.
+
+```js
+// app/javascript/application.js
+import "@popperjs/core"
+import "bootstrap"
+```
+
 #### Sprockets
 
 Add Bootstrap dependencies and Bootstrap to your `application.js`:
