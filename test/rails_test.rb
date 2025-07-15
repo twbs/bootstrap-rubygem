@@ -12,11 +12,6 @@ class RailsTest < ActionDispatch::IntegrationTest
     screenshot!
   end
 
-  def test_autoprefixer
-    get ActionController::Base.helpers.stylesheet_path('application.css')
-    assert_match(/-webkit-(?:transition|transform)/, response.body)
-  end
-
   def test_precompile
     Dummy::Application.load_tasks
     Rake::Task['assets:precompile'].invoke
