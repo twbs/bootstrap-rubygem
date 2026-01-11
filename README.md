@@ -84,6 +84,12 @@ Whichever files you pin will need to be added to `config.assets.precompile`:
 # config/initializers/assets.rb
 Rails.application.config.assets.precompile += %w(bootstrap.min.js popper.js)
 ```
+and `app/javascript/application.js`:
+
+```javascript
+import "bootstrap"
+import "@popperjs/core"
+```
 
 #### Sprockets
 
