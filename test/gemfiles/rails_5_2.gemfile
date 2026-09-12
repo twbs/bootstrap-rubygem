@@ -5,3 +5,6 @@ gem 'activesupport', '~> 5.2.8'
 gem 'sassc-rails', '~> 2.0'
 
 gemspec path: '../../'
+
+# json ~> 3 raises ArgumentError: unknown keyword: quirks_mode
+gem 'json', '~> 2.7'

@@ -6,6 +6,9 @@ gem 'sassc-rails', '~> 2.0'
 
 gemspec path: '../../'
 
+# json ~> 3 raises ArgumentError: unknown keyword: quirks_mode
+gem 'json', '~> 2.7'
+
 # no longer bundled as default gems in newer ruby
 gem 'base64'
 gem 'benchmark'
@@ -13,3 +16,4 @@ gem 'drb'
 gem 'mutex_m'
 gem 'ruby2_keywords'
 gem 'tsort'
+gem 'webrick'

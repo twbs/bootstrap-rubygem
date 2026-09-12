@@ -6,3 +6,6 @@ gem 'sassc-rails', '~> 2.0'
 gem 'bigdecimal', '1.3.5'
 
 gemspec path: '../../'
+
+# json ~> 3 raises ArgumentError: unknown keyword: quirks_mode
+gem 'json', '~> 2.7'
