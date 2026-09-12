@@ -3,59 +3,72 @@ require 'tsort'
 
 class Updater
   module Js
-    INLINED_SRCS = %w[].freeze
-
     def update_javascript_assets
       log_status 'Updating javascripts...'
       save_to  = @save_to[:js]
+      # Bootstrap 6 ships ES modules only (no UMD bundle, no `window.bootstrap`
+      # global). We keep the individual modules and the bundles for importmap
+      # pinning; Sprockets `//= require` concatenation no longer applies.
       read_files('js/dist', bootstrap_js_files).each do |name, content|
         save_file("#{save_to}/#{name}", remove_source_mapping_url(content))
       end
       log_processed "#{bootstrap_js_files * ' '}"
 
-      log_status 'Updating javascript manifest'
-      manifest = "//= require ./bootstrap-global-this-define\n"
-      bootstrap_js_files.each do |name|
-        name = name.gsub(/\.js$/, '')
-        manifest << "//= require ./bootstrap/#{name}\n"
-      end
-      manifest << "//= require ./bootstrap-global-this-undefine\n"
-      dist_js = read_files('dist/js', %w(bootstrap.js bootstrap.min.js))
-      {
-          'assets/javascripts/bootstrap-global-this-define.js' => <<~JS,
-            // Set a `globalThis` so that bootstrap components are defined on window.bootstrap instead of window.
-            window['bootstrap'] = {
-              "@popperjs/core": window.Popper,
-              _originalGlobalThis: window['globalThis']
-            };
-            window['globalThis'] = window['bootstrap'];
-          JS
-          'assets/javascripts/bootstrap-global-this-undefine.js' => <<~JS,
-            window['globalThis'] = window['bootstrap']._originalGlobalThis;
-            window['bootstrap']._originalGlobalThis = null;
-          JS
-          'assets/javascripts/bootstrap-sprockets.js' => manifest,
-          'assets/javascripts/bootstrap.js'           => dist_js['bootstrap.js'],
-          'assets/javascripts/bootstrap.min.js'       => dist_js['bootstrap.min.js'],
-      }.each do |path, content|
+      log_status 'Updating javascript bundles'
+      # `bootstrap.{js,min.js}` import @floating-ui/dom and vanilla-calendar-pro
+      # as bare specifiers; the `bootstrap.bundle.{js,min.js}` builds inline those
+      # dependencies and are fully self-contained (the recommended importmap pin).
+      dist_files = %w(bootstrap.js bootstrap.min.js bootstrap.bundle.js bootstrap.bundle.min.js)
+      read_files('dist/js', dist_files).each do |name, content|
+        path = "assets/javascripts/#{name}"
         save_file path, remove_source_mapping_url(content)
         log_processed path
       end
+
+      vendor_floating_ui
+    end
+
+    # Bootstrap 6 depends on @floating-ui/dom (replacing Popper). Vendor a
+    # self-contained ESM bundle so apps can pin it via importmaps without a CDN.
+    def vendor_floating_ui
+      version = floating_ui_version
+      log_status "Vendoring @floating-ui/dom@#{version}"
+      stub = get_file("https://esm.sh/@floating-ui/dom@#{version}?bundle")
+      rel  = stub[/from\s+"([^"]+)"/, 1] or
+        raise "Unexpected esm.sh response for @floating-ui/dom@#{version}:\n#{stub}"
+      bundle = get_file("https://esm.sh#{rel}")
+      path = 'assets/javascripts/floating-ui.js'
+      save_file path, bundle
+      log_processed path
+    end
+
+    def floating_ui_version
+      pkg = get_json(file_url 'package.json')
+      spec = (pkg['dependencies'] || {})['@floating-ui/dom'] ||
+             (pkg['devDependencies'] || {})['@floating-ui/dom'] or
+        raise 'Could not find @floating-ui/dom in upstream package.json'
+      spec.sub(/\A\D*/, '')
     end
 
     def bootstrap_js_files
       @bootstrap_js_files ||= begin
-        src_files = get_paths_by_type('js/src', /\.js$/) - INLINED_SRCS
-        puts "src_files: #{src_files.inspect}"
+        src_files = get_paths_by_type('js/src', /\.js$/)
         imports = Deps.new
-        # Get the imports from the ES6 files to order requires correctly.
+        # Get the imports from the ES modules to order requires correctly.
         read_files('js/src', src_files).each do |name, content|
-          file_imports = content.scan(%r{import *(?:[a-zA-Z]*|\{[a-zA-Z ,]*\}) *from '([\w/.-]+)}).flatten(1).map do |f|
-            Pathname.new(name).dirname.join(f).cleanpath.to_s
-          end.uniq
-          imports.add name, *(file_imports - INLINED_SRCS)
+          file_imports = content.scan(%r{import *(?:[a-zA-Z]*|\{[a-zA-Z ,]*\}) *from '([\w/.-]+)}).flatten(1)
+            # Only follow relative imports between Bootstrap's own source files;
+            # skip npm dependencies (e.g. `vanilla-calendar-pro`, `@floating-ui/dom`).
+            .select { |f| f.start_with?('.') }
+            .map { |f| Pathname.new(name).dirname.join(f).cleanpath.to_s }
+            .uniq
+          imports.add name, *file_imports
         end
-        imports.tsort
+        # Order by the src import graph, but only ship components that are
+        # actually present in the compiled dist (src/ may contain modules that
+        # have no standalone dist/ build).
+        dist_files = get_paths_by_type('js/dist', /\.js$/)
+        imports.tsort.select { |f| dist_files.include?(f) }
       end
     end
 

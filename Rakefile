@@ -58,7 +58,8 @@ task :debug do
   require './lib/bootstrap'
   require 'term/ansicolor'
   path = Bootstrap.stylesheets_path
-  %w(_bootstrap _bootstrap-reboot _bootstrap-grid).each do |file|
+  # Bootstrap 6 exposes a single `bootstrap` entry point.
+  %w(_bootstrap).each do |file|
     filename = "#{path}/#{file}.scss"
     css = if defined?(SassC::Engine)
             SassC::Engine.new(File.read(filename), filename: filename, syntax: :scss).render
@@ -75,6 +76,22 @@ desc 'Update bootstrap from upstream'
 task :update, :branch do |t, args|
   require './tasks/updater'
   Updater.new(branch: args[:branch]).update_bootstrap
+end
+
+desc 'Update only bootstrap stylesheets from upstream (leaves JS untouched)'
+task :update_scss, :branch do |t, args|
+  require './tasks/updater'
+  Updater.new(branch: args[:branch], skip_js: true).update_bootstrap
+end
+
+desc 'Sync the gem VERSION to the upstream Bootstrap package.json version'
+task :sync_version, :branch do |t, args|
+  require './tasks/updater'
+  # npm prerelease versions (e.g. 6.0.0-alpha1) map to RubyGems (6.0.0.alpha1).
+  gem_version = Updater.new(branch: args[:branch]).upstream_version.sub('-', '.')
+  path = 'lib/bootstrap/version.rb'
+  File.write(path, File.read(path).sub(/VERSION\s*=\s*'[^']*'/, "VERSION       = '#{gem_version}'"))
+  $stderr.puts "VERSION set to #{gem_version}"
 end
 
 desc 'Start a dummy Rails app server'

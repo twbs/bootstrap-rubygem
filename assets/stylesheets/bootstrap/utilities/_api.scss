@@ -1,47 +1,55 @@
-// Loop over each breakpoint
-@each $breakpoint in map-keys($grid-breakpoints) {
+@use "sass:map";
+@use "../config" as *;
+@use "../mixins/utilities" as *;
+@use "../utilities" as *;
 
-  // Generate media query if needed
-  @include media-breakpoint-up($breakpoint) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+// Register utility-composition custom properties as non-inheriting so utilities
+// (e.g. `.border-inverse`) don't leak their composed value into descendants.
+// Emitted outside the cascade layer since `@property` registration is global.
+@include generate-utility-at-properties($utilities);
 
-    // Loop over each utility property
-    @each $key, $utility in $utilities {
-      // The utility can be disabled with `false`, thus check if the utility is a map first
-      // Only proceed if responsive media queries are enabled or if it's the base media query
-      @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "") {
-        @include generate-utility($utility, $infix);
+@layer utilities {
+  @include generate-utilities-loop($utilities, $breakpoints);
+
+  // The keyframe animation utilities (.animation-shake, .animation-pop) are
+  // decorative, so disable them when the user prefers reduced motion.
+  @if map.has-key($utilities, "animation") and $enable-reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+      .animation-shake,
+      .animation-pop {
+        animation: none;
       }
     }
   }
 }
 
-// RFS rescaling
-@media (min-width: $rfs-mq-value) {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+// Keyframes powering the animation utilities. Declared outside the cascade
+// layer since @keyframes registration is global and unaffected by layers — which
+// is also why they carry the utility prefix, so they cannot collide with a
+// `shake` or `pop` animation of your own.
+// Bundles such as `bootstrap-grid` narrow `$utilities` before importing this
+// file, so skip the keyframes when the animation utility is filtered out.
+@if map.has-key($utilities, "animation") {
+  @keyframes animation-shake {
+    10%,
+    90% { transform: translate3d(-1px, 0, 0); }
 
-    @if (map-get($grid-breakpoints, $breakpoint) < $rfs-breakpoint) {
-      // Loop over each utility property
-      @each $key, $utility in $utilities {
-        // The utility can be disabled with `false`, thus check if the utility is a map first
-        // Only proceed if responsive media queries are enabled or if it's the base media query
-        @if type-of($utility) == "map" and map-get($utility, rfs) and (map-get($utility, responsive) or $infix == "") {
-          @include generate-utility($utility, $infix, true);
-        }
-      }
-    }
+    20%,
+    80% { transform: translate3d(2px, 0, 0); }
+
+    30%,
+    50%,
+    70% { transform: translate3d(-4px, 0, 0); }
+
+    40%,
+    60% { transform: translate3d(4px, 0, 0); }
   }
-}
 
+  // Scales from 0 to 1; the back-easing curve on the utility supplies the
+  // slight overshoot, so the keyframes stay a simple two-stop scale.
+  @keyframes animation-pop {
+    from { transform: scale(0); }
 
-// Print utilities
-@media print {
-  @each $key, $utility in $utilities {
-    // The utility can be disabled with `false`, thus check if the utility is a map first
-    // Then check if the utility needs print styles
-    @if type-of($utility) == "map" and map-get($utility, print) == true {
-      @include generate-utility($utility, "-print");
-    }
+    to { transform: scale(1); }
   }
 }

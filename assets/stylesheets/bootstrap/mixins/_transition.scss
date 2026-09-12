@@ -1,10 +1,15 @@
+@use "sass:list";
+@use "../config" as *;
+
+$transition-base: all .2s ease-in-out !default;
+
 // stylelint-disable property-disallowed-list
 @mixin transition($transition...) {
-  @if length($transition) == 0 {
+  @if list.length($transition) == 0 {
     $transition: $transition-base;
   }
 
-  @if length($transition) > 1 {
+  @if list.length($transition) > 1 {
     @each $value in $transition {
       @if $value == null or $value == none {
         @warn "The keyword 'none' or 'null' must be used as a single argument.";
@@ -13,14 +18,50 @@
   }
 
   @if $enable-transitions {
-    @if nth($transition, 1) != null {
-      transition: $transition;
-    }
+    $first: list.nth($transition, 1);
 
-    @if $enable-reduced-motion and nth($transition, 1) != null and nth($transition, 1) != none {
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
+    @if $first != null {
+      // `none` force-disables a transition, so it must reach every reader. It
+      // arrives bare or as `none !important`, hence the list test.
+      @if $enable-reduced-motion and not list.index($first, none) {
+        @media (prefers-reduced-motion: no-preference) {
+          transition: $transition;
+        }
+      } @else {
+        transition: $transition;
       }
     }
+  }
+}
+
+// Set the `transition-*` properties one by one. In the shorthand a trailing
+// duration binds to the last property only, so `color, box-shadow .15s` leaves
+// `color` at `0s`. Set apart, one duration and easing cover every property.
+//
+// This also keeps the property list in a custom property. A single token then
+// adds a property to the animation, where the shorthand would need the whole
+// declaration again.
+//
+// Pass `$behavior: allow-discrete` for a list that animates a discrete
+// property, such as `display` or `content-visibility`.
+@mixin transition-props($property, $duration, $timing, $behavior: null) {
+  @if $enable-transitions {
+    @if $enable-reduced-motion {
+      @media (prefers-reduced-motion: no-preference) {
+        @include transition-longhands($property, $duration, $timing, $behavior);
+      }
+    } @else {
+      @include transition-longhands($property, $duration, $timing, $behavior);
+    }
+  }
+}
+
+@mixin transition-longhands($property, $duration, $timing, $behavior) {
+  transition-timing-function: $timing;
+  transition-duration: $duration;
+  transition-property: $property;
+
+  @if $behavior {
+    transition-behavior: $behavior;
   }
 }

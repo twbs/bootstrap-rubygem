@@ -4,16 +4,12 @@ begin
   require 'dartsass-sprockets'
 rescue LoadError
   begin
-    require 'sassc-rails'
+    require 'dartsass-rails'
   rescue LoadError
     begin
-      require 'dartsass-rails'
+      require 'cssbundling-rails'
     rescue LoadError
-      begin
-        require 'cssbundling-rails'
-      rescue LoadError
-        raise LoadError.new("bootstrap-rubygem requires a Sass engine. Please add dartsass-sprockets, sassc-rails, dartsass-rails or cssbundling-rails to your dependencies.")
-      end
+      raise LoadError.new("bootstrap-rubygem requires a Dart Sass engine. Please add dartsass-sprockets, dartsass-rails or cssbundling-rails to your dependencies.")
     end
   end
 end

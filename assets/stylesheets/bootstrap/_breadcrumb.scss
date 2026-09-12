@@ -1,40 +1,90 @@
-.breadcrumb {
-  // scss-docs-start breadcrumb-css-vars
-  --#{$prefix}breadcrumb-padding-x: #{$breadcrumb-padding-x};
-  --#{$prefix}breadcrumb-padding-y: #{$breadcrumb-padding-y};
-  --#{$prefix}breadcrumb-margin-bottom: #{$breadcrumb-margin-bottom};
-  @include rfs($breadcrumb-font-size, --#{$prefix}breadcrumb-font-size);
-  --#{$prefix}breadcrumb-bg: #{$breadcrumb-bg};
-  --#{$prefix}breadcrumb-border-radius: #{$breadcrumb-border-radius};
-  --#{$prefix}breadcrumb-divider-color: #{$breadcrumb-divider-color};
-  --#{$prefix}breadcrumb-item-padding-x: #{$breadcrumb-item-padding-x};
-  --#{$prefix}breadcrumb-item-active-color: #{$breadcrumb-active-color};
-  // scss-docs-end breadcrumb-css-vars
+@use "functions" as *;
+@use "mixins/border-radius" as *;
+@use "mixins/mask-icon" as *;
+@use "mixins/transition" as *;
+@use "mixins/tokens" as *;
 
-  display: flex;
-  flex-wrap: wrap;
-  padding: var(--#{$prefix}breadcrumb-padding-y) var(--#{$prefix}breadcrumb-padding-x);
-  margin-bottom: var(--#{$prefix}breadcrumb-margin-bottom);
-  @include font-size(var(--#{$prefix}breadcrumb-font-size));
-  list-style: none;
-  background-color: var(--#{$prefix}breadcrumb-bg);
-  @include border-radius(var(--#{$prefix}breadcrumb-border-radius));
-}
+$breadcrumb-tokens: () !default;
 
-.breadcrumb-item {
-  // The separator between breadcrumbs (by default, a forward-slash: "/")
-  + .breadcrumb-item {
-    padding-left: var(--#{$prefix}breadcrumb-item-padding-x);
+// scss-docs-start breadcrumb-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$breadcrumb-tokens: defaults(
+  (
+    --breadcrumb-font-size: inherit,
+    --breadcrumb-bg: transparent,
+    --breadcrumb-border-radius: var(--radius-5),
+    --breadcrumb-divider-color: var(--fg-4),
+    --breadcrumb-divider-icon: #{escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 16'><path fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M2 2l4 6-4 6'/></svg>"))},
+    --breadcrumb-divider-width: .375rem,
+    --breadcrumb-divider-height: .75rem,
+    --breadcrumb-link-padding-x: .75rem,
+    --breadcrumb-link-padding-y: .25rem,
+    --breadcrumb-link-color: var(--fg-3),
+    --breadcrumb-link-hover-color: var(--fg-2),
+    --breadcrumb-link-hover-bg: var(--bg-1),
+    --breadcrumb-link-active-color: var(--fg-1),
+    --breadcrumb-link-border-radius: var(--radius-7),
+  ),
+  $breadcrumb-tokens
+);
+// scss-docs-end breadcrumb-tokens
 
-    &::before {
-      float: left; // Suppress inline spacings and underlining of the separator
-      padding-right: var(--#{$prefix}breadcrumb-item-padding-x);
-      color: var(--#{$prefix}breadcrumb-divider-color);
-      content: var(--#{$prefix}breadcrumb-divider, escape-svg($breadcrumb-divider)) #{"/* rtl:"} var(--#{$prefix}breadcrumb-divider, escape-svg($breadcrumb-divider-flipped)) #{"*/"};
+@layer components {
+  .breadcrumb {
+    @include tokens($breadcrumb-tokens);
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: var(--breadcrumb-padding-y, 0) var(--breadcrumb-padding-x, 0);
+    margin-bottom: 0;
+    font-size: var(--breadcrumb-font-size);
+    list-style-type: "";
+    background-color: var(--breadcrumb-bg);
+    @include border-radius(var(--breadcrumb-border-radius));
+  }
+
+  .breadcrumb-item {
+    display: flex;
+  }
+
+  .breadcrumb-divider {
+    margin-inline: calc(var(--breadcrumb-link-padding-x) / 4);
+    color: var(--breadcrumb-divider-color);
+
+    // Render a default chevron, painted with `currentcolor` via a mask, when the
+    // divider has no explicit content. Any content (an inline SVG, a text
+    // character, etc.) added to the element overrides this default.
+    &:empty::before {
+      display: block;
+      width: var(--breadcrumb-divider-width);
+      height: var(--breadcrumb-divider-height);
+      content: "";
+      background-color: currentcolor;
+      @include mask-icon(var(--breadcrumb-divider-icon));
     }
   }
 
-  &.active {
-    color: var(--#{$prefix}breadcrumb-item-active-color);
+  .breadcrumb-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    padding: var(--breadcrumb-link-padding-y) var(--breadcrumb-link-padding-x);
+    color: var(--breadcrumb-link-color);
+    text-decoration: none;
+    @include border-radius(var(--breadcrumb-link-border-radius));
+    @include transition(.1s text-decoration-color ease-in-out);
+
+    &:hover {
+      z-index: 2;
+      color: var(--breadcrumb-link-hover-color);
+      background-color: var(--breadcrumb-link-hover-bg);
+    }
+
+    &.active {
+      color: var(--breadcrumb-link-active-color);
+    }
   }
 }

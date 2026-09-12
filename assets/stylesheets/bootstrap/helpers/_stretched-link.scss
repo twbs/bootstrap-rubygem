@@ -1,15 +1,31 @@
-//
-// Stretched link
-//
+@use "../functions" as *;
+@use "../mixins/tokens" as *;
 
-.stretched-link {
-  &::#{$stretched-link-pseudo-element} {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: $stretched-link-z-index;
-    content: "";
+// scss-docs-start stretched-link-pseudo-element
+$stretched-link-pseudo-element: after !default;
+// scss-docs-end stretched-link-pseudo-element
+
+$stretched-link-tokens: () !default;
+
+// scss-docs-start stretched-link-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$stretched-link-tokens: defaults(
+  (
+    --stretched-link-z-index: 1,
+  ),
+  $stretched-link-tokens
+);
+// scss-docs-end stretched-link-tokens
+
+@layer helpers {
+  .stretched-link {
+    @include tokens($stretched-link-tokens);
+
+    &::#{$stretched-link-pseudo-element} {
+      position: absolute;
+      inset: 0;
+      z-index: var(--stretched-link-z-index);
+      content: "";
+    }
   }
 }

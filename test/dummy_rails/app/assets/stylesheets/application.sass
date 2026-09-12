@@ -1,4 +1,8 @@
-@import 'bootstrap'
+// Bootstrap 6 uses the Sass module system (@use), not @import.
+@use 'bootstrap'
+
+// Verify Bootstrap's Sass API is reachable through the gem's load path.
+@use 'bootstrap/layout/containers' as containers
 
 .test-mixin
-  +make-container
+  @include containers.make-container

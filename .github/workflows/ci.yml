@@ -16,31 +16,10 @@ jobs:
         gemfile:
           - test/gemfiles/rails_6_0.gemfile
           - test/gemfiles/rails_6_1.gemfile
-          - test/gemfiles/rails_7_0_sassc.gemfile
           - test/gemfiles/rails_7_0_dartsass.gemfile
         include:
-          - ruby_version: '2.5'
-            gemfile: test/gemfiles/rails_4_2.gemfile
           - ruby_version: '2.6'
-            gemfile: test/gemfiles/rails_4_2.gemfile
-          - ruby_version: '2.5'
-            gemfile: test/gemfiles/rails_5_0.gemfile
-          - ruby_version: '2.6'
-            gemfile: test/gemfiles/rails_5_0.gemfile
-          - ruby_version: '2.7'
-            gemfile: test/gemfiles/rails_5_0.gemfile
-          - ruby_version: '2.5'
-            gemfile: test/gemfiles/rails_5_1.gemfile
-          - ruby_version: '2.6'
-            gemfile: test/gemfiles/rails_5_1.gemfile
-          - ruby_version: '2.7'
-            gemfile: test/gemfiles/rails_5_1.gemfile
-          - ruby_version: '2.5'
-            gemfile: test/gemfiles/rails_5_2.gemfile
-          - ruby_version: '2.6'
-            gemfile: test/gemfiles/rails_5_2.gemfile
-          - ruby_version: '2.7'
-            gemfile: test/gemfiles/rails_5_2.gemfile
+            gemfile: test/gemfiles/rails_6_0.gemfile
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

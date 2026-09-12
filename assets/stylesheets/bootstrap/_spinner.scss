@@ -1,0 +1,114 @@
+@use "config" as *;
+@use "functions" as *;
+@use "mixins/tokens" as *;
+
+// stylelint-disable custom-property-no-missing-var-function
+$spinner-border-tokens: () !default;
+
+// scss-docs-start spinner-border-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$spinner-border-tokens: defaults(
+  (
+    --spinner-width: 1em,
+    --spinner-height: 1em,
+    --spinner-border-width: .125em,
+    --spinner-animation-speed: 1s,
+    --spinner-animation-timing-function: linear,
+    --spinner-animation-name: spinner-border,
+  ),
+  $spinner-border-tokens
+);
+// scss-docs-end spinner-border-tokens
+
+$spinner-grow-tokens: () !default;
+
+// scss-docs-start spinner-grow-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$spinner-grow-tokens: defaults(
+  (
+    --spinner-width: 1em,
+    --spinner-height: 1em,
+    --spinner-animation-speed: 1s,
+    --spinner-animation-timing-function: ease-in-out,
+    --spinner-animation-name: spinner-grow,
+  ),
+  $spinner-grow-tokens
+);
+// scss-docs-end spinner-grow-tokens
+
+// stylelint-enable custom-property-no-missing-var-function
+
+//
+// Rotating border
+//
+
+@layer components {
+  // Assumes a flex parent
+  .spinner-grow,
+  .spinner-border {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: var(--spinner-width);
+    height: var(--spinner-height);
+    // stylelint-disable-next-line property-disallowed-list
+    border-radius: 50%;
+    animation: var(--spinner-animation-speed) var(--spinner-animation-timing-function) infinite var(--spinner-animation-name);
+  }
+
+  // scss-docs-start spinner-border-keyframes
+  @keyframes spinner-border {
+    to { transform: rotate(360deg); }
+  }
+  // scss-docs-end spinner-border-keyframes
+
+  .spinner-border {
+    @include tokens($spinner-border-tokens);
+
+    border: var(--spinner-border-width) solid currentcolor;
+    border-inline-end-color: transparent;
+  }
+
+  .spinner-sm {
+    // scss-docs-start spinner-border-sm-css-vars
+    --spinner-width: .75em;
+    --spinner-height: .75em;
+    // scss-docs-end spinner-border-sm-css-vars
+  }
+
+  //
+  // Growing circle
+  //
+
+  // scss-docs-start spinner-grow-keyframes
+  @keyframes spinner-grow {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  // scss-docs-end spinner-grow-keyframes
+
+  .spinner-grow {
+    @include tokens($spinner-grow-tokens);
+
+    background-color: currentcolor;
+    opacity: 0;
+  }
+
+  // Generic class for rotating custom spinners
+  .spinner-rotate {
+    animation: 1s linear infinite spinner-border;
+  }
+
+  @if $enable-reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+      .spinner-border,
+      .spinner-grow {
+        --spinner-animation-speed: 1.5s;
+      }
+    }
+  }
+}

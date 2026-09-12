@@ -1,0 +1,41 @@
+// Nav Overflow (Priority+ Pattern)
+//
+// A responsive navigation pattern that automatically moves items
+// to an overflow menu when space is limited.
+
+@layer components {
+  // The component measures this wrapper to decide what fits, so the wrapper must
+  // never size to the nav inside it. If it did, each collapse would change the
+  // width that caused it and the two would fight each other forever.
+  .nav-overflow {
+    // Inline-size containment keeps the nav's width, and the min-content width
+    // it leaks through any flex ancestor, out of the wrapper's own size
+    container-type: inline-size;
+    flex: 1 1 0; // Fill the free space when the wrapper is itself a flex item
+    min-width: 0; // Let the wrapper shrink below its content width
+  }
+
+  // The nav fills the wrapper and stops wrapping, so items run past the edge in
+  // one line for the component to measure.
+  .nav-overflow > .nav {
+    display: flex; // Also overrides the inline-flex of .nav-pills
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  // Items keep their natural width instead of squeezing, so the measured widths
+  // say what the nav really needs.
+  .nav-overflow > .nav > .nav-item {
+    flex-shrink: 0;
+  }
+
+  // Container item for overflow
+  .nav-overflow-item {
+    margin-inline-start: auto;
+  }
+
+  // Hide items that have been moved to overflow
+  .nav-overflow [data-bs-nav-overflow="true"] {
+    display: none;
+  }
+}

@@ -1,3 +1,4 @@
+require 'ruby2_keywords' if RUBY_VERSION < '2.7' # drb 2.0.6 needs the shim but doesn't require it
 require 'logger'
 
 require 'minitest/autorun'

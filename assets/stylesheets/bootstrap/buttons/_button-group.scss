@@ -1,0 +1,135 @@
+@use "../mixins/border-radius" as *;
+
+@layer components {
+  // Make the div behave like a button
+  .btn-group,
+  .btn-group-vertical {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle; // match .btn alignment given font-size hack above
+
+    > [class*="btn-"] {
+      position: relative;
+      flex: 1 1 auto;
+
+      &:hover {
+        z-index: 1;
+      }
+    }
+
+    > .btn-check:has(input:checked),
+    > [class*="btn-"]:active,
+    > [class*="btn-"].active {
+      z-index: 2;
+    }
+
+    > .btn-check:has(input:focus),
+    > [class*="btn-"]:focus {
+      z-index: 3;
+    }
+  }
+
+  .btn-group-divider {
+    > [class*="btn-"] + [class*="btn-"] {
+      &::before {
+        position: absolute;
+        // top: 25%;
+        // bottom: 25%;
+        // left: calc(var(--btn-border-width) * -1);
+        z-index: 3;
+        // width: var(--btn-border-width);
+        content: "";
+        background-color: var(--btn-color);
+        opacity: .25;
+      }
+    }
+  }
+
+  .btn-group:where(.btn-group-divider) {
+    > [class*="btn-"] + [class*="btn-"] {
+      &::before {
+        top: 25%;
+        bottom: 25%;
+        left: calc(var(--btn-border-width) * -1);
+        width: var(--btn-border-width);
+      }
+    }
+  }
+
+  .btn-group-vertical:where(.btn-group-divider) {
+    > [class*="btn-"] + [class*="btn-"] {
+      &::before {
+        top: calc(var(--btn-border-width) * -1);
+        right: var(--btn-padding-x);
+        left: var(--btn-padding-x);
+        height: var(--btn-border-width);
+      }
+    }
+  }
+
+  // Optional: Group multiple button groups together for a toolbar
+  .btn-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: flex-start;
+
+    .input-group {
+      width: auto;
+    }
+  }
+
+  .btn-group {
+    @include border-radius(var(--btn-border-radius));
+
+    // Prevent double borders when buttons are next to each other
+    > [class*="btn-"]:not(:first-child),
+    > .btn-group:not(:first-child) {
+      margin-inline-start: calc(-1 * var(--btn-border-width));
+    }
+
+    // Reset rounded corners
+    > [class*="btn-"]:not(:last-child, :has(+ .menu)),
+    > .btn-group:not(:last-child) > [class*="btn-"] {
+      @include border-end-radius(0);
+    }
+
+    // The left radius should be 0 if the button is not the first child
+    > [class*="btn-"]:not(:first-child),
+    > .btn-group:not(:first-child) > [class*="btn-"] {
+      @include border-start-radius(0);
+    }
+  }
+
+  //
+  // Vertical button groups
+  //
+
+  .btn-group-vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    > [class*="btn-"],
+    > .btn-group {
+      width: 100%;
+    }
+
+    > [class*="btn-"]:not(:first-child),
+    > .btn-group:not(:first-child) {
+      margin-top: calc(-1 * var(--btn-border-width));
+    }
+
+    // Reset rounded corners
+    > [class*="btn-"]:not(:last-child, :has(+ .menu)),
+    > .btn-group:not(:last-child) > [class*="btn-"] {
+      @include border-bottom-radius(0);
+    }
+
+    // The top radius should be 0 if the button is not the first child
+    > [class*="btn-"]:not(:first-child),
+    > .btn-group:not(:first-child) > [class*="btn-"] {
+      @include border-top-radius(0);
+    }
+  }
+}

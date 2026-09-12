@@ -1,0 +1,126 @@
+@use "../functions" as *;
+@use "../mixins/focus-ring" as *;
+@use "../mixins/tokens" as *;
+@use "../mixins/transition" as *;
+
+// stylelint-disable custom-property-no-missing-var-function
+$switch-tokens: () !default;
+
+// scss-docs-start switch-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$switch-tokens: defaults(
+  (
+    --switch-height: 1.25rem,
+    --switch-width: calc(var(--switch-height) * 1.75),
+    --switch-padding: .0625rem,
+    --switch-margin-block: .125rem,
+    // Share the form-control motion tokens so switch, checkbox, and radio move
+    // in sync; the overshoot ("back") easing makes the thumb bounce as it settles.
+    --switch-transition-duration: var(--control-transition-duration),
+    --switch-transition-timing: var(--control-transition-timing),
+    --switch-bg: var(--bg-3),
+    --switch-border-width: var(--border-width),
+    --switch-border-color: var(--border-color),
+    --switch-indicator-bg: var(--white),
+    --switch-indicator-width: calc(var(--switch-height) - calc(var(--switch-padding) * 2) - var(--switch-border-width) * 2),
+    --switch-indicator-height: calc(var(--switch-height) - calc(var(--switch-padding) * 2) - var(--switch-border-width) * 2),
+    --switch-checked-bg: var(--control-checked-bg),
+    --switch-checked-border-color: var(--switch-checked-bg),
+    --switch-checked-indicator-bg: var(--white),
+    --switch-disabled-bg: var(--control-disabled-bg),
+    --switch-disabled-indicator-bg: var(--fg-3),
+  ),
+  $switch-tokens
+);
+// scss-docs-end switch-tokens
+// stylelint-enable custom-property-no-missing-var-function
+
+@layer forms {
+  .switch {
+    @include tokens($switch-tokens);
+
+    position: relative;
+    flex-shrink: 0;
+    width: var(--switch-width);
+    height: var(--switch-height);
+    padding: var(--switch-padding);
+    margin-block: var(--switch-margin-block);
+    background-color: var(--switch-bg);
+    border: var(--switch-border-width) solid var(--switch-border-color);
+    // stylelint-disable-next-line property-disallowed-list
+    border-radius: 10rem;
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / .05);
+    @include transition(background-color var(--switch-transition-duration) var(--switch-transition-timing));
+
+    &::before {
+      position: absolute;
+      inset-block: var(--switch-padding);
+      inset-inline-start: var(--switch-padding);
+      width: var(--switch-indicator-width);
+      height: var(--switch-indicator-height);
+      content: "";
+      background-color: var(--theme-contrast, var(--switch-indicator-bg));
+      // stylelint-disable-next-line property-disallowed-list
+      border-radius: 10rem;
+      box-shadow: 0 1px 2px rgb(0 0 0 / .1);
+      @include transition(inset-inline-start var(--switch-transition-duration) var(--switch-transition-timing));
+    }
+
+    input {
+      position: absolute;
+      inset: 0;
+      appearance: none;
+      background-color: transparent;
+      outline: 0;
+    }
+
+    &:focus-within {
+      @include focus-ring(true);
+    }
+
+    &:has(input:disabled:not(:checked)) {
+      --switch-bg: var(--switch-disabled-bg);
+      --switch-indicator-bg: var(--switch-disabled-indicator-bg);
+
+      &::before { opacity: .4; }
+
+      ~ label {
+        color: var(--fg-3);
+        cursor: default;
+      }
+    }
+
+    &:has(input:checked) {
+      background-color: var(--theme-bg, var(--switch-checked-bg));
+      border-color: var(--theme-bg, var(--switch-checked-border-color));
+
+      &::before {
+        inset-inline-start: calc(100% - var(--switch-indicator-width) - var(--switch-padding));
+      }
+    }
+
+    &:has(input:checked:disabled) {
+      opacity: .65;
+
+      ~ label {
+        color: var(--fg-3);
+        cursor: default;
+      }
+    }
+  }
+  .switch-sm {
+    --switch-height: 1rem;
+
+    + label {
+      font-size: var(--font-size-sm);
+    }
+  }
+  .switch-lg {
+    --switch-height: 1.5rem;
+    --switch-margin-block: .375rem;
+
+    + label {
+      font-size: var(--font-size-lg);
+    }
+  }
+}

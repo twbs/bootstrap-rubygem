@@ -84,7 +84,14 @@ class Updater
           log cmd
           result = %x[#{cmd}]
           raise 'Could not get branch sha!' unless $?.success? && !result.empty?
-          result.split(/\s+/).first
+          # `git ls-remote <url> v6-dev` also matches suffixes like
+          # `refs/heads/mdo/v6-dev`, so pick the exact branch (or tag) ref
+          # rather than blindly taking the first line.
+          ref_of = ->(line) { line.split(/\s+/, 2)[1].to_s.strip }
+          line   = result.lines.find { |l| ref_of.call(l) == "refs/heads/#@branch" } ||
+                   result.lines.find { |l| ref_of.call(l) == "refs/tags/#@branch" } ||
+                   result.lines.first
+          line.split(/\s+/).first
         end
       end
     end

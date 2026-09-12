@@ -1,73 +1,122 @@
-.toast {
-  // scss-docs-start toast-css-vars
-  --#{$prefix}toast-zindex: #{$zindex-toast};
-  --#{$prefix}toast-padding-x: #{$toast-padding-x};
-  --#{$prefix}toast-padding-y: #{$toast-padding-y};
-  --#{$prefix}toast-spacing: #{$toast-spacing};
-  --#{$prefix}toast-max-width: #{$toast-max-width};
-  @include rfs($toast-font-size, --#{$prefix}toast-font-size);
-  --#{$prefix}toast-color: #{$toast-color};
-  --#{$prefix}toast-bg: #{$toast-background-color};
-  --#{$prefix}toast-border-width: #{$toast-border-width};
-  --#{$prefix}toast-border-color: #{$toast-border-color};
-  --#{$prefix}toast-border-radius: #{$toast-border-radius};
-  --#{$prefix}toast-box-shadow: #{$toast-box-shadow};
-  --#{$prefix}toast-header-color: #{$toast-header-color};
-  --#{$prefix}toast-header-bg: #{$toast-header-background-color};
-  --#{$prefix}toast-header-border-color: #{$toast-header-border-color};
-  // scss-docs-end toast-css-vars
+@use "config" as *;
+@use "functions" as *;
+@use "mixins/border-radius" as *;
+@use "mixins/tokens" as *;
+@use "mixins/transition" as *;
 
-  width: var(--#{$prefix}toast-max-width);
-  max-width: 100%;
-  @include font-size(var(--#{$prefix}toast-font-size));
-  color: var(--#{$prefix}toast-color);
-  pointer-events: auto;
-  background-color: var(--#{$prefix}toast-bg);
-  background-clip: padding-box;
-  border: var(--#{$prefix}toast-border-width) solid var(--#{$prefix}toast-border-color);
-  box-shadow: var(--#{$prefix}toast-box-shadow);
-  @include border-radius(var(--#{$prefix}toast-border-radius));
+$toast-tokens: () !default;
 
-  &.showing {
-    opacity: 0;
-  }
+// scss-docs-start toast-tokens
+// stylelint-disable custom-property-no-missing-var-function
+// stylelint-disable-next-line scss/dollar-variable-default
+$toast-tokens: defaults(
+  (
+    --toast-zindex: var(--z-toast),
+    --toast-padding-x: 1rem,
+    --toast-padding-y: .75rem,
+    --toast-spacing: #{$container-padding-x},
+    --toast-max-width: 350px,
+    --toast-font-size: var(--font-size-sm),
+    --toast-color: null,
+    --toast-bg: var(--bg-body),
+    --toast-border-width: var(--border-width),
+    --toast-border-color: var(--border-color-translucent),
+    --toast-border-radius: null,
+    --toast-box-shadow: var(--box-shadow),
+    --toast-header-color: var(--fg-3),
+    --toast-header-bg: var(--bg-1),
+    --toast-header-border-color: var(--border-color-translucent),
+    --toast-transition-property: "opacity, display",
+    --toast-transition-duration: .15s,
+    --toast-transition-timing: linear,
+  ),
+  $toast-tokens
+);
+// stylelint-enable custom-property-no-missing-var-function
+// scss-docs-end toast-tokens
 
-  &:not(.show) {
+@layer components {
+  .toast {
+    @include tokens($toast-tokens);
+
     display: none;
+    flex-direction: column;
+    width: var(--toast-max-width);
+    max-width: 100%;
+    overflow: hidden;
+    font-size: var(--toast-font-size);
+    color: var(--toast-color, var(--fg-body));
+    pointer-events: auto;
+    background-color: var(--toast-bg);
+    background-clip: padding-box;
+    border: var(--toast-border-width) solid var(--theme-border, var(--toast-border-color));
+    box-shadow: var(--toast-box-shadow);
+    @include border-radius(var(--toast-border-radius, var(--radius-7)));
+
+    // scss-docs-start toast-transition
+    // Animated variant (default). `display` transitions discretely so the toast
+    // stays laid out until the fade-out finishes. Add .toast-instant to skip it.
+    &:not(.toast-instant) {
+      opacity: 0;
+      @include transition-props(
+        var(--toast-transition-property),
+        var(--toast-transition-duration),
+        var(--toast-transition-timing),
+        allow-discrete
+      );
+    }
+
+    &.show {
+      display: flex;
+      opacity: 1;
+    }
+    // scss-docs-end toast-transition
   }
-}
 
-.toast-container {
-  --#{$prefix}toast-zindex: #{$zindex-toast};
-
-  position: absolute;
-  z-index: var(--#{$prefix}toast-zindex);
-  width: max-content;
-  max-width: 100%;
-  pointer-events: none;
-
-  > :not(:last-child) {
-    margin-bottom: var(--#{$prefix}toast-spacing);
+  // The toast is not rendered before .show lands, so the fade-in needs an
+  // explicit starting state — the base opacity above cannot serve as one.
+  @starting-style {
+    .toast:not(.toast-instant).show {
+      opacity: 0;
+    }
   }
-}
 
-.toast-header {
-  display: flex;
-  align-items: center;
-  padding: var(--#{$prefix}toast-padding-y) var(--#{$prefix}toast-padding-x);
-  color: var(--#{$prefix}toast-header-color);
-  background-color: var(--#{$prefix}toast-header-bg);
-  background-clip: padding-box;
-  border-bottom: var(--#{$prefix}toast-border-width) solid var(--#{$prefix}toast-header-border-color);
-  @include border-top-radius(calc(var(--#{$prefix}toast-border-radius) - var(--#{$prefix}toast-border-width)));
+  .toast-container {
+    --toast-zindex: var(--z-toast);
 
-  .btn-close {
-    margin-right: calc(-.5 * var(--#{$prefix}toast-padding-x)); // stylelint-disable-line function-disallowed-list
-    margin-left: var(--#{$prefix}toast-padding-x);
+    position: absolute;
+    z-index: var(--toast-zindex);
+    width: max-content;
+    max-width: 100%;
+    pointer-events: none;
+
+    > :not(:last-child) {
+      margin-bottom: var(--toast-spacing);
+    }
   }
-}
 
-.toast-body {
-  padding: var(--#{$prefix}toast-padding-x);
-  word-wrap: break-word;
+  .toast-header {
+    display: flex;
+    align-items: center;
+    padding: var(--toast-padding-y) var(--toast-padding-x);
+    color: var(--theme-fg-emphasis, var(--toast-header-color));
+    background-color: var(--theme-bg-subtle, var(--toast-header-bg));
+    // background-clip: padding-box;
+    border-block-end: var(--toast-border-width, var(--border-width)) solid var(--theme-border, var(--toast-header-border-color, var(--border-color-translucent)));
+
+    .btn-close {
+      margin-inline-start: calc(.5 * var(--toast-padding-x));
+      margin-inline-end: calc(-.25 * var(--toast-padding-x));
+      color: inherit;
+    }
+  }
+
+  .toast-translucent {
+    backdrop-filter: blur(5px) saturate(180%);
+  }
+
+  .toast-body {
+    padding: var(--toast-padding-x);
+    word-wrap: break-word;
+  }
 }

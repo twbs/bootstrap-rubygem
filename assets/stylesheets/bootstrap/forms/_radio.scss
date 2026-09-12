@@ -1,0 +1,108 @@
+@use "../functions" as *;
+@use "../mixins/focus-ring" as *;
+@use "../mixins/tokens" as *;
+@use "../mixins/transition" as *;
+
+// stylelint-disable custom-property-no-missing-var-function
+$radio-tokens: () !default;
+
+// scss-docs-start radio-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$radio-tokens: defaults(
+  (
+    --radio-size: 1.25rem,
+    --radio-margin-block: .125rem,
+    --radio-bg: var(--bg-body),
+    --radio-border-color: var(--border-color),
+    --radio-checked-bg: var(--control-checked-bg),
+    --radio-checked-border-color: var(--control-checked-border-color),
+    --radio-disabled-bg: var(--control-disabled-bg),
+    --radio-disabled-opacity: var(--control-disabled-opacity),
+  ),
+  $radio-tokens
+);
+// scss-docs-end radio-tokens
+// stylelint-enable custom-property-no-missing-var-function
+
+@layer forms {
+  .radio {
+    @include tokens($radio-tokens);
+
+    position: relative;
+    flex-shrink: 0;
+    width: var(--radio-size);
+    height: var(--radio-size);
+    margin-block: var(--radio-margin-block);
+    appearance: none;
+    background-color: var(--theme-bg, var(--radio-bg));
+    border: 1px solid var(--theme-bg, var(--radio-border-color));
+    // stylelint-disable-next-line property-disallowed-list
+    border-radius: 50%;
+    // `color` is transitioned because the dot paints with `currentcolor`; without
+    // it the dot would snap to the body color as it fades out on uncheck.
+    @include transition(
+      color var(--control-transition-duration) var(--control-transition-timing),
+      background-color var(--control-transition-duration) var(--control-transition-timing),
+      border-color var(--control-transition-duration) var(--control-transition-timing)
+    );
+
+    // Inner dot: always present but scaled/faded out until checked so it pops in.
+    &::before {
+      position: absolute;
+      inset: calc(var(--radio-size) * .25);
+      content: "";
+      background-color: currentcolor;
+      // stylelint-disable-next-line property-disallowed-list
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0);
+      @include transition(
+        opacity var(--control-transition-duration) var(--control-transition-timing),
+        transform var(--control-transition-duration) var(--control-transition-timing)
+      );
+    }
+
+    &:checked {
+      color: var(--theme-contrast, var(--primary-contrast));
+      background-color: var(--theme-bg, var(--radio-checked-bg));
+      border-color: var(--theme-bg, var(--radio-checked-border-color));
+
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    &:disabled {
+      --radio-bg: var(--radio-disabled-bg);
+
+      ~ label {
+        color: var(--secondary-fg);
+        cursor: default;
+      }
+    }
+    &:disabled:checked {
+      opacity: var(--radio-disabled-opacity);
+    }
+
+    &:focus-visible {
+      @include focus-ring(true);
+    }
+  }
+
+  .radio-sm {
+    --radio-size: 1rem;
+
+    + label {
+      font-size: var(--font-size-sm);
+    }
+  }
+  .radio-lg {
+    --radio-size: 1.5rem;
+    --radio-margin-block: .375rem;
+
+    + label {
+      font-size: var(--font-size-lg);
+    }
+  }
+}

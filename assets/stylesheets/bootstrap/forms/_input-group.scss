@@ -1,132 +1,135 @@
-//
-// Base styles
-//
+@use "../functions" as *;
+@use "../mixins/border-radius" as *;
+@use "../mixins/tokens" as *;
 
-.input-group {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap; // For form validation feedback
-  align-items: stretch;
-  width: 100%;
+$input-group-addon-tokens: () !default;
 
-  > .form-control,
-  > .form-select,
-  > .form-floating {
-    position: relative; // For focus state's z-index
-    flex: 1 1 auto;
-    width: 1%;
-    min-width: 0; // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
-  }
+// scss-docs-start input-group-addon-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$input-group-addon-tokens: defaults(
+  (
+    --input-group-addon-padding-y: var(--btn-input-padding-y),
+    --input-group-addon-padding-x: var(--btn-input-padding-x),
+    --input-group-addon-font-size: var(--btn-input-font-size),
+    --input-group-addon-line-height: var(--btn-input-line-height),
+    --input-group-addon-color: var(--fg-body),
+    --input-group-addon-bg: var(--bg-2),
+    --input-group-addon-border-color: var(--border-color),
+  ),
+  $input-group-addon-tokens
+);
+// scss-docs-end input-group-addon-tokens
 
-  // Bring the "active" form control to the top of surrounding elements
-  > .form-control:focus,
-  > .form-select:focus,
-  > .form-floating:focus-within {
-    z-index: 5;
-  }
+// scss-docs-start input-group-sizes
+$input-group-sizes: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$input-group-sizes: defaults(
+  ("sm", "lg"),
+  $input-group-sizes
+);
+// scss-docs-end input-group-sizes
 
-  // Ensure buttons are always above inputs for more visually pleasing borders.
-  // This isn't needed for `.input-group-text` since it shares the same border-color
-  // as our inputs.
-  .btn {
+@layer components {
+  .input-group {
+    @include tokens($input-group-addon-tokens);
+
     position: relative;
-    z-index: 2;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
 
-    &:focus {
+    > .form-control,
+    > .form-floating {
+      position: relative; // For focus state's z-index
+      flex: 1 1 auto;
+      width: 1%;
+      min-width: 0; // https://stackoverflow.com/questions/36247140/why-dont-flex-items-shrink-past-content-size
+    }
+
+    // Bring the "active" form control to the top of surrounding elements
+    > .form-control:focus,
+    > .form-floating:focus-within {
       z-index: 5;
     }
+
+    // Ensure buttons are always above inputs for more visually pleasing borders.
+    // This isn't needed for `.input-group-text` since it shares the same border-color
+    // as our inputs.
+    > .input-group-btn {
+      position: relative;
+      z-index: 2;
+
+      &:focus {
+        z-index: 5;
+      }
+    }
   }
-}
 
+  // Textual addons
+  //
+  // Serves as a catch-all element for any text or radio/checkbox input you wish
+  // to prepend or append to an input.
 
-// Textual addons
-//
-// Serves as a catch-all element for any text or radio/checkbox input you wish
-// to prepend or append to an input.
+  .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: var(--input-group-addon-padding-y) var(--input-group-addon-padding-x);
+    font-size: var(--input-group-addon-font-size); // Match inputs
+    // font-weight: $input-group-addon-font-weight;
+    line-height: var(--input-group-addon-line-height);
+    color: var(--input-group-addon-color);
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--input-group-addon-bg);
+    border: var(--border-width) solid var(--input-group-addon-border-color);
+    @include border-radius(var(--btn-input-border-radius));
+  }
 
-.input-group-text {
-  display: flex;
-  align-items: center;
-  padding: $input-group-addon-padding-y $input-group-addon-padding-x;
-  @include font-size($input-font-size); // Match inputs
-  font-weight: $input-group-addon-font-weight;
-  line-height: $input-line-height;
-  color: $input-group-addon-color;
-  text-align: center;
-  white-space: nowrap;
-  background-color: $input-group-addon-bg;
-  border: $input-border-width solid $input-group-addon-border-color;
-  @include border-radius($input-border-radius);
-}
+  // Sizing
+  //
+  // Remix the default form control sizing classes into new ones for easier
+  // manipulation.
 
+  @each $size, $_ in $input-group-sizes {
+    .input-group-#{$size} {
+      > .form-control,
+      > .input-group-text,
+      > .btn {
+        min-height: var(--btn-input-#{$size}-min-height);
+        padding: var(--btn-input-#{$size}-padding-y) var(--btn-input-#{$size}-padding-x);
+        font-size: var(--btn-input-#{$size}-font-size);
+        @include border-radius(var(--btn-input-#{$size}-border-radius));
+      }
+    }
+  }
 
-// Sizing
-//
-// Remix the default form control sizing classes into new ones for easier
-// manipulation.
+  // Rounded corners
+  //
+  // These rulesets must come after the sizing ones to properly override sm and lg
+  // border-radius values when extending. They're more specific than we'd like
+  // with the `.input-group >` part, but without it, we cannot override the sizing.
 
-.input-group-lg > .form-control,
-.input-group-lg > .form-select,
-.input-group-lg > .input-group-text,
-.input-group-lg > .btn {
-  padding: $input-padding-y-lg $input-padding-x-lg;
-  @include font-size($input-font-size-lg);
-  @include border-radius($input-border-radius-lg);
-}
-
-.input-group-sm > .form-control,
-.input-group-sm > .form-select,
-.input-group-sm > .input-group-text,
-.input-group-sm > .btn {
-  padding: $input-padding-y-sm $input-padding-x-sm;
-  @include font-size($input-font-size-sm);
-  @include border-radius($input-border-radius-sm);
-}
-
-.input-group-lg > .form-select,
-.input-group-sm > .form-select {
-  padding-right: $form-select-padding-x + $form-select-indicator-padding;
-}
-
-
-// Rounded corners
-//
-// These rulesets must come after the sizing ones to properly override sm and lg
-// border-radius values when extending. They're more specific than we'd like
-// with the `.input-group >` part, but without it, we cannot override the sizing.
-
-// stylelint-disable-next-line no-duplicate-selectors
-.input-group {
-  &:not(.has-validation) {
-    > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
-    > .dropdown-toggle:nth-last-child(n + 3),
+  // stylelint-disable-next-line no-duplicate-selectors
+  .input-group {
+    > :not(:last-child, .menu-toggle-split, .menu, .input-group-ignore, .form-floating, :has(+ :is(.menu, .input-group-ignore):last-child)),
+    > .menu-toggle-split:nth-last-child(n + 3),
     > .form-floating:not(:last-child) > .form-control,
     > .form-floating:not(:last-child) > .form-select {
       @include border-end-radius(0);
     }
-  }
 
-  &.has-validation {
-    > :nth-last-child(n + 3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
-    > .dropdown-toggle:nth-last-child(n + 4),
-    > .form-floating:nth-last-child(n + 3) > .form-control,
-    > .form-floating:nth-last-child(n + 3) > .form-select {
-      @include border-end-radius(0);
+    > :not(:first-child, .menu, .input-group-ignore) {
+      margin-inline-start: calc(-1 * var(--border-width));
+      @include border-start-radius(0);
     }
-  }
 
-  $validation-messages: "";
-  @each $state in map-keys($form-validation-states) {
-    $validation-messages: $validation-messages + ":not(." + unquote($state) + "-tooltip)" + ":not(." + unquote($state) + "-feedback)";
-  }
+    > :first-child:is(.input-group-ignore) + :not(.menu, .input-group-ignore) {
+      @include border-start-radius(var(--btn-input-border-radius));
+    }
 
-  > :not(:first-child):not(.dropdown-menu)#{$validation-messages} {
-    margin-left: calc(-1 * #{$input-border-width}); // stylelint-disable-line function-disallowed-list
-    @include border-start-radius(0);
-  }
-
-  > .form-floating:not(:first-child) > .form-control,
-  > .form-floating:not(:first-child) > .form-select {
-    @include border-start-radius(0);
+    > .form-floating:not(:first-child) > .form-control,
+    > .form-floating:not(:first-child) > .form-select {
+      @include border-start-radius(0);
+    }
   }
 }

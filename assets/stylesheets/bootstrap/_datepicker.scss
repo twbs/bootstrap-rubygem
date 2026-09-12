@@ -1,0 +1,54 @@
+@use "functions" as *;
+@use "mixins/border-radius" as *;
+@use "mixins/tokens" as *;
+
+$datepicker-tokens: () !default;
+
+// scss-docs-start datepicker-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$datepicker-tokens: defaults(
+  (
+    --datepicker-padding: 1rem,
+    --datepicker-bg: var(--bg-body),
+    --datepicker-border-color: var(--border-color-translucent),
+    --datepicker-border-width: var(--border-width),
+    --datepicker-border-radius: var(--radius-7),
+    --datepicker-box-shadow: var(--box-shadow),
+    --datepicker-min-width: 280px,
+    --datepicker-zindex: var(--z-menu),
+  ),
+  $datepicker-tokens
+);
+// scss-docs-end datepicker-tokens
+
+@layer components {
+  // The popup surface. VCP only adds `[data-vc-input]` when it owns a popup, so
+  // inline calendars keep the bare styling from the calendar component.
+  [data-vc="calendar"][data-vc-input] {
+    @include tokens($datepicker-tokens);
+
+    --calendar-padding: var(--datepicker-padding);
+
+    position: absolute;
+    z-index: var(--datepicker-zindex);
+    min-width: var(--datepicker-min-width);
+    background-color: var(--datepicker-bg);
+    border: var(--datepicker-border-width) solid var(--datepicker-border-color);
+    box-shadow: var(--datepicker-box-shadow);
+    opacity: 1;
+    @include border-radius(var(--datepicker-border-radius));
+  }
+
+  [data-vc-calendar-hidden] {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  [data-vc-position="bottom"] {
+    margin-block-start: .25rem;
+  }
+
+  [data-vc-position="top"] {
+    margin-block-end: -.25rem;
+  }
+}

@@ -1,12 +1,360 @@
+@use "../config" as *;
+@use "../mixins/border-radius" as *;
+@use "../mixins/focus-ring" as *;
+@use "../mixins/form-validation" as *;
+
 // Form validation
 //
-// Provide feedback to users when form field values are valid or invalid. Works
-// primarily for client-side validation via scoped `:invalid` and `:valid`
-// pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
-// server-side validation.
+// Provide feedback to users when form field values are valid or invalid.
+// Server-side: `.is-invalid` / `.is-valid` classes work globally.
+// Client-side: `:user-invalid` pseudo-class is scoped behind `[data-bs-validate]`.
+// `:user-valid` is scoped behind `[data-bs-validate~="valid"]` so success styling is opt-in.
+// Custom states (e.g., "warning") use only `.is-*` classes.
 
-// scss-docs-start form-validation-states-loop
-@each $state, $data in $form-validation-states {
-  @include form-validation-state($state, $data...);
+// scss-docs-start form-validation-states
+$validation-states: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$validation-states: defaults(
+  (
+    "valid": "success",
+    "invalid": "danger",
+  ),
+  $validation-states
+);
+// scss-docs-end form-validation-states
+
+// scss-docs-start form-validation-state-mixin
+@mixin form-validation-state($state, $theme) {
+  .#{$state}-feedback {
+    display: none;
+    width: 100%;
+    font-size: var(--font-size-sm);
+    color: var(--#{$theme}-fg);
+  }
+
+  // More specific to override base tooltip styles
+  .tooltip.#{$state}-tooltip {
+    position: absolute;
+    top: 100%;
+    z-index: 5;
+    display: none;
+    max-width: 100%;
+    padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+    margin-top: .1rem;
+    color: var(--#{$theme}-contrast);
+    text-align: center;
+    background-color: var(--#{$theme}-bg);
+    opacity: 1;
+    @include border-radius(var(--tooltip-border-radius));
+  }
+
+  // Generic sibling feedback display — works for .form-control, .form-range,
+  // and any element where feedback is a direct sibling.
+  @include form-validation-state-selector($state) {
+    ~ .#{$state}-feedback,
+    ~ .#{$state}-tooltip {
+      display: block;
+    }
+  }
+
+  // Form control
+  .form-control {
+    @include form-validation-state-selector($state) {
+      --control-border-color: var(--#{$theme}-border);
+
+      &:focus-visible {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        --control-border-color: var(--#{$theme}-border);
+      }
+    }
+  }
+
+  // Checkbox — control-level styling (border, checked bg, focus ring).
+  .check {
+    @include form-validation-state-selector($state) {
+      --check-border-color: var(--#{$theme}-border);
+      --check-checked-bg: var(--#{$theme}-bg);
+      --check-checked-border-color: var(--#{$theme}-bg);
+
+      &:focus-visible {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      }
+    }
+  }
+
+  // Checkbox — label color and feedback display via .form-field:has().
+  .form-field:has(.check.is-#{$state}) {
+    label { color: var(--#{$theme}-fg); }
+
+    .#{$state}-feedback,
+    .#{$state}-tooltip { display: block; }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .form-field:has(.check:user-invalid) {
+      label { color: var(--#{$theme}-fg); }
+
+      .invalid-feedback,
+      .invalid-tooltip { display: block; }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .form-field:has(.check:user-valid) {
+      label { color: var(--#{$theme}-fg); }
+
+      .valid-feedback,
+      .valid-tooltip { display: block; }
+    }
+  }
+
+  // Radio — control-level styling.
+  .radio {
+    @include form-validation-state-selector($state) {
+      --radio-border-color: var(--#{$theme}-border);
+      --radio-checked-bg: var(--#{$theme}-bg);
+      --radio-checked-border-color: var(--#{$theme}-bg);
+
+      &:focus-visible {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      }
+    }
+  }
+
+  // Radio — label color and feedback display via .form-field:has().
+  .form-field:has(.radio.is-#{$state}) {
+    label { color: var(--#{$theme}-fg); }
+
+    .#{$state}-feedback,
+    .#{$state}-tooltip { display: block; }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .form-field:has(.radio:user-invalid) {
+      label { color: var(--#{$theme}-fg); }
+
+      .invalid-feedback,
+      .invalid-tooltip { display: block; }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .form-field:has(.radio:user-valid) {
+      label { color: var(--#{$theme}-fg); }
+
+      .valid-feedback,
+      .valid-tooltip { display: block; }
+    }
+  }
+
+  // Switch — control-level styling. The input is an invisible overlay;
+  // all visuals are on the .switch wrapper.
+  .switch:has(input.is-#{$state}) {
+    --switch-border-color: var(--#{$theme}-border);
+    --switch-checked-bg: var(--#{$theme}-bg);
+    --switch-checked-border-color: var(--#{$theme}-bg);
+
+    &:focus-within {
+      @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+    }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .switch:has(input:user-invalid) {
+      --switch-border-color: var(--#{$theme}-border);
+      --switch-checked-bg: var(--#{$theme}-bg);
+      --switch-checked-border-color: var(--#{$theme}-bg);
+
+      &:focus-within {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .switch:has(input:user-valid) {
+      --switch-border-color: var(--#{$theme}-border);
+      --switch-checked-bg: var(--#{$theme}-bg);
+      --switch-checked-border-color: var(--#{$theme}-bg);
+
+      &:focus-within {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      }
+    }
+  }
+
+  // Switch — label color and feedback display via .form-field:has().
+  .form-field:has(.switch input.is-#{$state}) {
+    label { color: var(--#{$theme}-fg); }
+
+    .#{$state}-feedback,
+    .#{$state}-tooltip { display: block; }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .form-field:has(.switch input:user-invalid) {
+      label { color: var(--#{$theme}-fg); }
+
+      .invalid-feedback,
+      .invalid-tooltip { display: block; }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .form-field:has(.switch input:user-valid) {
+      label { color: var(--#{$theme}-fg); }
+
+      .valid-feedback,
+      .valid-tooltip { display: block; }
+    }
+  }
+
+  // Chip input — wrapper has the visible border; the .form-ghost inside
+  // receives the native pseudo-class.
+  .chip-input:has(.form-ghost.is-#{$state}) {
+    border-color: var(--#{$theme}-border);
+
+    &:focus-within {
+      @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      border-color: var(--#{$theme}-border);
+    }
+
+    ~ .#{$state}-feedback,
+    ~ .#{$state}-tooltip { display: block; }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .chip-input:has(.form-ghost:user-invalid) {
+      border-color: var(--#{$theme}-border);
+
+      &:focus-within {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        border-color: var(--#{$theme}-border);
+      }
+
+      ~ .invalid-feedback,
+      ~ .invalid-tooltip { display: block; }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .chip-input:has(.form-ghost:user-valid) {
+      border-color: var(--#{$theme}-border);
+
+      &:focus-within {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        border-color: var(--#{$theme}-border);
+      }
+
+      ~ .valid-feedback,
+      ~ .valid-tooltip { display: block; }
+    }
+  }
+
+  // Form adorn — :user-invalid fires on the inner .form-ghost, so we
+  // propagate it to the visible wrapper with :has().
+  .form-adorn:has(.form-ghost.is-#{$state}) {
+    border-color: var(--#{$theme}-border);
+
+    &:focus-within {
+      @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      border-color: var(--#{$theme}-border);
+    }
+
+    ~ .#{$state}-feedback,
+    ~ .#{$state}-tooltip { display: block; }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .form-adorn:has(.form-ghost:user-invalid) {
+      border-color: var(--#{$theme}-border);
+
+      &:focus-within {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        border-color: var(--#{$theme}-border);
+      }
+
+      ~ .invalid-feedback,
+      ~ .invalid-tooltip { display: block; }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .form-adorn:has(.form-ghost:user-valid) {
+      border-color: var(--#{$theme}-border);
+
+      &:focus-within {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        border-color: var(--#{$theme}-border);
+      }
+
+      ~ .valid-feedback,
+      ~ .valid-tooltip { display: block; }
+    }
+  }
+
+  // Range — the validation class lives on .form-range-input, while feedback sits outside
+  // the .form-range wrapper, so we use :has() to toggle it.
+  .form-range-input {
+    @include form-validation-state-selector($state) {
+      &::-webkit-slider-thumb { background: var(--#{$theme}-bg); }
+      &::-moz-range-thumb { background: var(--#{$theme}-bg); }
+
+      &:focus-visible {
+        &::-webkit-slider-thumb {
+          @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        }
+        &::-moz-range-thumb {
+          @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+        }
+      }
+    }
+  }
+
+  .form-range:has(.form-range-input.is-#{$state}) {
+    ~ .#{$state}-feedback,
+    ~ .#{$state}-tooltip { display: block; }
+  }
+
+  // Input group — feedback lives outside the input-group in the parent
+  // .form-field, so we use :has() to toggle display.
+  .form-field:has(.input-group .form-control.is-#{$state}) {
+    .#{$state}-feedback,
+    .#{$state}-tooltip { display: block; }
+  }
+
+  @if $state == "invalid" {
+    [data-bs-validate] .form-field:has(.input-group .form-control:user-invalid) {
+      .invalid-feedback,
+      .invalid-tooltip { display: block; }
+    }
+  } @else if $state == "valid" {
+    [data-bs-validate~="valid"] .form-field:has(.input-group .form-control:user-valid) {
+      .valid-feedback,
+      .valid-tooltip { display: block; }
+    }
+  }
+
+  .input-group {
+    > .form-control:not(:focus),
+    > .form-floating:not(:focus-within) {
+      @include form-validation-state-selector($state) {
+        @if $state == "valid" {
+          z-index: 3;
+        } @else if $state == "invalid" {
+          z-index: 4;
+        }
+      }
+    }
+  }
+
+  // OTP — validation applies to the wrapper; the visual slots inherit the state.
+  .otp {
+    @include form-validation-state-selector($state) {
+      .otp-slot {
+        --otp-slot-border-color: var(--#{$theme}-border);
+      }
+
+      .otp-slot-active {
+        @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
+      }
+    }
+  }
 }
-// scss-docs-end form-validation-states-loop
+// scss-docs-end form-validation-state-mixin
+
+@layer components {
+  // scss-docs-start form-validation-states-loop
+  @each $state, $theme in $validation-states {
+    @include form-validation-state($state, $theme);
+  }
+  // scss-docs-end form-validation-states-loop
+}

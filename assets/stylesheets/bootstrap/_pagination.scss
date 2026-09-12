@@ -1,109 +1,132 @@
-.pagination {
-  // scss-docs-start pagination-css-vars
-  --#{$prefix}pagination-padding-x: #{$pagination-padding-x};
-  --#{$prefix}pagination-padding-y: #{$pagination-padding-y};
-  @include rfs($pagination-font-size, --#{$prefix}pagination-font-size);
-  --#{$prefix}pagination-color: #{$pagination-color};
-  --#{$prefix}pagination-bg: #{$pagination-bg};
-  --#{$prefix}pagination-border-width: #{$pagination-border-width};
-  --#{$prefix}pagination-border-color: #{$pagination-border-color};
-  --#{$prefix}pagination-border-radius: #{$pagination-border-radius};
-  --#{$prefix}pagination-hover-color: #{$pagination-hover-color};
-  --#{$prefix}pagination-hover-bg: #{$pagination-hover-bg};
-  --#{$prefix}pagination-hover-border-color: #{$pagination-hover-border-color};
-  --#{$prefix}pagination-focus-color: #{$pagination-focus-color};
-  --#{$prefix}pagination-focus-bg: #{$pagination-focus-bg};
-  --#{$prefix}pagination-focus-box-shadow: #{$pagination-focus-box-shadow};
-  --#{$prefix}pagination-active-color: #{$pagination-active-color};
-  --#{$prefix}pagination-active-bg: #{$pagination-active-bg};
-  --#{$prefix}pagination-active-border-color: #{$pagination-active-border-color};
-  --#{$prefix}pagination-disabled-color: #{$pagination-disabled-color};
-  --#{$prefix}pagination-disabled-bg: #{$pagination-disabled-bg};
-  --#{$prefix}pagination-disabled-border-color: #{$pagination-disabled-border-color};
-  // scss-docs-end pagination-css-vars
+@use "functions" as *;
+@use "mixins/lists" as *;
+@use "mixins/border-radius" as *;
+@use "mixins/focus-ring" as *;
+@use "mixins/transition" as *;
+@use "mixins/tokens" as *;
 
-  display: flex;
-  @include list-unstyled();
-}
+// stylelint-disable custom-property-no-missing-var-function
+$pagination-tokens: () !default;
 
-.page-link {
-  position: relative;
-  display: block;
-  padding: var(--#{$prefix}pagination-padding-y) var(--#{$prefix}pagination-padding-x);
-  @include font-size(var(--#{$prefix}pagination-font-size));
-  color: var(--#{$prefix}pagination-color);
-  text-decoration: if($link-decoration == none, null, none);
-  background-color: var(--#{$prefix}pagination-bg);
-  border: var(--#{$prefix}pagination-border-width) solid var(--#{$prefix}pagination-border-color);
-  @include transition($pagination-transition);
+// scss-docs-start pagination-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$pagination-tokens: defaults(
+  (
+    --pagination-min-height: var(--btn-input-min-height),
+    --pagination-padding-x: var(--btn-input-padding-x),
+    --pagination-padding-y: var(--btn-input-padding-y),
+    --pagination-font-size: var(--btn-input-font-size),
+    --pagination-color: var(--link-color),
+    --pagination-bg: var(--bg-body),
+    --pagination-border-width: var(--border-width),
+    --pagination-border-color: var(--border-color),
+    --pagination-border-radius: var(--btn-input-border-radius),
+    --pagination-hover-color: var(--link-hover-color),
+    --pagination-hover-bg: var(--bg-1),
+    --pagination-hover-border-color: var(--border-color),
+    --pagination-active-color: var(--theme-contrast, var(--primary-contrast)),
+    --pagination-active-bg: var(--theme-bg, var(--primary-bg)),
+    --pagination-active-border-color: var(--theme-bg, var(--primary-bg)),
+    --pagination-disabled-color: var(--fg-3),
+    --pagination-disabled-bg: var(--bg-2),
+    --pagination-disabled-border-color: var(--border-color),
+  ),
+  $pagination-tokens
+);
+// scss-docs-end pagination-tokens
 
-  &:hover {
-    z-index: 2;
-    color: var(--#{$prefix}pagination-hover-color);
-    text-decoration: if($link-hover-decoration == underline, none, null);
-    background-color: var(--#{$prefix}pagination-hover-bg);
-    border-color: var(--#{$prefix}pagination-hover-border-color);
+// scss-docs-start pagination-sizes
+$pagination-sizes: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$pagination-sizes: defaults(
+  ("sm", "lg"),
+  $pagination-sizes
+);
+// scss-docs-end pagination-sizes
+// stylelint-enable custom-property-no-missing-var-function
+
+@layer components {
+  .pagination {
+    @include tokens($pagination-tokens);
+
+    display: flex;
+    @include list-unstyled();
   }
 
-  &:focus {
-    z-index: 3;
-    color: var(--#{$prefix}pagination-focus-color);
-    background-color: var(--#{$prefix}pagination-focus-bg);
-    outline: $pagination-focus-outline;
-    box-shadow: var(--#{$prefix}pagination-focus-box-shadow);
+  .page-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--pagination-min-height);
+    padding: var(--pagination-padding-y) var(--pagination-padding-x);
+    font-size: var(--pagination-font-size);
+    color: var(--theme-fg, var(--pagination-color));
+    text-decoration: none;
+    background-color: var(--pagination-bg);
+    border: var(--pagination-border-width) solid var(--pagination-border-color);
+    @include transition(color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out);
+
+    &:hover {
+      z-index: 2;
+      color: var(--theme-fg-emphasis, var(--pagination-hover-color));
+      background-color: var(--theme-bg-subtle, var(--pagination-hover-bg));
+      border-color: var(--theme-border, var(--pagination-hover-border-color));
+    }
+
+    &:focus-visible {
+      z-index: 3;
+      @include focus-ring(true, var(--theme-focus-ring, var(--focus-ring-color)));
+    }
+
+    &.active,
+    .active > & {
+      z-index: 3;
+      color: var(--theme-contrast, var(--pagination-active-color));
+      background-color: var(--theme-bg, var(--pagination-active-bg));
+      border-color: var(--theme-bg, var(--pagination-active-border-color));
+    }
+
+    &.disabled,
+    .disabled > & {
+      color: var(--pagination-disabled-color);
+      pointer-events: none;
+      background-color: var(--pagination-disabled-bg);
+      border-color: var(--pagination-disabled-border-color);
+    }
   }
 
-  &.active,
-  .active > & {
-    z-index: 3;
-    color: var(--#{$prefix}pagination-active-color);
-    @include gradient-bg(var(--#{$prefix}pagination-active-bg));
-    border-color: var(--#{$prefix}pagination-active-border-color);
-  }
+  .page-item {
+    &:not(:first-child) .page-link {
+      margin-inline-start: calc(-1 * var(--pagination-border-width));
+    }
 
-  &.disabled,
-  .disabled > & {
-    color: var(--#{$prefix}pagination-disabled-color);
-    pointer-events: none;
-    background-color: var(--#{$prefix}pagination-disabled-bg);
-    border-color: var(--#{$prefix}pagination-disabled-border-color);
-  }
-}
-
-.page-item {
-  &:not(:first-child) .page-link {
-    margin-left: $pagination-margin-start;
-  }
-
-  @if $pagination-margin-start == calc(-1 * #{$pagination-border-width}) {
     &:first-child {
       .page-link {
-        @include border-start-radius(var(--#{$prefix}pagination-border-radius));
+        @include border-start-radius(var(--pagination-border-radius));
       }
     }
 
     &:last-child {
       .page-link {
-        @include border-end-radius(var(--#{$prefix}pagination-border-radius));
+        @include border-end-radius(var(--pagination-border-radius));
       }
     }
-  } @else {
-    // Add border-radius to all pageLinks in case they have left margin
-    .page-link {
-      @include border-radius(var(--#{$prefix}pagination-border-radius));
+  }
+
+  //
+  // Sizing
+  //
+
+  // scss-docs-start pagination-sizes-loop
+  @each $size, $_ in $pagination-sizes {
+    .pagination-#{$size} {
+      --pagination-min-height: var(--btn-input-#{$size}-min-height);
+      --pagination-padding-y: var(--btn-input-#{$size}-padding-y);
+      --pagination-padding-x: var(--btn-input-#{$size}-padding-x);
+      --pagination-font-size: var(--btn-input-#{$size}-font-size);
+      --pagination-border-radius: var(--btn-input-#{$size}-border-radius);
     }
   }
-}
-
-
-//
-// Sizing
-//
-
-.pagination-lg {
-  @include pagination-size($pagination-padding-y-lg, $pagination-padding-x-lg, $font-size-lg, $pagination-border-radius-lg);
-}
-
-.pagination-sm {
-  @include pagination-size($pagination-padding-y-sm, $pagination-padding-x-sm, $font-size-sm, $pagination-border-radius-sm);
+  // scss-docs-end pagination-sizes-loop
 }

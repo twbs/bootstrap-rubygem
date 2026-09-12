@@ -7,8 +7,8 @@ Gemfile.lock
 .rvmrc
 .rbenv-version
 
-# Ignore bundler config
-/.bundle
+# Ignore bundler config (in the repo root and under test/gemfiles/*)
+.bundle/
 /vendor/cache
 /vendor/bundle
 tmp/

@@ -1,15 +1,33 @@
-// scss-docs-start stacks
-.hstack {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-self: stretch;
-}
+@use "../layout/breakpoints" as *;
 
-.vstack {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  align-self: stretch;
+@layer helpers {
+  // scss-docs-start stacks
+  .stack-container {
+    @include set-container();
+  }
+
+  [class*="hstack"],
+  [class*="vstack"] {
+    display: flex;
+    flex: var(--stack-flex, 1 1 auto);
+    flex-direction: var(--stack-direction, row);
+    align-items: var(--stack-align-items, center);
+    align-self: var(--stack-align-self, stretch);
+  }
+
+  @include loop-breakpoints-up() using ($breakpoint, $prefix) {
+    .#{$prefix}vstack {
+      @include container-breakpoint-up($breakpoint) {
+        --stack-direction: column;
+        --stack-align-items: stretch;
+      }
+    }
+    .#{$prefix}hstack {
+      @include container-breakpoint-up($breakpoint) {
+        --stack-direction: row;
+        --stack-align-items: flex-start;
+      }
+    }
+  }
+  // scss-docs-end stacks
 }
-// scss-docs-end stacks

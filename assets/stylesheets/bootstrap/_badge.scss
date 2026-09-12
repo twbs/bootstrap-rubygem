@@ -1,38 +1,108 @@
-// Base class
-//
-// Requires one of the contextual, color modifier classes for `color` and
-// `background-color`.
+@use "functions" as *;
+@use "mixins/border-radius" as *;
+@use "mixins/tokens" as *;
 
-.badge {
-  // scss-docs-start badge-css-vars
-  --#{$prefix}badge-padding-x: #{$badge-padding-x};
-  --#{$prefix}badge-padding-y: #{$badge-padding-y};
-  @include rfs($badge-font-size, --#{$prefix}badge-font-size);
-  --#{$prefix}badge-font-weight: #{$badge-font-weight};
-  --#{$prefix}badge-color: #{$badge-color};
-  --#{$prefix}badge-border-radius: #{$badge-border-radius};
-  // scss-docs-end badge-css-vars
+$badge-tokens: () !default;
 
-  display: inline-block;
-  padding: var(--#{$prefix}badge-padding-y) var(--#{$prefix}badge-padding-x);
-  @include font-size(var(--#{$prefix}badge-font-size));
-  font-weight: var(--#{$prefix}badge-font-weight);
-  line-height: 1;
-  color: var(--#{$prefix}badge-color);
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  @include border-radius(var(--#{$prefix}badge-border-radius));
-  @include gradient-bg();
+// stylelint-disable custom-property-no-missing-var-function, scss/dollar-variable-default
 
-  // Empty badges collapse automatically
-  &:empty {
-    display: none;
+// scss-docs-start badge-tokens
+$badge-tokens: defaults(
+  (
+    --badge-gap: .375em,
+    --badge-padding-x: .625em,
+    --badge-padding-y: .25em,
+    --badge-font-size: clamp(12px, .75em, .75em),
+    --badge-font-weight: var(--font-weight-semibold),
+    --badge-color: inherit,
+    --badge-bg: var(--bg-2),
+    --badge-border-width: var(--border-width),
+    --badge-border-color: transparent,
+    --badge-border-radius: var(--radius-7),
+  ),
+  $badge-tokens
+);
+// scss-docs-end badge-tokens
+
+// scss-docs-start badge-variants
+$badge-variants: () !default;
+$badge-variants: defaults(
+  (
+    "subtle": (
+      "color": "fg",
+      "bg": "bg-subtle",
+      "border-color": "transparent"
+    ),
+    "outline": (
+      "color": "fg",
+      "bg": "transparent",
+      "border-color": "border"
+    )
+  ),
+  $badge-variants
+);
+// scss-docs-end badge-variants
+
+// stylelint-enable custom-property-no-missing-var-function, scss/dollar-variable-default
+
+@layer components {
+  .badge {
+    @include tokens($badge-tokens);
+
+    display: inline-flex;
+    gap: var(--badge-gap);
+    align-items: center;
+    justify-content: center;
+    min-height: 1.375rem;
+    padding: var(--badge-padding-y) var(--badge-padding-x);
+    font-size: var(--badge-font-size);
+    font-weight: var(--badge-font-weight);
+    line-height: 1;
+    color: var(--theme-contrast, var(--badge-color));
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: var(--theme-bg, var(--badge-bg));
+    border: var(--badge-border-width) solid var(--badge-border-color);
+    @include border-radius(var(--badge-border-radius));
+
+    // Empty badges collapse automatically
+    &:empty {
+      display: none;
+    }
   }
-}
 
-// Quick fix for badges in buttons
-.btn .badge {
-  position: relative;
-  top: -1px;
+  // stylelint-disable-next-line selector-no-qualifying-type
+  a.badge {
+    text-decoration: none;
+  }
+
+  // Quick fix for badges in buttons
+  .btn .badge {
+    position: relative;
+    top: -1px;
+  }
+
+  // scss-docs-start badge-variant-loop
+  @each $variant, $properties in $badge-variants {
+    .badge-#{$variant} {
+      @each $property, $value in $properties {
+        @if $value == "transparent" {
+          --badge-#{$property}: transparent;
+        } @else {
+          --badge-#{$property}: var(--theme-#{$value});
+        }
+      }
+
+      color: var(--badge-color);
+      background-color: var(--badge-bg);
+      border-color: var(--badge-border-color);
+    }
+  }
+  // scss-docs-end badge-variant-loop
+
+  .badge-lg {
+    --badge-padding-x: 1rem;
+    --badge-padding-y: .5rem;
+  }
 }

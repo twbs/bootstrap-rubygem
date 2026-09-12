@@ -1,0 +1,69 @@
+@use "banner" with (
+  $file: "Grid"
+);
+
+@use "config" as *;
+@use "functions" as *;
+
+@forward "utilities"; // Make utilities available downstream
+@use "utilities" as *; // Bring utilities into the current namespace
+
+@forward "layout/containers";
+@forward "layout/grid";
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$utilities: map-get-multiple(
+  $utilities,
+  (
+    "display",
+    "order",
+    "grid-column-counts",
+    "grid-columns",
+    "grid-auto-flow",
+    "gap",
+    "row-gap",
+    "column-gap",
+    "flex",
+    "flex-direction",
+    "flex-grow",
+    "flex-shrink",
+    "flex-wrap",
+    "justify-content",
+    "justify-items",
+    "align-items",
+    "align-content",
+    "align-self",
+    "place-items",
+    "margin",
+    "margin-x",
+    "margin-y",
+    "margin-top",
+    "margin-end",
+    "margin-bottom",
+    "margin-start",
+    "negative-margin",
+    "negative-margin-x",
+    "negative-margin-y",
+    "negative-margin-top",
+    "negative-margin-end",
+    "negative-margin-bottom",
+    "negative-margin-start",
+    "padding",
+    "padding-x",
+    "padding-y",
+    "padding-top",
+    "padding-end",
+    "padding-bottom",
+    "padding-start",
+  )
+);
+
+// check-unused-imports-disable-next-line — side-effect import: generates utility CSS.
+@use "utilities/api";
+
+:root,
+:host {
+  @each $name, $value in $breakpoints {
+    --breakpoint-#{$name}: #{$value};
+  }
+}

@@ -1,187 +1,228 @@
-:root,
-[data-bs-theme="light"] {
-  // Note: Custom variable values only support SassScript inside `#{}`.
+@use "sass:map";
+@use "colors" as *;
+@use "config" as *;
+@use "functions" as *;
+@use "theme" as *;
+@use "mixins/tokens" as *;
 
-  // Colors
-  //
-  // Generate palettes for full colors, grays, and theme colors.
+@layer colors, config, root, reboot, layout, content, forms, components, custom, helpers, utilities;
 
-  @each $color, $value in $colors {
-    --#{$prefix}#{$color}: #{$value};
+$root-tokens: () !default;
+
+// scss-docs-start root-tokens
+// stylelint-disable @stylistic/value-list-max-empty-lines, @stylistic/function-max-empty-lines, custom-property-no-missing-var-function
+// stylelint-disable-next-line scss/dollar-variable-default
+$root-tokens: defaults(
+  (
+    --black: #{$black},
+    --white: #{$white},
+
+    --gradient: #{$gradient},
+
+    // scss-docs-start root-body-variables
+    // The stack omits system-ui. It resolves to the user interface font of the
+    // locale, which shows non-Latin text incorrectly. See twbs/bootstrap#42703.
+    --body-font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+    --body-font-size: 1rem,
+    --body-font-weight: var(--font-weight-normal),
+    --body-line-height: 1.5,
+    // scss-docs-end root-body-variables
+
+    --heading-color: inherit,
+
+    --hr-border-color: var(--border-color),
+
+    --link-color: light-dark(var(--primary-base), var(--primary-fg)),
+    --link-decoration: underline,
+    --link-underline-offset: .2em,
+    --link-hover-color: color-mix(in oklch, var(--link-color) 90%, #000),
+
+    --font-mono: "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace",
+    --code-font-size: 95%,
+    --code-color: var(--fg-2),
+
+    // scss-docs-start root-border-var
+    --border-width: #{$border-width},
+    --border-width-keyline: .5px,
+    --border-style: #{$border-style},
+    --border-color: light-dark(var(--gray-200), var(--gray-700)),
+    --border-color-translucent: color-mix(in oklch, var(--fg-body) 15%, transparent),
+    // scss-docs-end root-border-var
+
+    // scss-docs-start root-box-shadow-variables
+    // --box-shadow* tokens are generated below (see root-box-shadow-loop) from
+    // the shared $shadows map in scss/_config.scss, which reads these two.
+    --shadow-color: #000,
+    --shadow-strength: 1,
+    // scss-docs-end root-box-shadow-variables
+
+    // scss-docs-start root-transition-variables
+    // Shared easing curve for overlay components (dialog, drawer, menu)
+    --transition-timing-overlay: cubic-bezier(.22, 1, .36, 1),
+    // scss-docs-end root-transition-variables
+
+    --spacer: 1rem,
+
+    // scss-docs-start root-focus-variables
+    --focus-ring-width: 3px,
+    --focus-ring-offset: 1px,
+    --focus-ring-color: var(--primary-focus-ring),
+    --focus-ring: var(--focus-ring-width) solid var(--focus-ring-color),
+    // scss-docs-end root-focus-variables
+
+    // scss-docs-start root-form-variables
+    --control-checked-bg: var(--primary-base),
+    --control-checked-border-color: var(--control-checked-bg),
+    --control-active-bg: var(--primary-base),
+    --control-active-border-color: var(--control-active-bg),
+    --control-disabled-bg: var(--bg-3),
+    --control-disabled-opacity: .65,
+    // Shared motion for checkbox/radio marks; slight overshoot so the mark pops in
+    --control-transition-duration: .15s,
+    --control-transition-timing: cubic-bezier(.34, 1.56, .64, 1),
+
+    --btn-input-fg: var(--fg-body),
+    --btn-input-bg: var(--bg-body),
+
+    --btn-input-gap: .375rem,
+    --btn-input-min-height: 2.375rem,
+    --btn-input-padding-y: .375rem,
+    --btn-input-padding-x: .75rem,
+    --btn-input-font-size: var(--body-font-size),
+    --btn-input-line-height: var(--body-line-height),
+    --btn-input-border-radius: var(--radius-5),
+
+    --btn-input-xs-gap: var(--spacer-1),
+    --btn-input-xs-min-height: 1.5rem,
+    --btn-input-xs-padding-y: .125rem,
+    --btn-input-xs-padding-x: .5rem,
+    --btn-input-xs-font-size: var(--font-size-xs),
+    --btn-input-xs-line-height: 1.125,
+    --btn-input-xs-border-radius: var(--radius-5),
+
+    --btn-input-sm-gap: .375rem,
+    --btn-input-sm-min-height: 2rem,
+    --btn-input-sm-padding-y: .25rem,
+    --btn-input-sm-padding-x: .625rem,
+    --btn-input-sm-font-size: var(--font-size-sm),
+    --btn-input-sm-line-height: var(--line-height-sm),
+    --btn-input-sm-border-radius: var(--radius-5),
+
+    --btn-input-lg-gap: .375rem,
+    --btn-input-lg-min-height: 2.75rem,
+    --btn-input-lg-padding-y: .5rem,
+    --btn-input-lg-padding-x: 1rem,
+    --btn-input-lg-font-size: var(--font-size-md),
+    --btn-input-lg-line-height: var(--line-height-md),
+    --btn-input-lg-border-radius: var(--radius-7),
+    // scss-docs-end root-form-variables
+  ),
+  $root-tokens
+);
+// stylelint-enable @stylistic/value-list-max-empty-lines, @stylistic/function-max-empty-lines, custom-property-no-missing-var-function
+// scss-docs-end root-tokens
+
+// scss-docs-start root-font-size-loop
+// Generate font-size and line-height tokens
+@each $name, $props in $font-sizes {
+  $root-tokens: map.set($root-tokens, --font-size-#{$name}, map.get($props, "font-size"));
+  $root-tokens: map.set($root-tokens, --line-height-#{$name}, map.get($props, "line-height"));
+}
+// scss-docs-end root-font-size-loop
+
+// scss-docs-start root-font-weight-loop
+// Generate font-weight tokens
+@each $name, $value in $font-weights {
+  $root-tokens: map.set($root-tokens, --font-weight-#{$name}, $value);
+}
+// scss-docs-end root-font-weight-loop
+
+// scss-docs-start root-theme-tokens
+// Generate semantic theme colors
+@each $color-name, $color-map in $theme-colors {
+  @each $key, $value in $color-map {
+    $root-tokens: map.set($root-tokens, --#{$color-name}-#{$key}, $value);
   }
-
-  @each $color, $value in $grays {
-    --#{$prefix}gray-#{$color}: #{$value};
-  }
-
-  @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}: #{$value};
-  }
-
-  @each $color, $value in $theme-colors-rgb {
-    --#{$prefix}#{$color}-rgb: #{$value};
-  }
-
-  @each $color, $value in $theme-colors-text {
-    --#{$prefix}#{$color}-text-emphasis: #{$value};
-  }
-
-  @each $color, $value in $theme-colors-bg-subtle {
-    --#{$prefix}#{$color}-bg-subtle: #{$value};
-  }
-
-  @each $color, $value in $theme-colors-border-subtle {
-    --#{$prefix}#{$color}-border-subtle: #{$value};
-  }
-
-  --#{$prefix}white-rgb: #{to-rgb($white)};
-  --#{$prefix}black-rgb: #{to-rgb($black)};
-
-  // Fonts
-
-  // Note: Use `inspect` for lists so that quoted items keep the quotes.
-  // See https://github.com/sass/sass/issues/2383#issuecomment-336349172
-  --#{$prefix}font-sans-serif: #{inspect($font-family-sans-serif)};
-  --#{$prefix}font-monospace: #{inspect($font-family-monospace)};
-  --#{$prefix}gradient: #{$gradient};
-
-  // Root and body
-  // scss-docs-start root-body-variables
-  @if $font-size-root != null {
-    --#{$prefix}root-font-size: #{$font-size-root};
-  }
-  --#{$prefix}body-font-family: #{inspect($font-family-base)};
-  @include rfs($font-size-base, --#{$prefix}body-font-size);
-  --#{$prefix}body-font-weight: #{$font-weight-base};
-  --#{$prefix}body-line-height: #{$line-height-base};
-  @if $body-text-align != null {
-    --#{$prefix}body-text-align: #{$body-text-align};
-  }
-
-  --#{$prefix}body-color: #{$body-color};
-  --#{$prefix}body-color-rgb: #{to-rgb($body-color)};
-  --#{$prefix}body-bg: #{$body-bg};
-  --#{$prefix}body-bg-rgb: #{to-rgb($body-bg)};
-
-  --#{$prefix}emphasis-color: #{$body-emphasis-color};
-  --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color)};
-
-  --#{$prefix}secondary-color: #{$body-secondary-color};
-  --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color)};
-  --#{$prefix}secondary-bg: #{$body-secondary-bg};
-  --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg)};
-
-  --#{$prefix}tertiary-color: #{$body-tertiary-color};
-  --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color)};
-  --#{$prefix}tertiary-bg: #{$body-tertiary-bg};
-  --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg)};
-  // scss-docs-end root-body-variables
-
-  --#{$prefix}heading-color: #{$headings-color};
-
-  --#{$prefix}link-color: #{$link-color};
-  --#{$prefix}link-color-rgb: #{to-rgb($link-color)};
-  --#{$prefix}link-decoration: #{$link-decoration};
-
-  --#{$prefix}link-hover-color: #{$link-hover-color};
-  --#{$prefix}link-hover-color-rgb: #{to-rgb($link-hover-color)};
-
-  @if $link-hover-decoration != null {
-    --#{$prefix}link-hover-decoration: #{$link-hover-decoration};
-  }
-
-  --#{$prefix}code-color: #{$code-color};
-  --#{$prefix}highlight-color: #{$mark-color};
-  --#{$prefix}highlight-bg: #{$mark-bg};
-
-  // scss-docs-start root-border-var
-  --#{$prefix}border-width: #{$border-width};
-  --#{$prefix}border-style: #{$border-style};
-  --#{$prefix}border-color: #{$border-color};
-  --#{$prefix}border-color-translucent: #{$border-color-translucent};
-
-  --#{$prefix}border-radius: #{$border-radius};
-  --#{$prefix}border-radius-sm: #{$border-radius-sm};
-  --#{$prefix}border-radius-lg: #{$border-radius-lg};
-  --#{$prefix}border-radius-xl: #{$border-radius-xl};
-  --#{$prefix}border-radius-xxl: #{$border-radius-xxl};
-  --#{$prefix}border-radius-2xl: var(--#{$prefix}border-radius-xxl); // Deprecated in v5.3.0 for consistency
-  --#{$prefix}border-radius-pill: #{$border-radius-pill};
-  // scss-docs-end root-border-var
-
-  --#{$prefix}box-shadow: #{$box-shadow};
-  --#{$prefix}box-shadow-sm: #{$box-shadow-sm};
-  --#{$prefix}box-shadow-lg: #{$box-shadow-lg};
-  --#{$prefix}box-shadow-inset: #{$box-shadow-inset};
-
-  // Focus styles
-  // scss-docs-start root-focus-variables
-  --#{$prefix}focus-ring-width: #{$focus-ring-width};
-  --#{$prefix}focus-ring-opacity: #{$focus-ring-opacity};
-  --#{$prefix}focus-ring-color: #{$focus-ring-color};
-  // scss-docs-end root-focus-variables
-
-  // scss-docs-start root-form-validation-variables
-  --#{$prefix}form-valid-color: #{$form-valid-color};
-  --#{$prefix}form-valid-border-color: #{$form-valid-border-color};
-  --#{$prefix}form-invalid-color: #{$form-invalid-color};
-  --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color};
-  // scss-docs-end root-form-validation-variables
 }
 
-@if $enable-dark-mode {
-  @include color-mode(dark, true) {
-    color-scheme: dark;
+// Generate background tokens
+@each $key, $value in $theme-bgs {
+  $root-tokens: map.set($root-tokens, --bg-#{$key}, $value);
+}
 
-    // scss-docs-start root-dark-mode-vars
-    --#{$prefix}body-color: #{$body-color-dark};
-    --#{$prefix}body-color-rgb: #{to-rgb($body-color-dark)};
-    --#{$prefix}body-bg: #{$body-bg-dark};
-    --#{$prefix}body-bg-rgb: #{to-rgb($body-bg-dark)};
+// Generate foreground tokens
+@each $key, $value in $theme-fgs {
+  $root-tokens: map.set($root-tokens, --fg-#{$key}, $value);
+}
 
-    --#{$prefix}emphasis-color: #{$body-emphasis-color-dark};
-    --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color-dark)};
+// Generate border tokens
+@each $key, $value in $theme-borders {
+  $root-tokens: map.set($root-tokens, --border-#{$key}, $value);
+}
+// scss-docs-end root-theme-tokens
 
-    --#{$prefix}secondary-color: #{$body-secondary-color-dark};
-    --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color-dark)};
-    --#{$prefix}secondary-bg: #{$body-secondary-bg-dark};
-    --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg-dark)};
+// Generate breakpoint tokens
+@each $name, $value in $breakpoints {
+  $root-tokens: map.set($root-tokens, --breakpoint-#{$name}, $value);
+}
 
-    --#{$prefix}tertiary-color: #{$body-tertiary-color-dark};
-    --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color-dark)};
-    --#{$prefix}tertiary-bg: #{$body-tertiary-bg-dark};
-    --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg-dark)};
+// Generate spacer tokens
+// scss-docs-start root-spacer-loop
+@each $key, $value in $spacers {
+  $root-tokens: map.set($root-tokens, --spacer-#{$key}, $value);
+}
+// scss-docs-end root-spacer-loop
 
-    @each $color, $value in $theme-colors-text-dark {
-      --#{$prefix}#{$color}-text-emphasis: #{$value};
-    }
+// Generate radius tokens
+// scss-docs-start root-radius-loop
+@each $key, $value in $radii {
+  $root-tokens: map.set($root-tokens, --radius-#{$key}, $value);
+}
+// stylelint-disable-next-line scss/dollar-variable-default
+$root-tokens: map.set($root-tokens, --radius-pill, 50rem);
+// scss-docs-end root-radius-loop
 
-    @each $color, $value in $theme-colors-bg-subtle-dark {
-      --#{$prefix}#{$color}-bg-subtle: #{$value};
-    }
-
-    @each $color, $value in $theme-colors-border-subtle-dark {
-      --#{$prefix}#{$color}-border-subtle: #{$value};
-    }
-
-    --#{$prefix}heading-color: #{$headings-color-dark};
-
-    --#{$prefix}link-color: #{$link-color-dark};
-    --#{$prefix}link-hover-color: #{$link-hover-color-dark};
-    --#{$prefix}link-color-rgb: #{to-rgb($link-color-dark)};
-    --#{$prefix}link-hover-color-rgb: #{to-rgb($link-hover-color-dark)};
-
-    --#{$prefix}code-color: #{$code-color-dark};
-    --#{$prefix}highlight-color: #{$mark-color-dark};
-    --#{$prefix}highlight-bg: #{$mark-bg-dark};
-
-    --#{$prefix}border-color: #{$border-color-dark};
-    --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
-
-    --#{$prefix}form-valid-color: #{$form-valid-color-dark};
-    --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};
-    --#{$prefix}form-invalid-color: #{$form-invalid-color-dark};
-    --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color-dark};
-    // scss-docs-end root-dark-mode-vars
+// Generate box-shadow tokens
+// scss-docs-start root-box-shadow-loop
+@each $key, $value in $shadows {
+  @if $key == null {
+    $root-tokens: map.set($root-tokens, --box-shadow, $value);
+  } @else {
+    $root-tokens: map.set($root-tokens, --box-shadow-#{$key}, $value);
   }
+}
+// scss-docs-end root-box-shadow-loop
+
+// Generate z-index tokens
+@each $key, $value in $zindex-levels {
+  $root-tokens: map.set($root-tokens, --z-#{$key}, $value);
+}
+
+:root,
+:host {
+  @include tokens($root-tokens);
+
+  color-scheme: light dark;
+  // Always reserve the viewport scrollbar gutter so layout doesn't shift
+  // when overflow: hidden is applied (e.g. when a dialog opens on Windows).
+  scrollbar-gutter: stable;
+}
+
+// Deepen shadows in dark mode. The shadow-strength token is a plain number, so it
+// can't use light-dark() (colors only); vary it alongside color-scheme instead.
+@media (prefers-color-scheme: dark) {
+  :root,
+  :host {
+    --shadow-strength: 2.4;
+  }
+}
+
+[data-bs-theme="dark"] {
+  --shadow-strength: 2.4;
+  color-scheme: dark;
+}
+
+[data-bs-theme="light"] {
+  --shadow-strength: 1;
+  color-scheme: light;
 }

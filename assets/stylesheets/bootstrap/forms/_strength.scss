@@ -1,0 +1,111 @@
+@use "sass:list";
+@use "../functions" as *;
+@use "../mixins/border-radius" as *;
+@use "../mixins/tokens" as *;
+@use "../mixins/transition" as *;
+
+// stylelint-disable custom-property-no-missing-var-function
+$strength-tokens: () !default;
+
+// scss-docs-start strength-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$strength-tokens: defaults(
+  (
+    --strength-height: .375rem,
+    --strength-gap: .25rem,
+    --strength-margin-top: .25rem,
+    --strength-border-radius: var(--radius-pill),
+    --strength-bg: var(--bg-2),
+    --strength-color: var(--bg-2),
+    --strength-weak-color: var(--danger-bg),
+    --strength-fair-color: var(--warning-bg),
+    --strength-good-color: var(--info-bg),
+    --strength-strong-color: var(--success-bg),
+  ),
+  $strength-tokens
+);
+// scss-docs-end strength-tokens
+// stylelint-enable custom-property-no-missing-var-function
+
+// scss-docs-start strength-levels
+$strength-levels: weak, fair, good, strong !default;
+// scss-docs-end strength-levels
+
+$strength-transition: background-color .2s ease-in-out, width .3s ease-in-out !default;
+
+@layer forms {
+  // Strength meter container
+  .strength {
+    @include tokens($strength-tokens);
+
+    display: flex;
+    gap: var(--strength-gap);
+    width: 100%;
+    margin-top: var(--strength-margin-top);
+  }
+
+  // Individual strength segments
+  .strength-segment {
+    flex: 1;
+    height: var(--strength-height);
+    background-color: var(--strength-bg);
+    @include border-radius(var(--strength-border-radius));
+    @include transition($strength-transition);
+
+    // Filled state
+    &.active {
+      background-color: var(--strength-color);
+    }
+  }
+
+  @each $level in $strength-levels {
+    .strength[data-bs-strength="#{$level}"] {
+      --strength-color: var(--strength-#{$level}-color);
+    }
+  }
+  // Optional text feedback
+  .strength-text {
+    display: block;
+    margin-top: var(--strength-margin-top);
+    font-size: var(--font-size-xs);
+    color: var(--strength-color, var(--fg-3));
+    @include transition(color .2s ease-in-out);
+
+    // Hide when empty
+    &:empty {
+      display: none;
+    }
+  }
+
+  // Alternative: Single bar variant (like a progress bar)
+  .strength-bar {
+    @include tokens($strength-tokens);
+
+    --strength-color: transparent;
+    --strength-width: 0%;
+
+    width: 100%;
+    height: var(--strength-height);
+    margin-top: var(--strength-margin-top);
+    overflow: hidden;
+    background-color: var(--strength-bg);
+    @include border-radius(var(--strength-border-radius));
+
+    &::after {
+      display: block;
+      width: var(--strength-width);
+      height: 100%;
+      content: "";
+      background-color: var(--strength-color);
+      @include border-radius(var(--strength-border-radius));
+      @include transition($strength-transition);
+    }
+
+    @each $level in $strength-levels {
+      &[data-bs-strength="#{$level}"] {
+        --strength-color: var(--strength-#{$level}-color);
+        --strength-width: #{list.index($strength-levels, $level) * 25%};
+      }
+    }
+  }
+}

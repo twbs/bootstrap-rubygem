@@ -1,0 +1,64 @@
+name: Update Bootstrap
+
+# Daily pull of new dist files from upstream twbs/bootstrap. If the tracked
+# branch has moved, re-import the assets, sync the version, verify the
+# stylesheets still compile, and commit the result.
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # every day at 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Upstream twbs/bootstrap branch to track
+        required: false
+        default: v6-dev
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/test/gemfiles/rails_7_0_dartsass.gemfile
+      UPSTREAM_BRANCH: ${{ github.event.inputs.branch || 'v6-dev' }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Import latest Bootstrap and sync version
+        id: update
+        run: |
+          bundle exec rake update"[$UPSTREAM_BRANCH]"
+          bundle exec rake sync_version"[$UPSTREAM_BRANCH]"
+          # Only consider the update's own outputs, never stray CI artifacts.
+          if [ -n "$(git status --porcelain -- assets lib/bootstrap/version.rb)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Already up to date with twbs/bootstrap@${UPSTREAM_BRANCH}."
+          fi
+
+      - name: Verify the stylesheets still compile
+        if: steps.update.outputs.changed == 'true'
+        run: bundle exec rake debug
+
+      - name: Commit and push
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          sha=$(grep -oE "[0-9a-f]{40}" lib/bootstrap/version.rb | head -1)
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- assets lib/bootstrap/version.rb
+          git commit -m "Auto-update Bootstrap from twbs/bootstrap@${UPSTREAM_BRANCH} (${sha})"
+          git push

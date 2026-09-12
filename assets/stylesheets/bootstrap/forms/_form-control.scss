@@ -1,214 +1,264 @@
-//
-// General form controls (plus a few specific high-level interventions)
-//
+@use "../functions" as *;
+@use "../mixins/border-radius" as *;
+@use "../mixins/box-shadow" as *;
+@use "../mixins/focus-ring" as *;
+@use "../mixins/tokens" as *;
+@use "../mixins/transition" as *;
 
-.form-control {
-  display: block;
-  width: 100%;
-  padding: $input-padding-y $input-padding-x;
-  font-family: $input-font-family;
-  @include font-size($input-font-size);
-  font-weight: $input-font-weight;
-  line-height: $input-line-height;
-  color: $input-color;
-  appearance: none; // Fix appearance for date inputs in Safari
-  background-color: $input-bg;
-  background-clip: padding-box;
-  border: $input-border-width solid $input-border-color;
+$form-control-tokens: () !default;
 
-  // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
-  @include border-radius($input-border-radius, 0);
+// scss-docs-start form-control-tokens
+// stylelint-disable custom-property-no-missing-var-function
+// stylelint-disable-next-line scss/dollar-variable-default
+$form-control-tokens: defaults(
+  (
+    --control-min-height: var(--btn-input-min-height),
+    --control-padding-y: var(--btn-input-padding-y),
+    --control-padding-x: var(--btn-input-padding-x),
+    --control-font-size: var(--btn-input-font-size),
+    --control-line-height: var(--btn-input-line-height),
+    --control-fg: var(--btn-input-fg),
+    --control-bg: var(--btn-input-bg),
+    --control-border-width: var(--border-width),
+    --control-border-color: var(--border-color),
+    --control-border-radius: var(--radius-5),
+    --control-box-shadow: var(--box-shadow-inset),
+    --control-action-bg: var(--bg-1),
+    --control-action-hover-bg: var(--bg-2),
+    --control-transition-property: "border-color, box-shadow",
+    --control-transition-duration: .15s,
+    --control-transition-timing: ease-in-out,
+    --control-placeholder-color: var(--fg-3),
+    --control-disabled-color: var(--control-fg),
+    --control-disabled-bg: var(--bg-2),
+    --control-disabled-border-color: var(--control-border-color),
+    --control-select-bg: #{escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#00000080' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>"))},
+    --control-select-bg-position: right .75rem center,
+    --control-select-bg-size: 16px 12px,
+    --control-select-bg-dark: #{escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#ffffff80' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>"))},
+  ),
+  $form-control-tokens
+);
+// scss-docs-end form-control-tokens
 
-  @include box-shadow($input-box-shadow);
-  @include transition($input-transition);
+// scss-docs-start form-control-sizes
+$form-control-sizes: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$form-control-sizes: defaults(
+  ("sm", "lg"),
+  $form-control-sizes
+);
+// scss-docs-end form-control-sizes
+// stylelint-enable custom-property-no-missing-var-function
 
-  &[type="file"] {
-    overflow: hidden; // prevent pseudo element button overlap
+@layer forms {
+  .form-control {
+    @include tokens($form-control-tokens);
 
-    &:not(:disabled):not([readonly]) {
+    display: flex;
+    width: 100%;
+    min-height: var(--control-min-height);
+    padding: var(--control-padding-y) var(--control-padding-x);
+    font-size: var(--control-font-size);
+    line-height: var(--control-line-height);
+    color: var(--control-fg);
+    appearance: none;
+    background-color: var(--control-bg);
+    background-clip: padding-box;
+    border: var(--control-border-width) solid var(--control-border-color);
+    @include border-radius(var(--control-border-radius), 0);
+    @include box-shadow(var(--control-box-shadow));
+    @include transition-props(
+      var(--control-transition-property),
+      var(--control-transition-duration),
+      var(--control-transition-timing)
+    );
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    &:focus-visible,
+    &:focus-within {
+      --focus-ring-offset: -1px;
+      @include focus-ring(true);
+    }
+
+    // Placeholder
+    &::placeholder {
+      color: var(--control-placeholder-color);
+      // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+      opacity: 1;
+    }
+
+    // Disabled inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &:disabled {
+      color: var(--control-disabled-color);
+      background-color: var(--control-disabled-bg);
+      border-color: var(--control-disabled-border-color);
+      // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+      opacity: 1;
+    }
+
+    // Prevent excessive date input height in WebKit/Blink; see
+    // https://github.com/twbs/bootstrap/issues/34433.
+    &::-webkit-datetime-edit {
+      display: block;
+      padding: 0;
+    }
+
+    // File inputs
+    &[type="file"] {
+      overflow: hidden; // prevent pseudo element button overlap
+
+      &:not(:disabled, [readonly]) {
+        cursor: pointer;
+      }
+    }
+    &::file-selector-button {
+      min-height: var(--control-min-height);
+      padding: var(--control-padding-y) var(--control-padding-x);
+      margin: calc(var(--control-padding-y) * -1) calc(var(--control-padding-x) * -1);
+      margin-inline-end: var(--control-padding-x);
+      color: var(--control-fg);
+      // @include gradient-bg(var(--control-action-bg));
+      pointer-events: none;
+      background-color: var(--control-action-bg);
+      border-color: inherit;
+      border-style: solid;
+      border-width: 0;
+      border-inline-end-width: var(--control-border-width);
+      border-radius: 0; // stylelint-disable-line property-disallowed-list
+      @include transition-props(
+        var(--control-transition-property),
+        var(--control-transition-duration),
+        var(--control-transition-timing)
+      );
+    }
+
+    &:hover:not(:disabled, [readonly])::file-selector-button {
+      background-color: var(--control-action-hover-bg);
+    }
+  }
+
+  // Readonly controls as plain text
+  //
+  // Apply class to a readonly input to make it appear like regular plain
+  // text (without any border, background color, focus indicator)
+
+  .form-control-plaintext {
+    // Plaintext is a standalone class (not combined with `.form-control`), so it
+    // needs its own copy of the control tokens. Without them the `var(--control-*)`
+    // references below are invalid and fall back to their initial values (e.g.
+    // `border-width: medium`), which adds phantom inline borders and misaligns the
+    // text from a floating label.
+    @include tokens($form-control-tokens);
+
+    display: block;
+    width: 100%;
+    padding: var(--control-padding-y) 0;
+    margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+    line-height: var(--control-line-height);
+    color: var(--control-fg);
+    background-color: transparent;
+    border: solid transparent;
+    border-width: var(--control-border-width) 0;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &.form-control-sm,
+    &.form-control-lg {
+      padding-inline: 0;
+    }
+  }
+
+  // stylelint-disable selector-no-qualifying-type
+  select.form-control,
+  .form-control-caret {
+    padding-inline-end: calc(var(--control-padding-x) * 3);
+    background-image: var(--control-select-bg);
+    background-repeat: no-repeat;
+    background-position: var(--control-select-bg-position);
+    background-size: var(--control-select-bg-size);
+
+    &[multiple],
+    &[size]:not([size="1"]) {
+      padding-inline-end: var(--control-padding-x);
+      background-image: none;
+    }
+  }
+
+  [data-bs-theme="dark"] {
+    select.form-control,
+    .form-control-caret {
+      background-image: var(--control-select-bg-dark);
+    }
+  }
+  // stylelint-enable selector-no-qualifying-type
+
+  // Form control sizing
+  //
+  // Build on `.form-control` with modifier classes to decrease or increase the
+  // height and font-size of form controls.
+  //
+  // Repeated in `_input_group.scss` to avoid Sass extend issues.
+  @each $size, $_ in $form-control-sizes {
+    .form-control-#{$size} {
+      --control-min-height: var(--btn-input-#{$size}-min-height);
+      --control-padding-y: var(--btn-input-#{$size}-padding-y);
+      --control-padding-x: var(--btn-input-#{$size}-padding-x);
+      --control-font-size: var(--btn-input-#{$size}-font-size);
+      --control-line-height: var(--btn-input-#{$size}-line-height);
+      --control-border-radius: var(--btn-input-#{$size}-border-radius);
+    }
+  }
+
+  .form-control-color {
+    width: var(--control-min-height);
+    padding: var(--control-padding-y);
+
+    &:not(:disabled, [readonly]) {
       cursor: pointer;
     }
-  }
 
-  // Customize the `:focus` state to imitate native WebKit styles.
-  &:focus {
-    color: $input-focus-color;
-    background-color: $input-focus-bg;
-    border-color: $input-focus-border-color;
-    outline: 0;
-    @if $enable-shadows {
-      @include box-shadow($input-box-shadow, $input-focus-box-shadow);
-    } @else {
-      // Avoid using mixin so we can pass custom focus shadow properly
-      box-shadow: $input-focus-box-shadow;
+    &::-moz-color-swatch {
+      border: 0 !important; // stylelint-disable-line declaration-no-important
+      @include border-radius(var(--radius-5));
+    }
+
+    &::-webkit-color-swatch {
+      border: 0 !important; // stylelint-disable-line declaration-no-important
+      @include border-radius(var(--radius-5));
     }
   }
 
-  &::-webkit-date-and-time-value {
-    // On Android Chrome, form-control's "width: 100%" makes the input width too small
-    // Tested under Android 11 / Chrome 89, Android 12 / Chrome 100, Android 13 / Chrome 109
-    //
-    // On iOS Safari, form-control's "appearance: none" + "width: 100%" makes the input width too small
-    // Tested under iOS 16.2 / Safari 16.2
-    min-width: 85px; // Seems to be a good minimum safe width
-
-    // Add some height to date inputs on iOS
-    // https://github.com/twbs/bootstrap/issues/23307
-    // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
-    // Multiply line-height by 1em if it has no unit
-    height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
-
-    // Android Chrome type="date" is taller than the other inputs
-    // because of "margin: 1px 24px 1px 4px" inside the shadow DOM
-    // Tested under Android 11 / Chrome 89, Android 12 / Chrome 100, Android 13 / Chrome 109
-    margin: 0;
-  }
-
-  // Prevent excessive date input height in Webkit
-  // https://github.com/twbs/bootstrap/issues/34433
-  &::-webkit-datetime-edit {
+  // Ghost input - removes all visual styling
+  // Used inside custom wrappers that handle their own styling
+  .form-ghost {
     display: block;
+    width: 100%;
     padding: 0;
+    font: inherit;
+    color: inherit;
+    appearance: none;
+    background: transparent;
+    border: 0;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &::placeholder {
+      color: var(--fg-3);
+      opacity: 1;
+    }
+
+    &:disabled {
+      color: var(--fg-4);
+      cursor: not-allowed;
+    }
   }
-
-  // Placeholder
-  &::placeholder {
-    color: $input-placeholder-color;
-    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
-    opacity: 1;
-  }
-
-  // Disabled inputs
-  //
-  // HTML5 says that controls under a fieldset > legend:first-child won't be
-  // disabled if the fieldset is disabled. Due to implementation difficulty, we
-  // don't honor that edge case; we style them as disabled anyway.
-  &:disabled {
-    color: $input-disabled-color;
-    background-color: $input-disabled-bg;
-    border-color: $input-disabled-border-color;
-    // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
-    opacity: 1;
-  }
-
-  // File input buttons theming
-  &::file-selector-button {
-    padding: $input-padding-y $input-padding-x;
-    margin: (-$input-padding-y) (-$input-padding-x);
-    margin-inline-end: $input-padding-x;
-    color: $form-file-button-color;
-    @include gradient-bg($form-file-button-bg);
-    pointer-events: none;
-    border-color: inherit;
-    border-style: solid;
-    border-width: 0;
-    border-inline-end-width: $input-border-width;
-    border-radius: 0; // stylelint-disable-line property-disallowed-list
-    @include transition($btn-transition);
-  }
-
-  &:hover:not(:disabled):not([readonly])::file-selector-button {
-    background-color: $form-file-button-hover-bg;
-  }
-}
-
-// Readonly controls as plain text
-//
-// Apply class to a readonly input to make it appear like regular plain
-// text (without any border, background color, focus indicator)
-
-.form-control-plaintext {
-  display: block;
-  width: 100%;
-  padding: $input-padding-y 0;
-  margin-bottom: 0; // match inputs if this class comes on inputs with default margins
-  line-height: $input-line-height;
-  color: $input-plaintext-color;
-  background-color: transparent;
-  border: solid transparent;
-  border-width: $input-border-width 0;
-
-  &:focus {
-    outline: 0;
-  }
-
-  &.form-control-sm,
-  &.form-control-lg {
-    padding-right: 0;
-    padding-left: 0;
-  }
-}
-
-// Form control sizing
-//
-// Build on `.form-control` with modifier classes to decrease or increase the
-// height and font-size of form controls.
-//
-// Repeated in `_input_group.scss` to avoid Sass extend issues.
-
-.form-control-sm {
-  min-height: $input-height-sm;
-  padding: $input-padding-y-sm $input-padding-x-sm;
-  @include font-size($input-font-size-sm);
-  @include border-radius($input-border-radius-sm);
-
-  &::file-selector-button {
-    padding: $input-padding-y-sm $input-padding-x-sm;
-    margin: (-$input-padding-y-sm) (-$input-padding-x-sm);
-    margin-inline-end: $input-padding-x-sm;
-  }
-}
-
-.form-control-lg {
-  min-height: $input-height-lg;
-  padding: $input-padding-y-lg $input-padding-x-lg;
-  @include font-size($input-font-size-lg);
-  @include border-radius($input-border-radius-lg);
-
-  &::file-selector-button {
-    padding: $input-padding-y-lg $input-padding-x-lg;
-    margin: (-$input-padding-y-lg) (-$input-padding-x-lg);
-    margin-inline-end: $input-padding-x-lg;
-  }
-}
-
-// Make sure textareas don't shrink too much when resized
-// https://github.com/twbs/bootstrap/pull/29124
-// stylelint-disable selector-no-qualifying-type
-textarea {
-  &.form-control {
-    min-height: $input-height;
-  }
-
-  &.form-control-sm {
-    min-height: $input-height-sm;
-  }
-
-  &.form-control-lg {
-    min-height: $input-height-lg;
-  }
-}
-// stylelint-enable selector-no-qualifying-type
-
-.form-control-color {
-  width: $form-color-width;
-  height: $input-height;
-  padding: $input-padding-y;
-
-  &:not(:disabled):not([readonly]) {
-    cursor: pointer;
-  }
-
-  &::-moz-color-swatch {
-    border: 0 !important; // stylelint-disable-line declaration-no-important
-    @include border-radius($input-border-radius);
-  }
-
-  &::-webkit-color-swatch {
-    border: 0 !important; // stylelint-disable-line declaration-no-important
-    @include border-radius($input-border-radius);
-  }
-
-  &.form-control-sm { height: $input-height-sm; }
-  &.form-control-lg { height: $input-height-lg; }
 }

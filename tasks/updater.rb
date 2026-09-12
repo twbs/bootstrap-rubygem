@@ -18,12 +18,13 @@ class Updater
   include Js
   include Scss
 
-  def initialize(repo: 'twbs/bootstrap', branch: 'main', save_to: {}, cache_path: 'tmp/bootstrap-cache')
+  def initialize(repo: 'twbs/bootstrap', branch: 'main', save_to: {}, cache_path: 'tmp/bootstrap-cache', skip_js: false)
     @logger     = Logger.new
     @repo       = repo
     @branch     = branch || 'main'
     @branch_sha = get_branch_sha
     @cache_path = cache_path
+    @skip_js    = skip_js
     @repo_url   = "https://github.com/#@repo"
     @save_to    = {
         js:    'assets/javascripts/bootstrap',
@@ -40,11 +41,20 @@ class Updater
     puts " twbs cache: #{@cache_path}"
     puts '-' * 60
 
-    FileUtils.rm_rf('assets')
-    @save_to.each { |_, v| FileUtils.mkdir_p(v) }
-
-    update_scss_assets
-    update_javascript_assets
+    # Bootstrap 6's upstream `v6-dev` still ships stale Bootstrap 5 `dist/js`,
+    # so `skip_js: true` refreshes only the stylesheets (and version SHA),
+    # leaving the bundled JavaScript untouched until Bootstrap 6's JS is
+    # published upstream.
+    if @skip_js
+      FileUtils.rm_rf(@save_to[:scss])
+      FileUtils.mkdir_p(@save_to[:scss])
+      update_scss_assets
+    else
+      FileUtils.rm_rf('assets')
+      @save_to.each { |_, v| FileUtils.mkdir_p(v) }
+      update_scss_assets
+      update_javascript_assets
+    end
     store_version
   end
 

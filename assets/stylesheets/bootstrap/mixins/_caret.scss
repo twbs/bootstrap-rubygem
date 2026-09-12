@@ -1,29 +1,37 @@
+@use "../config" as *;
+
+// scss-docs-start caret-variables
+$caret-width:                 .3em !default;
+$caret-vertical-align:        $caret-width * .85 !default;
+$caret-spacing:               $caret-width * .85 !default;
+// scss-docs-end caret-variables
+
 // scss-docs-start caret-mixins
 @mixin caret-down($width: $caret-width) {
-  border-top: $width solid;
-  border-right: $width solid transparent;
-  border-bottom: 0;
-  border-left: $width solid transparent;
+  border-block-start: $width solid;
+  border-block-end: 0;
+  border-inline-start: $width solid transparent;
+  border-inline-end: $width solid transparent;
 }
 
 @mixin caret-up($width: $caret-width) {
-  border-top: 0;
-  border-right: $width solid transparent;
-  border-bottom: $width solid;
-  border-left: $width solid transparent;
+  border-block-start: 0;
+  border-block-end: $width solid;
+  border-inline-start: $width solid transparent;
+  border-inline-end: $width solid transparent;
 }
 
 @mixin caret-end($width: $caret-width) {
-  border-top: $width solid transparent;
-  border-right: 0;
-  border-bottom: $width solid transparent;
-  border-left: $width solid;
+  border-block-start: $width solid transparent;
+  border-block-end: $width solid transparent;
+  border-inline-start: $width solid;
+  border-inline-end: 0;
 }
 
 @mixin caret-start($width: $caret-width) {
-  border-top: $width solid transparent;
-  border-right: $width solid;
-  border-bottom: $width solid transparent;
+  border-block-start: $width solid transparent;
+  border-block-end: $width solid transparent;
+  border-inline-end: $width solid;
 }
 
 @mixin caret(
@@ -35,7 +43,7 @@
   @if $enable-caret {
     &::after {
       display: inline-block;
-      margin-left: $spacing;
+      margin-inline-start: $spacing;
       vertical-align: $vertical-align;
       content: "";
       @if $direction == down {
@@ -54,7 +62,7 @@
 
       &::before {
         display: inline-block;
-        margin-right: $spacing;
+        margin-inline-end: $spacing;
         vertical-align: $vertical-align;
         content: "";
         @include caret-start($width);
@@ -62,7 +70,7 @@
     }
 
     &:empty::after {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 }

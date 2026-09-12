@@ -1,0 +1,63 @@
+@use "../functions" as *;
+@use "../mixins/border-radius" as *;
+@use "../mixins/focus-ring" as *;
+@use "../mixins/mask-icon" as *;
+@use "../mixins/tokens" as *;
+
+$btn-close-tokens: () !default;
+
+// scss-docs-start btn-close-tokens
+// stylelint-disable-next-line scss/dollar-variable-default
+$btn-close-tokens: defaults(
+  (
+    --btn-close-size: 1.25rem,
+    --btn-close-color: inherit,
+    --btn-close-icon: #{escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M12 0a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4zm-.646 4.646a.5.5 0 0 0-.707 0L8 7.293 5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.647a.5.5 0 1 0 .708.707L8 8.707l2.647 2.646a.5.5 0 1 0 .707-.707L8.707 8l2.646-2.646a.5.5 0 0 0 0-.708z'/></svg>"))},
+    --btn-close-opacity: .5,
+    --btn-close-hover-opacity: .75,
+    --btn-close-focus-opacity: .85,
+    --btn-close-disabled-opacity: .25,
+  ),
+  $btn-close-tokens
+);
+// scss-docs-end btn-close-tokens
+
+// iOS requires the button element instead of an anchor tag.
+// If you want the anchor version, it requires `href="#"`.
+// See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+@layer components {
+  .btn-close {
+    @include tokens($btn-close-tokens);
+
+    box-sizing: content-box;
+    min-width: var(--btn-close-size);
+    min-height: var(--btn-close-size);
+    padding: 0;
+    color: var(--btn-close-color);
+    background-color: currentcolor;
+    border: 0; // for button elements
+    @include border-radius(var(--radius-4));
+    opacity: var(--btn-close-opacity);
+    @include mask-icon(var(--btn-close-icon));
+
+    // Override <a>'s hover style
+    &:hover {
+      color: var(--btn-close-color);
+      text-decoration: none;
+      opacity: var(--btn-close-hover-opacity);
+    }
+
+    &:focus-visible {
+      opacity: var(--btn-close-focus-opacity);
+      @include focus-ring();
+    }
+
+    &:disabled,
+    &.disabled {
+      pointer-events: none;
+      user-select: none;
+      opacity: var(--btn-close-disabled-opacity);
+    }
+  }
+}
